@@ -1,0 +1,56 @@
+﻿@page "/"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using BlazorBingo.Components
+
+<PageTitle>Index</PageTitle>
+
+@*
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+*@
+
+<span><span class="gear-emoji"></span> Settings</span>
+
+<div class="form-group">
+    <label>
+        Name:
+        <input type="text" class="form-control" value="@playerName" @onchange="NameChanged" placeholder="player name" />
+    </label>
+</div>
+
+<div>
+    Host code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+</div>
+
+<BingoCard></BingoCard>
+
+@code {
+    string hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+
+    string playerName = string.Empty;
+    private int gamesPlayed { get; set; }
+    private int gamesWon { get; set; }
+
+    async Task NameChanged(ChangeEventArgs e)
+    {
+        playerName = e?.Value?.ToString() ?? string.Empty;
+        await localStorage.SetItemAsync("playerName", playerName);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            playerName = await localStorage.GetItemAsync<string>("playerName");
+            gamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
+            gamesWon = await localStorage.GetItemAsync<int>("gamesWon");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+}

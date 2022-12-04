@@ -1,0 +1,101 @@
+﻿<table id="BingoCard" class="prevent-select">
+    <thead>
+        <tr>
+            <td>B</td>
+            <td>I</td>
+            <td>N</td>
+            <td>G</td>
+            <td>O</td>
+        </tr>
+    </thead>
+    @for (int r = 0; r < 5; r++)
+    {
+        <tr>
+            @for (int c = 0; c < 5; c++)
+            {
+                var row = r;
+                var col = c;
+                <td @onclick="eventargs => StampSquare(eventargs, row, col, card.StampClass)" class="@card.Squares[r,c].StampClass">@card.Squares[r,c].Value</td>
+            }
+        </tr>
+    }
+</table>
+
+@code {
+
+    // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
+    private Card card = null!;
+
+    public class Card
+    {
+        public string StampClass { get; set; }
+        public Square[,] Squares { get; set; } = new Square[5, 5];
+
+        public Card()
+        {
+            StampClass = "DefaultStamp";
+            GenerateNewCard();
+        }
+
+        public void GenerateNewCard()
+        {
+            var rnd = new Random();
+            var uniqueValues = new HashSet<int>();
+
+            // generate a set of 5 unique integers for each column
+            for (int c = 0; c < 5; c++)
+            {
+                // determine the low and high numbers for the column
+                int minValue = 1 + (c * 15);
+                int maxValue = 15 + (c * 15);
+                // initialize the HashSet for the column to hold the uniqe values
+                uniqueValues.Clear();
+                // generate random numbers until we have 5 unique numbers for the column
+                while (uniqueValues.Count < 5)
+                {
+                    // generate a random number
+                    int x = rnd.Next(minValue, maxValue);
+                    // the number will only be added to the HashSet if it
+                    // does not already exist in the HashSet
+                    uniqueValues.Add(x);
+                }
+                // copy the unique values for the column to the card
+                for (int r = 0; r < 5; r++)
+                {
+                    Squares[r, c] = new Square() { Value = uniqueValues.ElementAt(r).ToString() };
+                    if (c == 2 && r == 2)
+                    {
+                        Squares[r, c].Value = "FREE";
+                        Squares[r, c].StampClass = StampClass;
+                    }
+                }
+            }
+        }
+
+        public class Square
+        {
+            public string Value { get; set; } = string.Empty;
+            public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
+            public string StampClass { get; set; } = string.Empty;
+        }
+
+    }
+
+    private void StampSquare(MouseEventArgs e, int row, int col, string stampClass)
+    {
+        if (row == 2 && col == 2) { return; }
+        var square = card.Squares[row, col];
+        square.StampClass = square.IsStamped ? string.Empty : card.StampClass;
+    }
+    private void GenerateNewCard()
+    {
+        card.GenerateNewCard();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        card = new Card();
+        card.StampClass = "stamp scooter";
+    }
+
+}
