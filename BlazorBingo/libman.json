@@ -22,6 +22,10 @@
         "font/fonts/open-iconic.ttf",
         "font/fonts/open-iconic.woff"
       ]
+    },
+    {
+      "library": "peerjs@1.4.7",
+      "destination": "wwwroot/lib/peerjs/"      
     }
   ]
 }

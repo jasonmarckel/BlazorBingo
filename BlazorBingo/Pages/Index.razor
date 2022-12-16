@@ -23,6 +23,13 @@ Welcome to your new app.
 
 <div>
     Host code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+    <br/>
+    <button @onclick="Host">Host</button>
+</div>
+
+<div>
+    <input type="text" class="form-control" value="@joinCode" placeholder="game code" />
+    <button @onclick="Join">Join</button>
 </div>
 
 <BingoCard></BingoCard>
@@ -31,6 +38,8 @@ Welcome to your new app.
 
 @code {
     string hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+
+    string joinCode = string.Empty;
 
     string playerName = string.Empty;
     private int gamesPlayed { get; set; }
@@ -55,4 +64,15 @@ Welcome to your new app.
             Console.WriteLine(ex.Message);
         }
     }
+
+    private void Host()
+    {
+
+    }
+
+    private void Join()
+    {
+        
+    }
+
 }

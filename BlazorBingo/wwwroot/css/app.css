@@ -124,90 +124,48 @@ a, .btn-link {
 /* stamps */
 
 .stamp {
-/*    font-size: xxx-large;
+    font-family: var(--system-ui);
     position: absolute;
     left: 0px;
-    top: 0px;
     width: 100%;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    z-index: -1;
-*/
-    color: white;
-    text-shadow: 1px 1px 2px green, 0 0 1em blue, 0 0 0.2em blue;
+    z-index: 1;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: max(32px, 1rem);
+    display: inline-block;
+    opacity: 0.87;
 }
-.basketball:before {
-    font-family: var(--system-ui);
-    content: "\1F3C0";
-    font-size: 5rem;
-    position: absolute;
-    left: 0px;
-    top: -5px;
-    width: 100%;
-    z-index: -1;
+
+/* https://unicode-table.com/en/ */
+
+.blackstar:before {
+    content: "\2605";
 }
-.curling:before {
-    font-family: var(--system-ui);
-    content: "\1F94C";
-    font-size: 5rem;
-    position: absolute;
-    left: 0px;
-    top: -5px;
-    width: 100%;
-    z-index: -1;
-}
-.pingpong:before {
-    font-family: var(--system-ui);
-    content: "\1F3D3";
-}
-.tennis:before {
-    font-family: var(--system-ui);
-    content: "\1F3BE";
-}
-.smiley:before {
-    font-family: var(--system-ui);
-    content: "\1F603";
-}
-.dogface:before {
-    font-family: var(--system-ui);
-    content: "\1F436";
-}
-.catface:before {
-    font-family: var(--system-ui);
-    content: "\1F431";
-    font-size: 5rem;
-    position: absolute;
-    left: 0px;
-    top: -5px;
-    width: 100%;
-    z-index: -1;
-}
-.cat:before {
-    font-family: var(--system-ui);
-    content: "\1F408";
-}
-.pawprints:before {
-    font-family: var(--system-ui);
-    content: "\1F43E";
-}
-.kangaroo:before {
-    font-family: var(--system-ui);
-    content: "\1F998";
-    font-size: 5rem;
-    position: absolute;
-    left: 0px;
-    top: -5px;
-    width: 100%;
-    z-index: -1;
-}
-.scooter:before {
-    font-family: var(--system-ui);
-    content: "\1F6F5";
-    font-size: 5rem;
-    position: absolute;
-    left: 0px;
-    top: -5px;
-    width: 100%;
-    z-index: -1;
-}
+
+.anchor:before { content: "\2693"; }
+.banana:before { content: "\1F34C"; }
+.basketball:before { content: "\1F3C0"; }
+.cat:before { content: "\1F408"; }
+.catface:before { content: "\1F431"; }
+.cherries:before { content: "\1F352"; }
+.curling:before { content: "\1F94C"; }
+.dogface:before { content: "\1F436"; }
+.dollar:before { content: "$"; color: #85bb65; }
+.football:before { content: "\1F3C8"; }
+.golfer:before { content: "\1F3CC"; }
+.heart:before { content: "\2665"; }
+.hotdog:before { content: "\1F32D"; }
+.kangaroo:before { content: "\1F998"; }
+.kissmark:before { content: "\1F48B"; }
+.musicalnote:before { content: "\1F3B5"; }
+.neptune:before { content: "\2646"; }
+.pawprints:before { content: "\1F43E"; }
+.penguin:before { content: "\1F427"; }
+.pingpong:before { content: "\1F3D3"; }
+.scooter:before { content: "\1F6F5"; }
+.smiley:before { content: "\1F603"; }
+.snowman:before { content: "\26C4"; }
+.soccer:before { content: "\26BD"; }
+.strawberry:before { content: "\1F353"; }
+.tennis:before { content: "\1F3BE"; }
+.tractor:before { content: "\1F69C"; }
+.videogame:before { content: "\1F3AE"; }

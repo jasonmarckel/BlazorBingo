@@ -7,6 +7,7 @@
         width: 20%;
         text-align: center;
         font-weight: bold;
+        font-size: 2rem;
         padding-bottom: 5%;
         padding-top: 5%;
         position: relative;
@@ -15,6 +16,7 @@
     #BingoCard thead td {
         font-size: x-large;
         font-weight: 900;
+        font-size: 3rem;
     }
 
 .DefaultStamp {
