@@ -20,6 +20,7 @@
     private char[] bingo = new char[] { 'B', 'I', 'N', 'G', 'O' };
     private int cardSize = 75;
     private HashSet<int> called = new HashSet<int>();
+    private Random rnd = new Random();
 
     private string CssClass(int n)
     {
@@ -29,7 +30,6 @@
     private void Pick()
     {
         if (called.Count == cardSize) { return; }
-        var rnd = new Random();
         int x;
         do
         {
