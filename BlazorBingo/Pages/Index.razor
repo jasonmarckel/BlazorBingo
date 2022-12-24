@@ -2,62 +2,64 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @using BlazorBingo.Components
 
-<PageTitle>Index</PageTitle>
+<PageTitle>BINGO</PageTitle>
 
-@*
-<h1>Hello, world!</h1>
+<CascadingValue Value="@settings">
+    @if (gameMode == GameMode.Initializing)
+    {
+        <div class="form-group">
+            <label>
+                Name:
+                <input type="text" class="form-control" value="@settings!.PlayerName" @onchange="NameChanged" placeholder="player name" />
+            </label>
+        </div>
 
-Welcome to your new app.
+        <div>
+            <button @onclick="Host">Host</button>
+            <div style="display:none;">
+                Game code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+            </div>
+        </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
-*@
-
-<span><span class="gear-emoji"></span> Settings</span>
-
-<div class="form-group">
-    <label>
-        Name:
-        <input type="text" class="form-control" value="@playerName" @onchange="NameChanged" placeholder="player name" />
-    </label>
-</div>
-
-<div>
-    Host code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
-    <br/>
-    <button @onclick="Host">Host</button>
-</div>
-
-<div>
-    <input type="text" class="form-control" value="@joinCode" placeholder="game code" />
-    <button @onclick="Join">Join</button>
-</div>
-
-<BingoCard></BingoCard>
-
-<BingoCaller></BingoCaller>
+        <div>
+            Game code:
+            <input type="text" class="form-control" value="@joinCode" placeholder="enter code" />
+            <button @onclick="Join">Join</button>
+        </div>
+    }
+    @if (gameMode == GameMode.Playing)
+    {<BingoCard></BingoCard>}
+    @if (gameMode == GameMode.Calling)
+    {<BingoCaller></BingoCaller>}
+</CascadingValue>
 
 @code {
-    string hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+    protected Settings settings = new ();
 
+    string hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
     string joinCode = string.Empty;
 
-    string playerName = string.Empty;
-    private int gamesPlayed { get; set; }
-    private int gamesWon { get; set; }
-
-    async Task NameChanged(ChangeEventArgs e)
+    public enum GameMode
     {
-        playerName = e?.Value?.ToString() ?? string.Empty;
-        await localStorage.SetItemAsync("playerName", playerName);
+        Initializing,
+        Starting,
+        Joining,
+        Waiting,
+        Playing,
+        Hosting,
+        Calling
     }
+
+    protected GameMode gameMode;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            playerName = await localStorage.GetItemAsync<string>("playerName");
-            gamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
-            gamesWon = await localStorage.GetItemAsync<int>("gamesWon");
+            settings.PlayerName = await localStorage.GetItemAsync<string>("playerName");
+            settings.GamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
+            settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
+            gameMode = GameMode.Initializing;
         }
         catch (Exception ex)
         {
@@ -65,14 +67,19 @@ Welcome to your new app.
         }
     }
 
+    async Task NameChanged(ChangeEventArgs e)
+    {
+        settings!.PlayerName = e?.Value?.ToString() ?? string.Empty;
+        await localStorage.SetItemAsync("playerName", settings!.PlayerName);
+    }
     private void Host()
     {
-
+        gameMode = GameMode.Calling;
     }
 
     private void Join()
     {
-        
+        gameMode = GameMode.Playing;
     }
 
-}
+    }

@@ -141,26 +141,33 @@ a, .btn-link {
     content: "\2605";
 }
 
+.random:before {
+    content: "?";
+}
+
 .anchor:before { content: "\2693"; }
 .banana:before { content: "\1F34C"; }
 .basketball:before { content: "\1F3C0"; }
 .cat:before { content: "\1F408"; }
 .catface:before { content: "\1F431"; }
 .cherries:before { content: "\1F352"; }
+.christmastree:before { content: "\1F384"; }
+.cookie:before { content: "\1F36A"; }
 .curling:before { content: "\1F94C"; }
 .dogface:before { content: "\1F436"; }
 .dollar:before { content: "$"; color: #85bb65; }
 .football:before { content: "\1F3C8"; }
 .golfer:before { content: "\1F3CC"; }
-.heart:before { content: "\2665"; }
+.heart:before { content: "\2764"; color: red; }
 .hotdog:before { content: "\1F32D"; }
 .kangaroo:before { content: "\1F998"; }
-.kissmark:before { content: "\1F48B"; }
+.kiss:before { content: "\1F48B"; }
 .musicalnote:before { content: "\1F3B5"; }
 .neptune:before { content: "\2646"; }
 .pawprints:before { content: "\1F43E"; }
 .penguin:before { content: "\1F427"; }
 .pingpong:before { content: "\1F3D3"; }
+.present:before { content: "\1F381"; }
 .scooter:before { content: "\1F6F5"; }
 .smiley:before { content: "\1F603"; }
 .snowman:before { content: "\26C4"; }
@@ -168,4 +175,4 @@ a, .btn-link {
 .strawberry:before { content: "\1F353"; }
 .tennis:before { content: "\1F3BE"; }
 .tractor:before { content: "\1F69C"; }
-.videogame:before { content: "\1F3AE"; }
+.videogamecontroller:before { content: "\1F3AE"; }

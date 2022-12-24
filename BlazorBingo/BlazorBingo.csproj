@@ -22,4 +22,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
 </Project>

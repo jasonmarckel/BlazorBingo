@@ -1,4 +1,6 @@
-﻿<table id="BingoCard" class="prevent-select">
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<table id="BingoCard" class="prevent-select">
     <thead>
         <tr>
             <td>B</td>
@@ -15,91 +17,136 @@
             {
                 var row = r;
                 var col = c;
-                <td @onclick="eventargs => StampSquare(eventargs, row, col, card.StampClass)">@((MarkupString)card.Squares[r,c].Value)<div class="@card.Squares[r,c].StampClass" style="transform: rotate(@(card.Squares[r,c].StampRotation)deg);"></div></td>
+                <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)squares[r,c].Value)<div class="@squares[r,c].StampClass" style="transform: rotate(@(squares[r,c].StampRotation)deg);"></div></td>
             }
         </tr>
     }
 </table>
 
+<label>Stamp</label>
+<InputSelect @bind-Value="StampClass">
+    @foreach (var stampClass in StampClasses)
+    {
+        <option value="@stampClass.CssName()">@stampClass</option>
+    }
+</InputSelect>
+
 @code {
+    private readonly string[] StampClasses = new string[]
+    {
+        "Random",
+        "Banana",
+        "Basketball",
+        "Cat",
+        "Cat Face",
+        "Cherries",
+        "Christmas Tree",
+        "Cookie",
+        "Curling",
+        "Dog Face",
+        "Dollar",
+        "Football",
+        "Golfer",
+        "Heart",
+        "Hot Dog",
+        "Kangaroo",
+        "Kiss",
+        "Musical note",
+        "Neptune",
+        "Paw prints",
+        "Penguin",
+        "Ping pong",
+        "Present",
+        "Scooter",
+        "Smiley",
+        "Snowman",
+        "Soccer",
+        "Strawberry",
+        "Tennis",
+        "Tractor",
+        "Video game controller"
+    };
+
+    private string _stampClass = string.Empty;
+    private string StampClass
+    {
+        get
+        {
+            return _stampClass;
+        }
+        set
+        {
+            _stampClass = value;
+            localStorage.SetItemAsync("stampClass", _stampClass);
+        }
+    }
+    private string StampClassCss
+    {
+        get
+        {
+            return StampClass == "random" ? StampClasses[rnd.Next(1, StampClasses.Length)].CssName() : StampClass;
+        }
+    }
 
     // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
-    private Card card = null!;
+
+    private readonly Square[,] squares = new Square[5, 5];
     private Random rnd = new Random();
 
-    public class Card
+    public void GenerateNewCard()
     {
-        public required string StampClass { get; set; }
-        public Square[,] Squares { get; set; } = new Square[5, 5];
+        var uniqueValues = new HashSet<int>();
 
-        public Card()
+        // generate a set of 5 unique integers for each column
+        for (int c = 0; c < 5; c++)
         {
-            GenerateNewCard();
-        }
-
-        public void GenerateNewCard()
-        {
-            var rnd = new Random();
-            var uniqueValues = new HashSet<int>();
-
-            // generate a set of 5 unique integers for each column
-            for (int c = 0; c < 5; c++)
+            // determine the low and high numbers for the column
+            int minValue = 1 + (c * 15);
+            int maxValue = 15 + (c * 15);
+            // initialize the HashSet for the column to hold the uniqe values
+            uniqueValues.Clear();
+            // generate random numbers until we have 5 unique numbers for the column
+            while (uniqueValues.Count < 5)
             {
-                // determine the low and high numbers for the column
-                int minValue = 1 + (c * 15);
-                int maxValue = 15 + (c * 15);
-                // initialize the HashSet for the column to hold the uniqe values
-                uniqueValues.Clear();
-                // generate random numbers until we have 5 unique numbers for the column
-                while (uniqueValues.Count < 5)
+                // generate a random number
+                int x = rnd.Next(minValue, maxValue);
+                // the number will only be added to the HashSet if it
+                // does not already exist in the HashSet
+                uniqueValues.Add(x);
+            }
+            // copy the unique values for the column to the card
+            for (int r = 0; r < 5; r++)
+            {
+                squares[r, c] = new Square() { Value = uniqueValues.ElementAt(r).ToString() };
+                if (c == 2 && r == 2)
                 {
-                    // generate a random number
-                    int x = rnd.Next(minValue, maxValue);
-                    // the number will only be added to the HashSet if it
-                    // does not already exist in the HashSet
-                    uniqueValues.Add(x);
-                }
-                // copy the unique values for the column to the card
-                for (int r = 0; r < 5; r++)
-                {
-                    Squares[r, c] = new Square() { Value = uniqueValues.ElementAt(r).ToString() };
-                    if (c == 2 && r == 2)
-                    {
-                        Squares[r, c].Value = "&nbsp;"; //FREE
-                        Squares[r, c].StampClass = "stamp blackstar";
-                    }
+                    squares[r, c].Value = "&nbsp;"; //FREE
+                    squares[r, c].StampClass = "stamp blackstar";
                 }
             }
         }
-
-        public class Square
-        {
-            public string Value { get; set; } = string.Empty;
-            public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
-            public string StampClass { get; set; } = string.Empty;
-            public int StampRotation { get; set; }
-        }
-
     }
 
-    private void StampSquare(MouseEventArgs e, int row, int col, string stampClass)
+    public class Square
+    {
+        public string Value { get; set; } = string.Empty;
+        public string StampClass { get; set; } = string.Empty;
+        public int StampRotation { get; set; }
+        public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
+    }
+
+    protected void StampSquare(MouseEventArgs e, int row, int col)
     {
         if (row == 2 && col == 2) { return; }
-        var square = card.Squares[row, col];
+        var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
-        square.StampClass = square.IsStamped ? string.Empty : card.StampClass;
-    }
-    private void GenerateNewCard()
-    {
-        card.GenerateNewCard();
+        square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
     }
 
     protected override async Task OnInitializedAsync()
     {
-        card = new Card()
-            {
-                StampClass = "stamp videogame"
-            };
+        GenerateNewCard();
+        _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
     }
 
 }
