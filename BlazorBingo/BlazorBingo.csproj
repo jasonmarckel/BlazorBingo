@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <!-- needed for .NET 7 JS interop API -->
+  <ItemGroup>
+    <Content Remove="wwwroot\script\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\script\" />
+  </ItemGroup>
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

@@ -1,18 +1,21 @@
 ﻿<h3>BingoCaller</h3>
 
-<button @onclick="Pick">Pick</button>
-<button @onclick="Restart">New Game</button>
+<button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
+<button type="button" class="btn btn-secondary" @onclick="Restart">New Game</button>
+
+<label># of calls: @called.Count</label>
+<label>Last called: @lastCalled</label>
 
 <table id="CallerCard">
     @for (int r = 0; r < 15; r++)
     {
-            <tr>
-            @for (int c = 0; c < 5; c++)
-            {
-                var n = (r + 1) + (15 * c);
-                    <td class="@CssClass(n)">@bingo[c]-@n</td>
-            }
-            </tr>
+        <tr>
+        @for (int c = 0; c < 5; c++)
+        {
+            var n = (r + 1) + (15 * c);
+            <td class="@CssClass(n)">@bingo[c]-@n</td>
+        }
+        </tr>
     }
 </table>
 
@@ -21,13 +24,19 @@
     private int cardSize = 75;
     private HashSet<int> called = new HashSet<int>();
     private Random rnd = new Random();
+    private string lastCalled = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await PeerInterop.Host(this, "com-marckel-blazorbingo-X4DZ");
+    }
 
     private string CssClass(int n)
     {
         return called.Contains(n) ? "called" : string.Empty;
     }
 
-    private void Pick()
+    private async void Pick()
     {
         if (called.Count == cardSize) { return; }
         int x;
@@ -35,10 +44,14 @@
         {
             x = rnd.Next(1, cardSize + 1);
         } while (!called.Add(x));
+        int col = ((x - 1) / 15);
+        lastCalled = $"{bingo[col]}-{x}";
+        await PeerInterop.Broadcast(this, x.ToString());
     }
 
     private void Restart()
     {
         called.Clear();
+        lastCalled = string.Empty;
     }
 }

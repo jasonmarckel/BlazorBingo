@@ -17,12 +17,12 @@
         <div>
             <button @onclick="Host">Host</button>
             <div style="display:none;">
-                Game code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+                Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
             </div>
         </div>
 
         <div>
-            Game code:
+            Bingo Hall code:
             <input type="text" class="form-control" value="@joinCode" placeholder="enter code" />
             <button @onclick="Join">Join</button>
         </div>
@@ -76,10 +76,8 @@
     {
         gameMode = GameMode.Calling;
     }
-
     private void Join()
     {
         gameMode = GameMode.Playing;
     }
-
-    }
+}

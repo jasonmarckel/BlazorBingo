@@ -147,6 +147,7 @@
     {
         GenerateNewCard();
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
+        await PeerInterop.Connect(this, "com-marckel-blazorbingo-X4DZ");
     }
 
 }

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using BlazorBingo;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
@@ -10,5 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddBlazoredLocalStorage();
+
+await JSHost.ImportAsync("PeerJs", "../script/peerjsinterop.js");
 
 await builder.Build().RunAsync();
