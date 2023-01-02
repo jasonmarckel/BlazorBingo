@@ -156,10 +156,12 @@ a, .btn-link {
 .curling:before { content: "\1F94C"; }
 .dogface:before { content: "\1F436"; }
 .dollar:before { content: "$"; color: #85bb65; }
+.doughnut:before { content: "\1F369"; }
 .football:before { content: "\1F3C8"; }
 .golfer:before { content: "\1F3CC"; }
 .heart:before { content: "\2764"; color: red; }
 .hotdog:before { content: "\1F32D"; }
+.icecream:before { content: "\1F366"; }
 .kangaroo:before { content: "\1F998"; }
 .kiss:before { content: "\1F48B"; }
 .musicalnote:before { content: "\1F3B5"; }

@@ -17,60 +17,71 @@ function insertGlobalScript(url) {
 
 let peerjsExports;
 
-export async function host(component, id) {
+let peer;
+let conn;
+
+export async function host(id) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
     peerjsExports = await getAssemblyExports("BlazorBingo.dll");
 
     await insertGlobalScript('../lib/peerjs/peerjs.min.js');
-    const peer = new peerjs.Peer(id);
+    peer = new peerjs.Peer(id);
 
-    peer.on('connection', function (conn) {
-
-
-//        conn.on('data', function (data) {
-//            peerjsExports.PeerInterop.OnReceive(component, data);
-//            console.log(data);
-//        });
+    peer.on('open', function (id) {
+        console.log('My Peer Id is: ' + id);
     });
-
-    //hands.onResults(results => onResults(component, results));
-    //console.log("peer started");
-}
-
-
-export async function connect(component, id) {
-
-    const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
-    peerjsExports = await getAssemblyExports("BlazorBingo.dll");
-
-    await insertGlobalScript('../lib/peerjs/peerjs.min.js');
-    const peer = new peerjs.Peer();
-
-    var conn = peer.connect(id, {
-        serialization: "json",
-        reliable: true
-    });
-
-    peerConn = conn;
-
-    // on open will be launch when you successfully connect to PeerServer
-    conn.on('open', function () {
+    
+    peer.on('connection', function (conn2) {
+        conn = conn2;
+        console.log('received connection from ' + conn.peer + ' ' + conn.metadata.playerName);
         conn.on('data', function (data) {
-            peerjsExports.PeerInterop.OnReceive(component, data);
+//            peerjsExports.PeerInterop.OnReceive(component, data);
             console.log(data);
-        });      
+        });
     });
 }
 
-export async function send(component, message) {
-    console.log(message);
-    peerConn.send(message);
+export async function connect(remoteId, playerName) {
+
+    const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
+    peerjsExports = await getAssemblyExports("BlazorBingo.dll");
+
+    await insertGlobalScript('../lib/peerjs/peerjs.min.js');
+    peer = new peerjs.Peer();
+
+    peer.on('open', function (id) {
+        console.log('My Peer Id is: ' + id);
+        console.log('Remote Id:' + remoteId);
+        console.log('Player Name:' + playerName);
+        conn = peer.connect(remoteId, {
+            reliable: true,
+            metadata: {
+                playerName: playerName
+                }
+        });
+        conn.on("open", () => {
+            console.log('connected');
+            //conn.send("hi from " + id);
+        });
+        conn.on("data", (data) => {
+            console.log(data);
+        });
+    });
+
+    peer.on('error', function (err) {
+        console.log('error ' + err.type);
+    });
 }
 
-export async function broadcast(component, message) {
-    console.log(message);
-    peerConn.send(message);
+export async function send(id, message) {
+    console.log('send: ' + message + ' to ' + id);
+    conn.send(message);
+}
+
+export async function broadcast(message) {
+    console.log('broadcast: ' + message);
+    conn.send(message);
 }
 
 /*

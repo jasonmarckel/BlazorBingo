@@ -17,20 +17,22 @@ public partial class PeerInterop
 	{
     }
 
+    // [JSMarshalAs<JSType.Any>] object component
+
     [JSImport("host", "PeerJs")]
-    internal static partial Task Host([JSMarshalAs<JSType.Any>] object component, [JSMarshalAs<JSType.String>] string id);
+    internal static partial Task Host([JSMarshalAs<JSType.String>] string id);
 
     [JSImport("connect", "PeerJs")]
-    internal static partial Task Connect([JSMarshalAs<JSType.Any>] object component, [JSMarshalAs<JSType.String>] string id);
+    internal static partial Task Connect([JSMarshalAs<JSType.String>] string id, [JSMarshalAs<JSType.String>] string playerName);
 
     [JSImport("send", "PeerJs")]
-    internal static partial Task Send([JSMarshalAs<JSType.Any>] object component, [JSMarshalAs<JSType.String>] string id, [JSMarshalAs<JSType.String>] string message);
+    internal static partial Task Send([JSMarshalAs<JSType.String>] string id, [JSMarshalAs<JSType.String>] string message);
 
     [JSImport("broadcast", "PeerJs")]
-    internal static partial Task Broadcast([JSMarshalAs<JSType.Any>] object component, [JSMarshalAs<JSType.String>] string message);
+    internal static partial Task Broadcast([JSMarshalAs<JSType.String>] string message);
 
     [JSExport]
-    internal static void OnReceive([JSMarshalAs<JSType.Any>] object component, string json)
+    internal static void OnReceive(string json)
     {
         //DetectHands detectHands = (DetectHands)component;
         //detectHands.DetectionResult = JsonSerializer.Deserialize<DetectionResult>(json, DetectionResult.SerializeOptions);

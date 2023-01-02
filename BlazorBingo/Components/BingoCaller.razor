@@ -28,7 +28,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await PeerInterop.Host(this, "com-marckel-blazorbingo-X4DZ");
+        await PeerInterop.Host("com-marckel-blazorbingo-X4DZ");
     }
 
     private string CssClass(int n)
@@ -46,7 +46,7 @@
         } while (!called.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{bingo[col]}-{x}";
-        await PeerInterop.Broadcast(this, x.ToString());
+        await PeerInterop.Broadcast(x.ToString());
     }
 
     private void Restart()

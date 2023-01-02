@@ -45,17 +45,19 @@
         "Curling",
         "Dog Face",
         "Dollar",
+        "Doughnut",
         "Football",
         "Golfer",
         "Heart",
         "Hot Dog",
+        "Ice Cream",
         "Kangaroo",
         "Kiss",
-        "Musical note",
+        "Musical Note",
         "Neptune",
-        "Paw prints",
+        "Paw Prints",
         "Penguin",
-        "Ping pong",
+        "Ping Pong",
         "Present",
         "Scooter",
         "Smiley",
@@ -64,7 +66,7 @@
         "Strawberry",
         "Tennis",
         "Tractor",
-        "Video game controller"
+        "Video Game Controller"
     };
 
     private string _stampClass = string.Empty;
@@ -141,13 +143,15 @@
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
+        PeerInterop.Send("com-marckel-blazorbingo-X4DZ", $"square[{row},{col}]");
     }
 
     protected override async Task OnInitializedAsync()
     {
         GenerateNewCard();
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
-        await PeerInterop.Connect(this, "com-marckel-blazorbingo-X4DZ");
+        var playerName = await localStorage.GetItemAsync<string>("playerName");
+        await PeerInterop.Connect("com-marckel-blazorbingo-X4DZ", playerName);
     }
 
 }
