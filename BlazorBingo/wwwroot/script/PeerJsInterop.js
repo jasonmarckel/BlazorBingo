@@ -19,6 +19,7 @@ let peerjsExports;
 
 let peer;
 let conn;
+let conns = [];
 
 export async function host(id) {
 
@@ -32,9 +33,12 @@ export async function host(id) {
         console.log('My Peer Id is: ' + id);
     });
     
-    peer.on('connection', function (conn2) {
-        conn = conn2;
+    peer.on('connection', function (conn) {
+        conns.push(conn);
         console.log('received connection from ' + conn.peer + ' ' + conn.metadata.playerName);
+
+        peerjsExports.BlazorBingo.PeerInterop.OnConnected(conn.metadata.playerName);
+
         conn.on('data', function (data) {
 //            peerjsExports.PeerInterop.OnReceive(component, data);
             console.log(data);
@@ -81,7 +85,9 @@ export async function send(id, message) {
 
 export async function broadcast(message) {
     console.log('broadcast: ' + message);
-    conn.send(message);
+    conns.forEach(function (conn) {
+        conn.send(message);
+    });
 }
 
 /*

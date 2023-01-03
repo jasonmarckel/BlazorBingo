@@ -32,6 +32,12 @@ public partial class PeerInterop
     internal static partial Task Broadcast([JSMarshalAs<JSType.String>] string message);
 
     [JSExport]
+    internal static void OnConnected(string playerName)
+    {
+        Console.WriteLine(playerName + " connected.");
+    }
+
+    [JSExport]
     internal static void OnReceive(string json)
     {
         //DetectHands detectHands = (DetectHands)component;
