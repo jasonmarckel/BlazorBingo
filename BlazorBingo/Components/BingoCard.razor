@@ -32,6 +32,8 @@
 </InputSelect>
 
 @code {
+    private string hostId = string.Empty;
+
     private readonly string[] StampClasses = new string[]
     {
         "Random",
@@ -143,7 +145,7 @@
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
-        PeerInterop.Send("com-marckel-blazorbingo-X4DZ", $"square[{row},{col}]");
+        PeerInterop.NotifyHost($"square[{row},{col}]");
     }
 
     protected override async Task OnInitializedAsync()
@@ -151,7 +153,8 @@
         GenerateNewCard();
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         var playerName = await localStorage.GetItemAsync<string>("playerName");
-        await PeerInterop.Connect("com-marckel-blazorbingo-X4DZ", playerName);
+        hostId = "X4DZ";
+        await PeerInterop.Connect(hostId, playerName);
     }
 
 }

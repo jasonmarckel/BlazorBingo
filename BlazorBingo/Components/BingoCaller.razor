@@ -25,10 +25,12 @@
     private HashSet<int> called = new HashSet<int>();
     private Random rnd = new Random();
     private string lastCalled = string.Empty;
+    private string hostId = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        await PeerInterop.Host("com-marckel-blazorbingo-X4DZ");
+        hostId = "X4DZ";
+        await PeerInterop.Host(hostId);
     }
 
     private string CssClass(int n)
