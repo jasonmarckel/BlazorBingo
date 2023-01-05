@@ -145,7 +145,7 @@
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
-        PeerInterop.NotifyHost($"square[{row},{col}]");
+        Interop.NotifyHost($"square[{row},{col}]");
     }
 
     protected override async Task OnInitializedAsync()
@@ -154,7 +154,7 @@
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         var playerName = await localStorage.GetItemAsync<string>("playerName");
         hostId = "X4DZ";
-        await PeerInterop.Connect(hostId, playerName);
+        await Interop.Connect(hostId, playerName);
     }
 
 }

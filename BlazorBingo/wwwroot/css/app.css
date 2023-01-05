@@ -115,6 +115,11 @@ a, .btn-link {
     content: "\2699";
 }
 
+/* overlap == copy icon! == &#128471; */
+.copy:before {
+    content: "\1F5D7";
+}
+
 .prevent-select {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */

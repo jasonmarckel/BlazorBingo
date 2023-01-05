@@ -16,9 +16,6 @@
 
         <div>
             <button @onclick="Host">Host</button>
-            <div style="display:none;">
-                Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
-            </div>
         </div>
 
         <div>
@@ -36,7 +33,6 @@
 @code {
     protected Settings settings = new ();
 
-    string hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
     string joinCode = string.Empty;
 
     public enum GameMode

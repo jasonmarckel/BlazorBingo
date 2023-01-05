@@ -38,11 +38,11 @@ export async function host(id) {
         conns.push(conn);
         console.log('received connection from ' + conn.peer + ' ' + conn.metadata.playerName);
 
-        dotnetExports.BlazorBingo.PeerInterop.OnConnected(conn.metadata.playerName);
+        dotnetExports.BlazorBingo.Interop.OnConnected(conn.metadata.playerName);
 
         conn.on('data', function (data) {
             console.log(data);
-            dotnetExports.BlazorBingo.PeerInterop.OnDataReceived(data);
+            dotnetExports.BlazorBingo.Interop.OnDataReceived(data);
         });
     });
 
@@ -75,7 +75,7 @@ export async function connect(remoteId, playerName) {
         });
         hostConnection.on("data", (data) => {
             console.log(data);
-            dotnetExports.BlazorBingo.PeerInterop.OnDataReceived(data);
+            dotnetExports.BlazorBingo.Interop.OnDataReceived(data);
         });
     });
 
@@ -102,3 +102,25 @@ spinner.ontransitionend = () => {
     spinner.style.display = 'none';
 };
 */
+
+export async function shareUrl(title, text, url) {
+    if (navigator.share) {
+        navigator.share({
+            title: title,
+            text: text,
+            url: url,
+        })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+    } else {
+        console.log('Share not supported on this browser, do it the old way.');
+    }
+}
+
+export async function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function () {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function (err) {
+        console.error('Async: Could not copy text: ', err);
+    });
+}

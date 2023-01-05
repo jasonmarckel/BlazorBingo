@@ -1,5 +1,10 @@
 ﻿<h3>BingoCaller</h3>
 
+<div>
+    Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+    <button class="btn" @onclick="Copy" title="copy">&#128471;</button>
+</div>
+
 <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 <button type="button" class="btn btn-secondary" @onclick="Restart">New Game</button>
 
@@ -10,11 +15,11 @@
     @for (int r = 0; r < 15; r++)
     {
         <tr>
-        @for (int c = 0; c < 5; c++)
-        {
-            var n = (r + 1) + (15 * c);
-            <td class="@CssClass(n)">@bingo[c]-@n</td>
-        }
+            @for (int c = 0; c < 5; c++)
+            {
+                var n = (r + 1) + (15 * c);
+                <td class="@CssClass(n)">@bingo[c]-@n</td>
+            }
         </tr>
     }
 </table>
@@ -25,12 +30,15 @@
     private HashSet<int> called = new HashSet<int>();
     private Random rnd = new Random();
     private string lastCalled = string.Empty;
-    private string hostId = string.Empty;
+    private string hostCode = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        hostId = "X4DZ";
-        await PeerInterop.Host(hostId);
+        hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+#if DEBUG
+    hostCode = "X4DZ";
+#endif
+        await Interop.Host(hostCode);
     }
 
     private string CssClass(int n)
@@ -48,7 +56,12 @@
         } while (!called.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{bingo[col]}-{x}";
-        await PeerInterop.Broadcast(x.ToString());
+        await Interop.Broadcast(x.ToString());
+    }
+
+    private async void Copy()
+    {
+        await Interop.CopyToClipboard(hostCode);
     }
 
     private void Restart()

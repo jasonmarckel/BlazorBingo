@@ -9,11 +9,11 @@ using System.Text.Json.Serialization.Metadata;
 namespace BlazorBingo;
 
 [SupportedOSPlatform("browser")]
-public partial class PeerInterop
+public partial class Interop
 {
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(JsonTypeInfo))]
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(JsonSerializerContext))]
-    public PeerInterop()
+    public Interop()
 	{
     }
 
@@ -50,6 +50,15 @@ public partial class PeerInterop
         Console.WriteLine("OnDataReceived " + data);
         //detectHands.StateHasChanged();
     }
+
+    [JSImport("shareUrl", "PeerJs")]
+    internal static partial Task ShareUrl(
+        [JSMarshalAs<JSType.String>] string title,
+        [JSMarshalAs<JSType.String>] string text,
+        [JSMarshalAs<JSType.String>] string? url);
+
+    [JSImport("copyToClipboard", "PeerJs")]
+    internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
 
 }
 

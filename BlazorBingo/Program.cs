@@ -12,6 +12,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddBlazoredLocalStorage();
 
-await JSHost.ImportAsync("PeerJs", "../script/peerjsinterop.js");
+await JSHost.ImportAsync("PeerJs", "../script/interop.js");
 
 await builder.Build().RunAsync();
