@@ -31,8 +31,25 @@
     }
 </InputSelect>
 
+<button type="button" class="btn btn-success" @onclick="CallBingo">BINGO!</button>
+
+<div>
+    Called Numbers:
+    <ol style="column-count: 5;">
+        @foreach(var calledNumber in calledNumbers)
+        {
+            <li>@calledNumber</li>
+        }
+    </ol>
+</div>
+
 @code {
-    private string hostId = string.Empty;
+    [Parameter]
+    required public string HostCode { get; set; }
+
+    private string playerName = string.Empty;
+
+    private List<string> calledNumbers = new();
 
     private readonly string[] StampClasses = new string[]
     {
@@ -65,6 +82,7 @@
         "Smiley",
         "Snowman",
         "Soccer",
+        "Statue of Liberty",
         "Strawberry",
         "Tennis",
         "Tractor",
@@ -145,16 +163,19 @@
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
-        Interop.NotifyHost($"square[{row},{col}]");
+    }
+
+    protected void CallBingo()
+    {
+        Interop.NotifyHost("bingo", playerName);
     }
 
     protected override async Task OnInitializedAsync()
     {
         GenerateNewCard();
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
-        var playerName = await localStorage.GetItemAsync<string>("playerName");
-        hostId = "X4DZ";
-        await Interop.Connect(hostId, playerName);
+        playerName = await localStorage.GetItemAsync<string>("playerName");
+        await Interop.Connect(this, HostCode, playerName);
     }
 
 }

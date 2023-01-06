@@ -25,7 +25,7 @@
         </div>
     }
     @if (gameMode == GameMode.Playing)
-    {<BingoCard></BingoCard>}
+    {<BingoCard HostCode="@joinCode"></BingoCard>}
     @if (gameMode == GameMode.Calling)
     {<BingoCaller></BingoCaller>}
 </CascadingValue>
@@ -56,6 +56,9 @@
             settings.GamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
             settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
             gameMode = GameMode.Initializing;
+#if DEBUG
+            joinCode = "X4DZ";
+#endif
         }
         catch (Exception ex)
         {

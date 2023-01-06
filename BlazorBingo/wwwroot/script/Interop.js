@@ -21,7 +21,7 @@ let hostConnection;
 let conns = [];
 const hostDomain = "net-marckel-blazorbingo-";
 
-export async function host(id) {
+export async function host(component, id) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
     dotnetExports = await getAssemblyExports("BlazorBingo.dll");
@@ -36,13 +36,17 @@ export async function host(id) {
     
     peer.on('connection', function (conn) {
         conns.push(conn);
-        console.log('received connection from ' + conn.peer + ' ' + conn.metadata.playerName);
-
-        dotnetExports.BlazorBingo.Interop.OnConnected(conn.metadata.playerName);
+        var playerName = conn.metadata.playerName;
+        //console.log('received connection from ' + conn.peer + ' ' + playerName);
+        dotnetExports.BlazorBingo.Interop.OnDataReceived(component, "connected", playerName);
 
         conn.on('data', function (data) {
-            console.log(data);
-            dotnetExports.BlazorBingo.Interop.OnDataReceived(data);
+            //console.log(data);
+            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, data.messageType, data.message);
+        });
+        conn.on('close', function () {
+            //console.log('connection to ' + playerName + ' has been closed.');
+            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, "disconnected", playerName);
         });
     });
 
@@ -51,7 +55,7 @@ export async function host(id) {
     });
 }
 
-export async function connect(remoteId, playerName) {
+export async function connect(component, remoteId, playerName) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
     dotnetExports = await getAssemblyExports("BlazorBingo.dll");
@@ -62,8 +66,8 @@ export async function connect(remoteId, playerName) {
 
     peer.on('open', function (id) {
         console.log('My Peer Id is: ' + id);
-        console.log('Remote Id:' + remoteId);
-        console.log('Player Name:' + playerName);
+        console.log('Remote Id: ' + remoteId);
+        console.log('Player Name: ' + playerName);
         hostConnection = peer.connect(hostDomain + remoteId, {
             reliable: true,
             metadata: {
@@ -74,8 +78,11 @@ export async function connect(remoteId, playerName) {
             console.log('connected');
         });
         hostConnection.on("data", (data) => {
-            console.log(data);
-            dotnetExports.BlazorBingo.Interop.OnDataReceived(data);
+            //console.log(data);
+            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, data.messageType, data.message);
+        });
+        hostConnection.on('close', function () {
+            console.log('connection to host has been closed.');
         });
     });
 
@@ -84,24 +91,25 @@ export async function connect(remoteId, playerName) {
     });
 }
 
-export async function notifyHost(message) {
-    console.log('notifyHost: ' + message);
-    hostConnection.send(message);
+export async function notifyHost(messageType, message) {
+    //console.log(`notifyHost (${messageType}): ${message}`);
+    let data = {
+        messageType: messageType,
+        message: message,
+    };
+    hostConnection.send(data);
 }
 
-export async function broadcast(message) {
-    console.log('broadcast: ' + message);
+export async function broadcast(messageType, message) {
+    //console.log(`broadcast (${messageType}): ${message}`);
+    let data = {
+        messageType: messageType,
+        message: message,
+    };
     conns.forEach(function (conn) {
-        conn.send(message);
+        conn.send(data);
     });
 }
-
-/*
-const spinner = document.querySelector('.loading');
-spinner.ontransitionend = () => {
-    spinner.style.display = 'none';
-};
-*/
 
 export async function shareUrl(title, text, url) {
     if (navigator.share) {
@@ -110,17 +118,9 @@ export async function shareUrl(title, text, url) {
             text: text,
             url: url,
         })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error sharing', error));
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
     } else {
         console.log('Share not supported on this browser, do it the old way.');
     }
-}
-
-export async function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function () {
-        console.log('Async: Copying to clipboard was successful!');
-    }, function (err) {
-        console.error('Async: Could not copy text: ', err);
-    });
 }

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Versioning;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+
+// https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/import-export-interop?view=aspnetcore-7.0#call-javascript-from-net
 
 namespace BlazorBingo;
 
@@ -18,36 +21,36 @@ public partial class Interop
     }
 
     [JSImport("host", "PeerJs")]
-    internal static partial Task Host([JSMarshalAs<JSType.String>] string id);
+    internal static partial Task Host(
+        [JSMarshalAs<JSType.Any>] object component,
+        [JSMarshalAs<JSType.String>] string id);
 
     [JSImport("connect", "PeerJs")]
-    internal static partial Task Connect([JSMarshalAs<JSType.String>] string remoteId, [JSMarshalAs<JSType.String>] string playerName);
+    internal static partial Task Connect(
+        [JSMarshalAs<JSType.Any>] object component, 
+        [JSMarshalAs<JSType.String>] string remoteId, 
+        [JSMarshalAs<JSType.String>] string playerName);
 
     [JSImport("broadcast", "PeerJs")]
-    internal static partial Task Broadcast([JSMarshalAs<JSType.String>] string message);
+    internal static partial Task Broadcast(
+        [JSMarshalAs<JSType.String>] string messageType,
+        [JSMarshalAs<JSType.String>] string message);
 
     [JSImport("notifyHost", "PeerJs")]
-    internal static partial Task NotifyHost([JSMarshalAs<JSType.String>] string message);
+    internal static partial Task NotifyHost(
+        [JSMarshalAs<JSType.String>] string messageType,
+        [JSMarshalAs<JSType.String>] string message);
 
     [JSExport]
-    internal static void OnConnected(string playerName)
+    internal static void OnDataReceived(
+        [JSMarshalAs<JSType.Any>] object component,
+        string messageType, 
+        string data)
     {
-        Console.WriteLine(playerName + " connected.");
-    }
-
-    [JSExport]
-    internal static void OnDisconnected(string playerName)
-    {
-        Console.WriteLine(playerName + " disconnected.");
-    }
-
-    [JSExport]
-    internal static void OnDataReceived(string data)
-    {
-        // [JSMarshalAs<JSType.Any>] object component
+        ((IMessageHandler)component).HandleMessage(messageType, data);
+        //Console.WriteLine(messageType + ": " + data);
         //DetectHands detectHands = (DetectHands)component;
         //detectHands.DetectionResult = JsonSerializer.Deserialize<DetectionResult>(json, DetectionResult.SerializeOptions);
-        Console.WriteLine("OnDataReceived " + data);
         //detectHands.StateHasChanged();
     }
 
@@ -57,7 +60,7 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string text,
         [JSMarshalAs<JSType.String>] string? url);
 
-    [JSImport("copyToClipboard", "PeerJs")]
+    [JSImport("globalThis.navigator.clipboard.writeText")]
     internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
 
 }

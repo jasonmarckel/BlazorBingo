@@ -8,7 +8,7 @@
 <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 <button type="button" class="btn btn-secondary" @onclick="Restart">New Game</button>
 
-<label># of calls: @called.Count</label>
+<label># of calls: @calledNumbers.Count</label>
 <label>Last called: @lastCalled</label>
 
 <table id="CallerCard">
@@ -18,19 +18,32 @@
             @for (int c = 0; c < 5; c++)
             {
                 var n = (r + 1) + (15 * c);
-                <td class="@CssClass(n)">@bingo[c]-@n</td>
+                <td class="@GetCssClass(n)">@bingo[c]-@n</td>
             }
         </tr>
     }
 </table>
 
+<ol>
+    @foreach(var player in players)
+    {
+        <li>@player</li>
+    }
+</ol>
+
+<div>
+    @notificationMessage;
+</div>
+
 @code {
     private char[] bingo = new char[] { 'B', 'I', 'N', 'G', 'O' };
     private int cardSize = 75;
-    private HashSet<int> called = new HashSet<int>();
+    private HashSet<int> calledNumbers = new HashSet<int>();
     private Random rnd = new Random();
     private string lastCalled = string.Empty;
     private string hostCode = string.Empty;
+    private SortedSet<string> players = new();
+    private string notificationMessage = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,25 +51,25 @@
 #if DEBUG
     hostCode = "X4DZ";
 #endif
-        await Interop.Host(hostCode);
+        await Interop.Host(this, hostCode);
     }
 
-    private string CssClass(int n)
+    private string GetCssClass(int n)
     {
-        return called.Contains(n) ? "called" : string.Empty;
+        return calledNumbers.Contains(n) ? "called" : string.Empty;
     }
 
     private async void Pick()
     {
-        if (called.Count == cardSize) { return; }
+        if (calledNumbers.Count == cardSize) { return; }
         int x;
         do
         {
             x = rnd.Next(1, cardSize + 1);
-        } while (!called.Add(x));
+        } while (!calledNumbers.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{bingo[col]}-{x}";
-        await Interop.Broadcast(x.ToString());
+        await Interop.Broadcast("pick", x.ToString());
     }
 
     private async void Copy()
@@ -66,7 +79,8 @@
 
     private void Restart()
     {
-        called.Clear();
+        calledNumbers.Clear();
         lastCalled = string.Empty;
     }
+
 }
