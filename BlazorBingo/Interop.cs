@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Versioning;
@@ -44,8 +43,8 @@ public partial class Interop
     [JSExport]
     internal static void OnDataReceived(
         [JSMarshalAs<JSType.Any>] object component,
-        string messageType, 
-        string data)
+        [JSMarshalAs<JSType.String>] string messageType,
+        [JSMarshalAs<JSType.String>] string data)
     {
         ((IMessageHandler)component).HandleMessage(messageType, data);
         //Console.WriteLine(messageType + ": " + data);
@@ -62,6 +61,4 @@ public partial class Interop
 
     [JSImport("globalThis.navigator.clipboard.writeText")]
     internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
-
 }
-
