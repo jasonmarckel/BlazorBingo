@@ -100,6 +100,10 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+input.gameCode {
+    text-transform: uppercase;
+}
+
 :root {
     /* https://css-tricks.com/snippets/css/system-font-stack/ */
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
