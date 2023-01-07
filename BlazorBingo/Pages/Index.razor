@@ -16,7 +16,7 @@
         <div class="row">
             <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
             <div class="col-auto">
-                <input type="text" id="gameCode" class="form-control" value="@gameCode" placeholder="enter code" />
+                <input type="text" id="gameCode" class="form-control gameCode" @bind="gameCode" placeholder="enter code" />
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
@@ -27,7 +27,7 @@
         </div>
     }
     @if (gameMode == GameMode.Playing)
-    {<BingoCard HostCode="@gameCode"></BingoCard>}
+    {<BingoCard GameCode="@gameCode"></BingoCard>}
     @if (gameMode == GameMode.Calling)
     {<BingoCaller></BingoCaller>}
 </CascadingValue>

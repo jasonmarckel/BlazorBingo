@@ -65,7 +65,7 @@
 
 @code {
     [Parameter]
-    required public string HostCode { get; set; }
+    required public string GameCode { get; set; }
 
     private string playerName = string.Empty;
 
@@ -219,7 +219,7 @@
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         playerName = await localStorage.GetItemAsync<string>("playerName");
         await Interop.InitVoices();
-        await Interop.Connect(this, HostCode, playerName);
+        await Interop.Connect(this, GameCode, playerName);
     }
 
 }
