@@ -31,16 +31,36 @@
     }
 </InputSelect>
 
+<div>
+    <label>Caller Voice</label>
+    <select id="voiceSelect"></select>
+</div>
+
 <button type="button" class="btn btn-success" @onclick="CallBingo">BINGO!</button>
 
 <div>
-    Called Numbers:
-    <ol style="column-count: 5;">
-        @foreach(var calledNumber in calledNumbers)
-        {
-            <li>@calledNumber</li>
-        }
-    </ol>
+    <table id="calledNumbersBoard">
+        <tr>
+            <td>B</td>
+            <td>@string.Join(',', calledNumbers["B"].ToArray())</td>
+        </tr>
+        <tr>
+            <td>I</td>
+            <td>@string.Join(',', calledNumbers["I"].ToArray())</td>
+        </tr>
+        <tr>
+            <td>N</td>
+            <td>@string.Join(',', calledNumbers["N"].ToArray())</td>
+        </tr>
+        <tr>
+            <td>G</td>
+            <td>@string.Join(',', calledNumbers["G"].ToArray())</td>
+        </tr>
+        <tr>
+            <td>O</td>
+            <td>@string.Join(',', calledNumbers["O"].ToArray())</td>
+        </tr>
+    </table>
 </div>
 
 @code {
@@ -49,7 +69,14 @@
 
     private string playerName = string.Empty;
 
-    private List<string> calledNumbers = new();
+    private Dictionary<string, SortedSet<int>> calledNumbers = new()
+    {
+        { "B", new() },
+        { "I", new() },
+        { "N", new() },
+        { "G", new() },
+        { "O", new() },
+    };
 
     private readonly string[] StampClasses = new string[]
     {
@@ -165,6 +192,22 @@
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
     }
 
+    protected void ClearCard()
+    {
+        foreach (var key in calledNumbers.Keys)
+        {
+            calledNumbers[key].Clear();
+        }
+        for (int c = 0; c < 5; c++)
+        {
+            for (int r = 0; r < 5; r++)
+            {
+                if (c == 2 && r == 2) { continue; }
+                squares[r, c].StampClass = string.Empty;
+            }
+        }
+    }
+
     protected void CallBingo()
     {
         Interop.NotifyHost("bingo", playerName);
@@ -175,6 +218,7 @@
         GenerateNewCard();
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         playerName = await localStorage.GetItemAsync<string>("playerName");
+        await Interop.InitVoices();
         await Interop.Connect(this, HostCode, playerName);
     }
 

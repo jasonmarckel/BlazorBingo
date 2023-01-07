@@ -1,7 +1,7 @@
 ﻿<h3>BingoCaller</h3>
 
 <div>
-    Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@hostCode</span>
+    Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@gameCode</span>
     <button class="btn" @onclick="Copy" title="copy">&#128471;</button>
 </div>
 
@@ -24,6 +24,7 @@
     }
 </table>
 
+<label>Players</label>
 <ol>
     @foreach(var player in players)
     {
@@ -32,7 +33,7 @@
 </ol>
 
 <div>
-    @notificationMessage;
+    @notificationMessage
 </div>
 
 @code {
@@ -41,17 +42,17 @@
     private HashSet<int> calledNumbers = new HashSet<int>();
     private Random rnd = new Random();
     private string lastCalled = string.Empty;
-    private string hostCode = string.Empty;
+    private string gameCode = string.Empty;
     private SortedSet<string> players = new();
     private string notificationMessage = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        hostCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+        gameCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
 #if DEBUG
-    hostCode = "X4DZ";
+    gameCode = "X4DZ";
 #endif
-        await Interop.Host(this, hostCode);
+        await Interop.Host(this, gameCode);
     }
 
     private string GetCssClass(int n)
@@ -69,18 +70,20 @@
         } while (!calledNumbers.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{bingo[col]}-{x}";
-        await Interop.Broadcast("pick", x.ToString());
+        await Interop.Broadcast("pick", lastCalled);
     }
 
     private async void Copy()
     {
-        await Interop.CopyToClipboard(hostCode);
+        await Interop.CopyToClipboard(gameCode);
     }
 
-    private void Restart()
+    private async void Restart()
     {
         calledNumbers.Clear();
         lastCalled = string.Empty;
+        notificationMessage = string.Empty;
+        await Interop.Broadcast("restart", "");
     }
 
 }

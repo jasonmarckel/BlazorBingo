@@ -19,3 +19,10 @@
         font-size: 3rem;
         padding: 0;
     }
+
+#calledNumbersBoard td {
+    font-weight: bold;
+}
+#calledNumbersBoard td:first-child {
+    text-align: center;
+}

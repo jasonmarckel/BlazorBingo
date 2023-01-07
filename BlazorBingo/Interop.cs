@@ -19,23 +19,23 @@ public partial class Interop
 	{
     }
 
-    [JSImport("host", "PeerJs")]
+    [JSImport("host", "interopModule")]
     internal static partial Task Host(
         [JSMarshalAs<JSType.Any>] object component,
         [JSMarshalAs<JSType.String>] string id);
 
-    [JSImport("connect", "PeerJs")]
+    [JSImport("connect", "interopModule")]
     internal static partial Task Connect(
         [JSMarshalAs<JSType.Any>] object component, 
         [JSMarshalAs<JSType.String>] string remoteId, 
         [JSMarshalAs<JSType.String>] string playerName);
 
-    [JSImport("broadcast", "PeerJs")]
+    [JSImport("broadcast", "interopModule")]
     internal static partial Task Broadcast(
         [JSMarshalAs<JSType.String>] string messageType,
         [JSMarshalAs<JSType.String>] string message);
 
-    [JSImport("notifyHost", "PeerJs")]
+    [JSImport("notifyHost", "interopModule")]
     internal static partial Task NotifyHost(
         [JSMarshalAs<JSType.String>] string messageType,
         [JSMarshalAs<JSType.String>] string message);
@@ -53,7 +53,7 @@ public partial class Interop
         //detectHands.StateHasChanged();
     }
 
-    [JSImport("shareUrl", "PeerJs")]
+    [JSImport("shareUrl", "interopModule")]
     internal static partial Task ShareUrl(
         [JSMarshalAs<JSType.String>] string title,
         [JSMarshalAs<JSType.String>] string text,
@@ -61,4 +61,10 @@ public partial class Interop
 
     [JSImport("globalThis.navigator.clipboard.writeText")]
     internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
+
+    [JSImport("initVoices", "interopModule")]
+    internal static partial Task InitVoices();
+
+    [JSImport("speak", "interopModule")]
+    internal static partial Task Speak([JSMarshalAs<JSType.String>] string inputText);
 }

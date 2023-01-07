@@ -7,25 +7,27 @@
 <CascadingValue Value="@settings">
     @if (gameMode == GameMode.Initializing)
     {
-        <div class="form-group">
-            <label>
-                Name:
-                <input type="text" class="form-control" value="@settings!.PlayerName" @onchange="NameChanged" placeholder="player name" />
-            </label>
+        <div class="row">
+            <label for="playerName" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" id="playerName" class="form-control" value="@settings!.PlayerName" @onchange="NameChanged" placeholder="player name" />            
+            </div>
         </div>
-
-        <div>
-            <button @onclick="Host">Host</button>
-        </div>
-
-        <div>
-            Bingo Hall code:
-            <input type="text" class="form-control" value="@joinCode" placeholder="enter code" />
-            <button @onclick="Join">Join</button>
+        <div class="row">
+            <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
+            <div class="col-auto">
+                <input type="text" id="gameCode" class="form-control" value="@gameCode" placeholder="enter code" />
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-secondary" @onclick="Host">Host</button>
+            </div>
         </div>
     }
     @if (gameMode == GameMode.Playing)
-    {<BingoCard HostCode="@joinCode"></BingoCard>}
+    {<BingoCard HostCode="@gameCode"></BingoCard>}
     @if (gameMode == GameMode.Calling)
     {<BingoCaller></BingoCaller>}
 </CascadingValue>
@@ -33,7 +35,7 @@
 @code {
     protected Settings settings = new ();
 
-    string joinCode = string.Empty;
+    string gameCode = string.Empty;
 
     public enum GameMode
     {
@@ -57,7 +59,7 @@
             settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
             gameMode = GameMode.Initializing;
 #if DEBUG
-            joinCode = "X4DZ";
+            gameCode = "X4DZ";
 #endif
         }
         catch (Exception ex)
