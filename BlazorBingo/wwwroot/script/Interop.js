@@ -1,4 +1,4 @@
-﻿// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
+// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
 // https://github.com/mdn/dom-examples/tree/main/web-speech-api/speak-easy-synthesis
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
 
