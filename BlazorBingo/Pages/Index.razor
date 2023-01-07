@@ -27,7 +27,7 @@
         </div>
     }
     @if (gameMode == GameMode.Playing)
-    {<BingoCard GameCode="@gameCode"></BingoCard>}
+    {<BingoCard GameCode="@gameCode.ToUpperInvariant()"></BingoCard>}
     @if (gameMode == GameMode.Calling)
     {<BingoCaller></BingoCaller>}
 </CascadingValue>
@@ -58,9 +58,6 @@
             settings.GamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
             settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
             gameMode = GameMode.Initializing;
-#if DEBUG
-            gameCode = "X4DZ";
-#endif
         }
         catch (Exception ex)
         {
