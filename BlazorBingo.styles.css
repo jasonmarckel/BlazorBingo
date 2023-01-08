@@ -42,17 +42,63 @@
         color: white;
     }
 /* /Components/Flashboard.razor.rz.scp.css */
-#calledNumbersBoard td[b-rje6ibnkdw] {
-    font-weight: bold;
+#flashboard[b-rje6ibnkdw] {
+    border-style: solid;
+    border-color: black;
+    border-radius: 0.5rem;
+    display: inline-block;
+    padding: 0.3rem;
     background-color: black;
-    color: white;
 }
 
-    #calledNumbersBoard td:first-child[b-rje6ibnkdw] {
+#flashboard table[b-rje6ibnkdw] {
+    background-color: black;
+}
+
+    #flashboard td[b-rje6ibnkdw] {
+        font-weight: bold;
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        border-color: #400000;
+        border-width: 1px;
+    }
+
+    #flashboard td:first-child[b-rje6ibnkdw] {
         text-align: center;
         background-color: white;
         color: red;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        border-width: 0;
     }
+
+    #flashboard tr:first-child td[b-rje6ibnkdw] {
+        border-top-style: none;
+    }
+
+    #flashboard tr:last-child td[b-rje6ibnkdw] {
+        border-bottom-style: none;
+    }
+
+    #flashboard td:last-child[b-rje6ibnkdw] {
+        border-right-style: none;
+    }
+
+.showNumber[b-rje6ibnkdw] {
+    visibility: visible;
+}
+
+.hideNumber[b-rje6ibnkdw] {
+    visibility: hidden;
+}
+
+#flashboard td.lastCalled[b-rje6ibnkdw] {
+    visibility: visible;
+    color: yellow;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-wo9qagrdy7] {
     position: relative;
