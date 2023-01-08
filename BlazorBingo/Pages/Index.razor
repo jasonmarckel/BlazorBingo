@@ -26,15 +26,6 @@
                 <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-auto">
-                <br />
-                <small>version <code style="color:black;">23.01.08.03</code></small>
-                <br/>
-                <small><a href="javascript:location.reload(true)">check for update</a></small>
-            </div>
-        </div>
     }
     @if (gameMode == GameMode.Playing)
     {<BingoCard GameCode="@gameCode"></BingoCard>}
