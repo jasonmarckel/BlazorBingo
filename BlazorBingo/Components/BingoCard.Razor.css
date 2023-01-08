@@ -1,5 +1,6 @@
 ﻿#BingoCard {
     width: 100%;
+    background-color: dodgerblue;
 }
 
     #BingoCard td {
@@ -11,6 +12,8 @@
         padding-bottom: 5%;
         padding-top: 5%;
         position: relative;
+        background-color: white;
+        color: black;
     }
 
     #BingoCard thead td {
@@ -18,11 +21,7 @@
         font-weight: 900;
         font-size: 3rem;
         padding: 0;
+        border-color: dodgerblue;
+        background-color: dodgerblue;
+        color: white;
     }
-
-#calledNumbersBoard td {
-    font-weight: bold;
-}
-#calledNumbersBoard td:first-child {
-    text-align: center;
-}

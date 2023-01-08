@@ -1,0 +1,11 @@
+﻿#calledNumbersBoard td {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+}
+
+    #calledNumbersBoard td:first-child {
+        text-align: center;
+        background-color: white;
+        color: red;
+    }

@@ -100,6 +100,12 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
 input.gameCode {
     text-transform: uppercase;
 }
@@ -108,26 +114,21 @@ input.gameCode {
     /* https://css-tricks.com/snippets/css/system-font-stack/ */
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+.symbol {
+    font-family: var(--system-ui);
+}
 
 .info-circle:before {
-    font-size: larger;
     content: "\1f6c8";
 }
 
-.gear-emoji:before {
-    font-family: var(--system-ui);
+.gear:before {
     content: "\2699";
 }
 
 /* overlap == copy icon! == &#128471; */
 .copy:before {
     content: "\1F5D7";
-}
-
-.prevent-select {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
 }
 
 /* stamps */
@@ -146,8 +147,12 @@ input.gameCode {
 
 /* https://unicode-table.com/en/ */
 
-.blackstar:before {
+.solidstar:before {
     content: "\2605";
+}
+
+.blue {
+    color: dodgerblue;
 }
 
 .random:before {

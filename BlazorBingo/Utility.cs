@@ -7,9 +7,6 @@ public class Utility
     // https://stackoverflow.com/questions/51999902/rngcryptoserviceprovider-getbytes-how-to-restrict-return-values
     // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rngcryptoserviceprovider.getbytes?view=net-6.0
 
-    public const string URL_KEY_CHARS = "bcdfghjkmnpqrstvwxyz23456789";
-    public const string BINGO_KEY_CHARS = "BCDFGHJKMNPQRSTVWXYZ0123456789";
-
     public static string GenerateKey(int keySize, string possibleCharacters)
     {
         if (keySize < 1 || keySize > 256) { throw new ArgumentOutOfRangeException("keySize", "size must be between 1 and 256."); }

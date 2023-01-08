@@ -1,0 +1,52 @@
+﻿<div>
+    <table id="calledNumbersBoard">
+        <tr>
+            <td>B</td>
+            <td>@string.Join(',', calledNumbers['B'].ToArray())</td>
+        </tr>
+        <tr>
+            <td>I</td>
+            <td>@string.Join(',', calledNumbers['I'].ToArray())</td>
+        </tr>
+        <tr>
+            <td>N</td>
+            <td>@string.Join(',', calledNumbers['N'].ToArray())</td>
+        </tr>
+        <tr>
+            <td>G</td>
+            <td>@string.Join(',', calledNumbers['G'].ToArray())</td>
+        </tr>
+        <tr>
+            <td>O</td>
+            <td>@string.Join(',', calledNumbers['O'].ToArray())</td>
+        </tr>
+    </table>
+</div>
+
+@code {
+
+    private Dictionary<char, SortedSet<int>> calledNumbers = new()
+    {
+        { 'B', new() },
+        { 'I', new() },
+        { 'N', new() },
+        { 'G', new() },
+        { 'O', new() },
+    };
+
+    public void Add(char col, int val)
+    {
+        calledNumbers[col].Add(val);
+        this.StateHasChanged(); // force the UI to refresh
+    }
+
+    public void ClearBoard()
+    {
+        foreach (var key in calledNumbers.Keys)
+        {
+            calledNumbers[key].Clear();
+        }
+        this.StateHasChanged(); // force the UI to refresh
+    }
+
+}

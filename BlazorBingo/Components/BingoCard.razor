@@ -38,30 +38,7 @@
 
 <button type="button" class="btn btn-success" @onclick="CallBingo">BINGO!</button>
 
-<div>
-    <table id="calledNumbersBoard">
-        <tr>
-            <td>B</td>
-            <td>@string.Join(',', calledNumbers["B"].ToArray())</td>
-        </tr>
-        <tr>
-            <td>I</td>
-            <td>@string.Join(',', calledNumbers["I"].ToArray())</td>
-        </tr>
-        <tr>
-            <td>N</td>
-            <td>@string.Join(',', calledNumbers["N"].ToArray())</td>
-        </tr>
-        <tr>
-            <td>G</td>
-            <td>@string.Join(',', calledNumbers["G"].ToArray())</td>
-        </tr>
-        <tr>
-            <td>O</td>
-            <td>@string.Join(',', calledNumbers["O"].ToArray())</td>
-        </tr>
-    </table>
-</div>
+<Flashboard @ref="flashboard"></Flashboard>
 
 @code {
     [Parameter]
@@ -69,14 +46,7 @@
 
     private string playerName = string.Empty;
 
-    private Dictionary<string, SortedSet<int>> calledNumbers = new()
-    {
-        { "B", new() },
-        { "I", new() },
-        { "N", new() },
-        { "G", new() },
-        { "O", new() },
-    };
+    private Flashboard? flashboard { get; set; }
 
     private readonly string[] StampClasses = new string[]
     {
@@ -170,7 +140,7 @@
                 if (c == 2 && r == 2)
                 {
                     squares[r, c].Value = "&nbsp;"; //FREE
-                    squares[r, c].StampClass = "stamp blackstar";
+                    squares[r, c].StampClass = "stamp solidstar blue";
                 }
             }
         }
@@ -194,10 +164,7 @@
 
     protected void ClearCard()
     {
-        foreach (var key in calledNumbers.Keys)
-        {
-            calledNumbers[key].Clear();
-        }
+        flashboard!.ClearBoard();
         for (int c = 0; c < 5; c++)
         {
             for (int r = 0; r < 5; r++)
@@ -219,7 +186,7 @@
         _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         playerName = await localStorage.GetItemAsync<string>("playerName");
         await Interop.InitVoices();
-        await Interop.Connect(this, GameCode, playerName);
+        await Interop.Connect(this, GameCode.ToUpperInvariant(), playerName);
     }
 
 }

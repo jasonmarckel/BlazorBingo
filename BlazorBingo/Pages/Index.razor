@@ -9,10 +9,14 @@
     {
         <div class="row">
             <label for="playerName" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
+            <div class="col-auto">
                 <input type="text" id="playerName" class="form-control" value="@settings!.PlayerName" @onchange="NameChanged" placeholder="player name" />            
             </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-secondary" @onclick="Host">Host</button>
+            </div>
         </div>
+        <br />
         <div class="row">
             <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
             <div class="col-auto">
@@ -21,13 +25,17 @@
             <div class="col-auto">
                 <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
             <div class="col-auto">
-                <button type="button" class="btn btn-outline-secondary" @onclick="Host">Host</button>
+                <br />
+                <small>version <code style="color:black;">23.01.08.01</code></small>
             </div>
         </div>
     }
     @if (gameMode == GameMode.Playing)
-    {<BingoCard GameCode="@gameCode.ToUpperInvariant()"></BingoCard>}
+    {<BingoCard GameCode="@gameCode"></BingoCard>}
     @if (gameMode == GameMode.Calling)
     {<BingoCaller></BingoCaller>}
 </CascadingValue>
@@ -58,6 +66,9 @@
             settings.GamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
             settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
             gameMode = GameMode.Initializing;
+#if DEBUG
+            gameCode = "0000";
+#endif
         }
         catch (Exception ex)
         {

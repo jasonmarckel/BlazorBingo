@@ -1,9 +1,7 @@
-﻿<h3>BingoCaller</h3>
-
-<div>
-    Bingo Hall code: <span style="font-family:monospace; font-weight:bold;">@gameCode</span>
-    <button class="btn" @onclick="Copy" title="copy">&#128471;</button>
-</div>
+﻿<h3>
+    Bingo Hall 
+    <span style="font-family:monospace; font-weight:bold;">@gameCode</span><button @onclick="Copy" title="copy" class="symbol" style="border:none; background-color:transparent;">&#128471;</button>
+</h3>
 
 <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 <button type="button" class="btn btn-secondary" @onclick="Restart">New Game</button>
@@ -11,26 +9,15 @@
 <label># of calls: @calledNumbers.Count</label>
 <label>Last called: @lastCalled</label>
 
-<table id="CallerCard">
-    @for (int r = 0; r < 15; r++)
-    {
-        <tr>
-            @for (int c = 0; c < 5; c++)
-            {
-                var n = (r + 1) + (15 * c);
-                <td class="@GetCssClass(n)">@bingo[c]-@n</td>
-            }
-        </tr>
-    }
-</table>
+<Flashboard @ref="flashboard"></Flashboard>
 
 <label>Players</label>
-<ol>
+<ul>
     @foreach(var player in players)
     {
         <li>@player</li>
     }
-</ol>
+</ul>
 
 <div>
     @notificationMessage
@@ -46,18 +33,17 @@
     private SortedSet<string> players = new();
     private string notificationMessage = string.Empty;
 
+    private Flashboard? flashboard { get; set; }
+
+    private const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
+
     protected override async Task OnInitializedAsync()
     {
-        gameCode = Utility.GenerateKey(4, Utility.BINGO_KEY_CHARS);
+        gameCode = Utility.GenerateKey(4, BINGO_KEY_CHARS);
 #if DEBUG
-    gameCode = "X4DZ";
+    gameCode = "0000";
 #endif
         await Interop.Host(this, gameCode);
-    }
-
-    private string GetCssClass(int n)
-    {
-        return calledNumbers.Contains(n) ? "called" : string.Empty;
     }
 
     private async void Pick()
@@ -70,6 +56,7 @@
         } while (!calledNumbers.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{bingo[col]}-{x}";
+        flashboard!.Add(bingo[col], x);
         await Interop.Broadcast("pick", lastCalled);
     }
 
@@ -80,6 +67,7 @@
 
     private async void Restart()
     {
+        flashboard!.ClearBoard();
         calledNumbers.Clear();
         lastCalled = string.Empty;
         notificationMessage = string.Empty;
