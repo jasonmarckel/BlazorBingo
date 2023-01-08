@@ -1,52 +1,43 @@
-﻿<div>
-    <table id="calledNumbersBoard">
-        <tr>
-            <td>B</td>
-            <td>@string.Join(',', calledNumbers['B'].ToArray())</td>
-        </tr>
-        <tr>
-            <td>I</td>
-            <td>@string.Join(',', calledNumbers['I'].ToArray())</td>
-        </tr>
-        <tr>
-            <td>N</td>
-            <td>@string.Join(',', calledNumbers['N'].ToArray())</td>
-        </tr>
-        <tr>
-            <td>G</td>
-            <td>@string.Join(',', calledNumbers['G'].ToArray())</td>
-        </tr>
-        <tr>
-            <td>O</td>
-            <td>@string.Join(',', calledNumbers['O'].ToArray())</td>
-        </tr>
+﻿<div id="flashboard">
+    <table>
+        @for (int r = 0; r < BINGO.Length; r++)
+        {
+            <tr>
+                <td>@BINGO[r]</td>
+                @for (int i = 0; i < z; i++)
+                {
+                    int n = (r * z) + i + 1;
+                    <td class="@GetCssClass(n)">@n</td>
+                }
+            </tr>
+        }
     </table>
 </div>
 
 @code {
+    private const string BINGO = "BINGO";
+    private const int boardSize = 75;
+    private int z = boardSize / 5;
+    private HashSet<int> calledNumbers = new HashSet<int>();
+    private int lastCalled = 0;
 
-    private Dictionary<char, SortedSet<int>> calledNumbers = new()
+    private string GetCssClass(int n)
     {
-        { 'B', new() },
-        { 'I', new() },
-        { 'N', new() },
-        { 'G', new() },
-        { 'O', new() },
-    };
+        if (n == lastCalled) { return "lastCalled"; }
+        return calledNumbers.Contains(n) ? "showNumber" : "hideNumber";
+    }
 
-    public void Add(char col, int val)
+    public void Add(int val)
     {
-        calledNumbers[col].Add(val);
+        lastCalled = val;
+        calledNumbers.Add(val);
         this.StateHasChanged(); // force the UI to refresh
     }
 
     public void ClearBoard()
     {
-        foreach (var key in calledNumbers.Keys)
-        {
-            calledNumbers[key].Clear();
-        }
+        lastCalled = 0;
+        calledNumbers.Clear();
         this.StateHasChanged(); // force the UI to refresh
     }
-
 }

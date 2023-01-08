@@ -178,8 +178,8 @@ input.gameCode {
 .icecream:before { content: "\1F366"; }
 .kangaroo:before { content: "\1F998"; }
 .kiss:before { content: "\1F48B"; }
+.moneybag:before { content: "\1F4B0"; }
 .musicalnote:before { content: "\1F3B5"; }
-.neptune:before { content: "\2646"; }
 .pawprints:before { content: "\1F43E"; }
 .penguin:before { content: "\1F427"; }
 .pingpong:before { content: "\1F3D3"; }
@@ -192,4 +192,5 @@ input.gameCode {
 .strawberry:before { content: "\1F353"; }
 .tennis:before { content: "\1F3BE"; }
 .tractor:before { content: "\1F69C"; }
+.trident:before { content: "\1F531"; }
 .videogamecontroller:before { content: "\1F3AE"; }

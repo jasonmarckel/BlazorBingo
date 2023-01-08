@@ -49,6 +49,7 @@
     private string playerName = string.Empty;
 
     private Flashboard? flashboard { get; set; }
+    private const int boardSize = 75;
 
     private readonly string[] StampClasses = new string[]
     {
@@ -62,7 +63,6 @@
         "Cookie",
         "Curling",
         "Dog Face",
-        "Dollar",
         "Doughnut",
         "Football",
         "Golfer",
@@ -71,8 +71,8 @@
         "Ice Cream",
         "Kangaroo",
         "Kiss",
+        "Money Bag",
         "Musical Note",
-        "Neptune",
         "Paw Prints",
         "Penguin",
         "Ping Pong",
@@ -85,6 +85,7 @@
         "Strawberry",
         "Tennis",
         "Tractor",
+        "Trident",
         "Video Game Controller"
     };
 
@@ -117,13 +118,14 @@
     public void GenerateNewCard()
     {
         var uniqueValues = new HashSet<int>();
+        int numberOfValuesPerColumn = boardSize / 5;
 
         // generate a set of 5 unique integers for each column
         for (int c = 0; c < 5; c++)
         {
             // determine the low and high numbers for the column
-            int minValue = 1 + (c * 15);
-            int maxValue = 15 + (c * 15);
+            int minValue = (c * numberOfValuesPerColumn) + 1;
+            int maxValue = (c * numberOfValuesPerColumn) + numberOfValuesPerColumn;
             // initialize the HashSet for the column to hold the uniqe values
             uniqueValues.Clear();
             // generate random numbers until we have 5 unique numbers for the column

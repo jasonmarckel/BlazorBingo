@@ -1,11 +1,57 @@
-﻿#calledNumbersBoard td {
-    font-weight: bold;
+﻿#flashboard {
+    border-style: solid;
+    border-color: black;
+    border-radius: 0.5rem;
+    display: inline-block;
+    padding: 0.3rem;
     background-color: black;
-    color: white;
 }
 
-    #calledNumbersBoard td:first-child {
+#flashboard table {
+    background-color: black;
+}
+
+    #flashboard td {
+        font-weight: bold;
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        border-color: #400000;
+        border-width: 1px;
+    }
+
+    #flashboard td:first-child {
         text-align: center;
         background-color: white;
         color: red;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        border-width: 0;
     }
+
+    #flashboard tr:first-child td {
+        border-top-style: none;
+    }
+
+    #flashboard tr:last-child td {
+        border-bottom-style: none;
+    }
+
+    #flashboard td:last-child {
+        border-right-style: none;
+    }
+
+.showNumber {
+    visibility: visible;
+}
+
+.hideNumber {
+    visibility: hidden;
+}
+
+#flashboard td.lastCalled {
+    visibility: visible;
+    color: yellow;
+}

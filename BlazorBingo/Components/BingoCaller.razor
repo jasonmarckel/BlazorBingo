@@ -5,24 +5,22 @@
 
 <Flashboard @ref="flashboard"></Flashboard>
 
-<div class="">
-    <label class="col-form-label"># of calls: @calledNumbers.Count</label>
-    <label class="col-form-label">Last called: @lastCalled</label>
+<div>
     <label>Players: @players.Count</label>
-    <button type="button" class="btn btn-outline-secondary btn-sm" @onclick="Restart">New Game</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" @onclick="Restart" style="float:right;">New Game</button>
 </div>
 
 <div>
     @notificationMessage
 </div>
 
-<div class="">
+<div style="text-align:center; margin-top:0.5rem;">
     <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 </div>
 
 @code {
-    private char[] bingo = new char[] { 'B', 'I', 'N', 'G', 'O' };
-    private int cardSize = 75;
+    private const string BINGO = "BINGO";
+    private const int boardSize = 75;
     private HashSet<int> calledNumbers = new HashSet<int>();
     private Random rnd = new Random();
     private string lastCalled = string.Empty;
@@ -45,15 +43,16 @@
 
     private async void Pick()
     {
-        if (calledNumbers.Count == cardSize) { return; }
+        if (calledNumbers.Count == boardSize) { return; }
         int x;
         do
         {
-            x = rnd.Next(1, cardSize + 1);
+            x = rnd.Next(1, boardSize + 1);
         } while (!calledNumbers.Add(x));
         int col = ((x - 1) / 15);
-        lastCalled = $"{bingo[col]}-{x}";
-        flashboard!.Add(bingo[col], x);
+        lastCalled = $"{BINGO[col]}-{x}";
+        flashboard!.Add(x);
+        notificationMessage = string.Empty;
         await Interop.Broadcast("pick", lastCalled);
     }
 
