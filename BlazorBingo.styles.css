@@ -16,6 +16,7 @@
 /* /Components/BingoCard.Razor.rz.scp.css */
 #BingoCard[b-uya85sbas0] {
     width: 100%;
+    background-color: dodgerblue;
 }
 
     #BingoCard td[b-uya85sbas0] {
@@ -27,6 +28,8 @@
         padding-bottom: 5%;
         padding-top: 5%;
         position: relative;
+        background-color: white;
+        color: black;
     }
 
     #BingoCard thead td[b-uya85sbas0] {
@@ -34,14 +37,22 @@
         font-weight: 900;
         font-size: 3rem;
         padding: 0;
+        border-color: dodgerblue;
+        background-color: dodgerblue;
+        color: white;
     }
-
-#calledNumbersBoard td[b-uya85sbas0] {
+/* /Components/Flashboard.razor.rz.scp.css */
+#calledNumbersBoard td[b-rje6ibnkdw] {
     font-weight: bold;
+    background-color: black;
+    color: white;
 }
-#calledNumbersBoard td:first-child[b-uya85sbas0] {
-    text-align: center;
-}
+
+    #calledNumbersBoard td:first-child[b-rje6ibnkdw] {
+        text-align: center;
+        background-color: white;
+        color: red;
+    }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-wo9qagrdy7] {
     position: relative;
