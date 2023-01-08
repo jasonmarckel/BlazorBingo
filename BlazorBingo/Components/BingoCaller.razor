@@ -3,24 +3,21 @@
     <span style="font-family:monospace; font-weight:bold; font-size:smaller;">@gameCode</span><button @onclick="Copy" title="copy" class="symbol" style="border:none; background-color:transparent;">&#128471;</button>
 </h3>
 
-<button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
-<button type="button" class="btn btn-secondary" @onclick="Restart">New Game</button>
-
-<label># of calls: @calledNumbers.Count</label>
-<label>Last called: @lastCalled</label>
-
 <Flashboard @ref="flashboard"></Flashboard>
 
-<label>Players</label>
-<ul>
-    @foreach(var player in players)
-    {
-        <li>@player</li>
-    }
-</ul>
+<div class="">
+    <label class="col-form-label"># of calls: @calledNumbers.Count</label>
+    <label class="col-form-label">Last called: @lastCalled</label>
+    <label>Players: @players.Count</label>
+    <button type="button" class="btn btn-outline-secondary btn-sm" @onclick="Restart">New Game</button>
+</div>
 
 <div>
     @notificationMessage
+</div>
+
+<div class="">
+    <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 </div>
 
 @code {

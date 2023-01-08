@@ -1,5 +1,9 @@
 ﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
+<Flashboard @ref="flashboard"></Flashboard>
+
+<br />
+
 <table id="BingoCard" class="prevent-select">
     <thead>
         <tr>
@@ -37,8 +41,6 @@
 </div>
 
 <button type="button" class="btn btn-success" @onclick="CallBingo">BINGO!</button>
-
-<Flashboard @ref="flashboard"></Flashboard>
 
 @code {
     [Parameter]
