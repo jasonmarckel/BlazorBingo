@@ -26,6 +26,13 @@
                 <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-auto">
+                <br />
+                <small>version <code style="color: inherit;">23.01.09.01</code></small>
+            </div>
+        </div>
     }
     @if (gameMode == GameMode.Playing)
     {<BingoCard GameCode="@gameCode"></BingoCard>}

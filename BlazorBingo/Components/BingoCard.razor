@@ -4,28 +4,32 @@
 
 <br />
 
-<table id="BingoCard" class="prevent-select">
-    <thead>
-        <tr>
-            <td>B</td>
-            <td>I</td>
-            <td>N</td>
-            <td>G</td>
-            <td>O</td>
-        </tr>
-    </thead>
-    @for (int r = 0; r < 5; r++)
-    {
-        <tr>
-            @for (int c = 0; c < 5; c++)
-            {
-                var row = r;
-                var col = c;
-                <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)squares[r,c].Value)<div class="@squares[r,c].StampClass" style="transform: rotate(@(squares[r,c].StampRotation)deg);"></div></td>
-            }
-        </tr>
-    }
-</table>
+<div id="BingoCard" class="prevent-select">
+    <table>
+        <thead>
+            <tr>
+                <td>B</td>
+                <td>I</td>
+                <td>N</td>
+                <td>G</td>
+                <td>O</td>
+            </tr>
+        </thead>
+        <tbody>
+        @for (int r = 0; r < 5; r++)
+        {
+            <tr>
+                @for (int c = 0; c < 5; c++)
+                {
+                    var row = r;
+                    var col = c;
+                    <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)squares[r,c].Value)<div class="@squares[r,c].StampClass" style="transform: rotate(@(squares[r,c].StampRotation)deg);"></div></td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
 
 <label>Stamp</label>
 <InputSelect @bind-Value="StampClass">

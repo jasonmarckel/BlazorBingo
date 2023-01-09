@@ -1,4 +1,10 @@
 ﻿#BingoCard {
+    background-color: dodgerblue;
+    padding: 0 0.7rem 0.7rem 0.7rem;
+    border-radius: 0.9rem;
+}
+
+#BingoCard table {
     width: 100%;
     background-color: dodgerblue;
 }
@@ -24,4 +30,16 @@
         border-color: dodgerblue;
         background-color: dodgerblue;
         color: white;
+    }
+
+    #BingoCard tbody tr:last-child td {
+        border-bottom-style: none;
+    }
+
+    #BingoCard tbody td:first-child {
+        border-left-style: none;
+    }
+
+    #BingoCard tbody td:last-child {
+        border-right-style: none;
     }

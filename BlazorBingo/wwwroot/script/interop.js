@@ -72,8 +72,8 @@ export async function speak(inputText) {
             console.error("SpeechSynthesisUtterance.onerror");
         };
 
-        const selectedOption =
-            voiceSelect.selectedOptions[0].getAttribute("data-name");
+        var selectedOption = voiceSelect.options[voiceSelect.selectedIndex].getAttribute("data-name");
+            //voiceSelect.selectedOptions[0].getAttribute("data-name");
 
         for (let i = 0; i < voices.length; i++) {
             if (voices[i].name === selectedOption) {
