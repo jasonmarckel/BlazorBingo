@@ -15,6 +15,12 @@
     }
 /* /Components/BingoCard.Razor.rz.scp.css */
 #BingoCard[b-uya85sbas0] {
+    background-color: dodgerblue;
+    padding: 0 0.7rem 0.7rem 0.7rem;
+    border-radius: 0.9rem;
+}
+
+#BingoCard table[b-uya85sbas0] {
     width: 100%;
     background-color: dodgerblue;
 }
@@ -40,6 +46,18 @@
         border-color: dodgerblue;
         background-color: dodgerblue;
         color: white;
+    }
+
+    #BingoCard tbody tr:last-child td[b-uya85sbas0] {
+        border-bottom-style: none;
+    }
+
+    #BingoCard tbody td:first-child[b-uya85sbas0] {
+        border-left-style: none;
+    }
+
+    #BingoCard tbody td:last-child[b-uya85sbas0] {
+        border-right-style: none;
     }
 /* /Components/Flashboard.razor.rz.scp.css */
 #flashboard[b-rje6ibnkdw] {
@@ -108,6 +126,8 @@
 
 main[b-wo9qagrdy7] {
     flex: 1;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .sidebar[b-wo9qagrdy7] {
