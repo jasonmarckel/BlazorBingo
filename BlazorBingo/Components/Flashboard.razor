@@ -1,4 +1,4 @@
-﻿<div id="flashboard">
+﻿<div id="flashboard" class="mb-1">
     <table>
         @for (int r = 0; r < BINGO.Length; r++)
         {
@@ -7,7 +7,7 @@
                 @for (int i = 0; i < z; i++)
                 {
                     int n = (r * z) + i + 1;
-                    <td class="@GetCssClass(n)">@n</td>
+                    <td><span class="@GetCssClass(n)">@n</span></td>
                 }
             </tr>
         }
@@ -24,7 +24,7 @@
     private string GetCssClass(int n)
     {
         if (n == lastCalled) { return "lastCalled"; }
-        return calledNumbers.Contains(n) ? "showNumber" : "hideNumber";
+        return calledNumbers.Contains(n) ? "visible" : "invisible";
     }
 
     public void Add(int val)

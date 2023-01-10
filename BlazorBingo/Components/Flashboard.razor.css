@@ -1,14 +1,14 @@
 ﻿#flashboard {
     border-style: solid;
     border-color: black;
-    border-radius: 0.5rem;
-    display: inline-block;
-    padding: 0.3rem;
+    border-radius: 0.3rem;
     background-color: black;
+    max-width: 13cm;
+    overflow-x: auto;
 }
 
 #flashboard table {
-    background-color: black;
+    width: 100%;
 }
 
     #flashboard td {
@@ -16,19 +16,19 @@
         background-color: black;
         color: white;
         text-align: center;
-        padding-left: 0.3rem;
-        padding-right: 0.3rem;
+        padding-left: 1px;
+        padding-right: 1px;
         border-color: #400000;
         border-width: 1px;
     }
 
     #flashboard td:first-child {
+        border-style: none;
         text-align: center;
         background-color: white;
         color: red;
-        padding-left: 0.3rem;
-        padding-right: 0.3rem;
-        border-width: 0;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     #flashboard tr:first-child td {
@@ -43,15 +43,7 @@
         border-right-style: none;
     }
 
-.showNumber {
-    visibility: visible;
-}
-
-.hideNumber {
-    visibility: hidden;
-}
-
-#flashboard td.lastCalled {
+#flashboard td .lastCalled {
     visibility: visible;
     color: yellow;
 }

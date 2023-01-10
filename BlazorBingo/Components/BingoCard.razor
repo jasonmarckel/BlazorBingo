@@ -2,9 +2,7 @@
 
 <Flashboard @ref="flashboard"></Flashboard>
 
-<br />
-
-<div id="BingoCard" class="prevent-select">
+<div id="BingoCard" class="prevent-select mb-1">
     <table>
         <thead>
             <tr>
@@ -31,86 +29,30 @@
     </table>
 </div>
 
-<label>Stamp</label>
-<InputSelect @bind-Value="StampClass">
-    @foreach (var stampClass in StampClasses)
-    {
-        <option value="@stampClass.CssName()">@stampClass</option>
-    }
-</InputSelect>
+<button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
 
-<div>
-    <label>Caller Voice</label>
-    <select id="voiceSelect"></select>
-</div>
+<button type="button" class="btn btn-outline-secondary" title="Settings"><span class="gear"></span></button>
 
-<button type="button" class="btn btn-success" @onclick="CallBingo">BINGO!</button>
+<button type="button" class="btn btn-outline-secondary" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker")"></span></button>
 
 @code {
     [Parameter]
     required public string GameCode { get; set; }
+
+    private bool isMuted;
 
     private string playerName = string.Empty;
 
     private Flashboard? flashboard { get; set; }
     private const int boardSize = 75;
 
-    private readonly string[] StampClasses = new string[]
-    {
-        "Random",
-        "Banana",
-        "Basketball",
-        "Cat",
-        "Cat Face",
-        "Cherries",
-        "Christmas Tree",
-        "Cookie",
-        "Curling",
-        "Dog Face",
-        "Doughnut",
-        "Football",
-        "Golfer",
-        "Heart",
-        "Hot Dog",
-        "Ice Cream",
-        "Kangaroo",
-        "Kiss",
-        "Money Bag",
-        "Musical Note",
-        "Paw Prints",
-        "Penguin",
-        "Ping Pong",
-        "Present",
-        "Scooter",
-        "Smiley",
-        "Snowman",
-        "Soccer",
-        "Statue of Liberty",
-        "Strawberry",
-        "Tennis",
-        "Tractor",
-        "Trident",
-        "Video Game Controller"
-    };
+    private string dauber = string.Empty;
 
-    private string _stampClass = string.Empty;
-    private string StampClass
+    private string StamperCssClass
     {
         get
         {
-            return _stampClass;
-        }
-        set
-        {
-            _stampClass = value;
-            localStorage.SetItemAsync("stampClass", _stampClass);
-        }
-    }
-    private string StampClassCss
-    {
-        get
-        {
-            return StampClass == "random" ? StampClasses[rnd.Next(1, StampClasses.Length)].CssName() : StampClass;
+            return dauber == "random" ? GameOptions.Stampers[rnd.Next(1, GameOptions.Stampers.Length)].CssName() : dauber;
         }
     }
 
@@ -119,7 +61,12 @@
     private readonly Square[,] squares = new Square[5, 5];
     private Random rnd = new Random();
 
-    public void GenerateNewCard()
+    protected void ToggleMute()
+    {
+        isMuted = !isMuted;
+    }
+
+    protected void GenerateNewCard()
     {
         var uniqueValues = new HashSet<int>();
         int numberOfValuesPerColumn = boardSize / 5;
@@ -167,7 +114,7 @@
         if (row == 2 && col == 2) { return; }
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
-        square.StampClass = square.IsStamped ? string.Empty : "stamp " + StampClassCss;
+        square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
     }
 
     protected void ClearCard()
@@ -191,9 +138,9 @@
     protected override async Task OnInitializedAsync()
     {
         GenerateNewCard();
-        _stampClass = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
+        dauber = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
         playerName = await localStorage.GetItemAsync<string>("playerName");
-        await Interop.InitVoices();
+        //await Interop.InitVoices();
         await Interop.Connect(this, GameCode.ToUpperInvariant(), playerName);
     }
 

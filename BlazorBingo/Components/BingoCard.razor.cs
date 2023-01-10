@@ -12,7 +12,7 @@ public partial class BingoCard : IMessageHandler
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.Add(Convert.ToInt32(data.Substring(2)));
-                Interop.Speak(data.Replace("-", " - "));
+                if (!isMuted) { Interop.Speak(data.Replace("-", " - ")); }
                 break;
             case "restart":
                 ClearCard();

@@ -2,15 +2,15 @@
     background-color: dodgerblue;
     padding: 0 0.7rem 0.7rem 0.7rem;
     border-radius: 0.9rem;
+    max-width: 13cm;
 }
 
 #BingoCard table {
     width: 100%;
-    background-color: dodgerblue;
 }
 
     #BingoCard td {
-        border: 3px solid black;
+        border: 2px solid black;
         width: 20%;
         text-align: center;
         font-weight: bold;
@@ -23,23 +23,24 @@
     }
 
     #BingoCard thead td {
-        font-size: x-large;
-        font-weight: 900;
         font-size: 3rem;
+        font-weight: 900;
         padding: 0;
+        border-style: none;
         border-color: dodgerblue;
         background-color: dodgerblue;
         color: white;
     }
 
+    #BingoCard tbody tr:first-child td {
+        border-top-style: none;
+    }
     #BingoCard tbody tr:last-child td {
         border-bottom-style: none;
     }
-
     #BingoCard tbody td:first-child {
         border-left-style: none;
     }
-
     #BingoCard tbody td:last-child {
         border-right-style: none;
     }

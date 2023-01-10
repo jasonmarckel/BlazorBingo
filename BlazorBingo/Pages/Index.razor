@@ -5,19 +5,18 @@
 <PageTitle>BINGO</PageTitle>
 
 <CascadingValue Value="@settings">
-    @if (gameMode == GameMode.Initializing)
+    @if (gameState == GameState.Startup)
     {
-        <div class="row">
+        <div class="row mb-2">
             <label for="playerName" class="col-sm-2 col-form-label">Name</label>
             <div class="col-auto">
-                <input type="text" id="playerName" class="form-control" value="@settings!.PlayerName" @onchange="NameChanged" placeholder="player name" />            
+                <input type="text" id="playerName" class="form-control" @bind="settings!.PlayerName" placeholder="player name" />
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-outline-secondary" @onclick="Host">Host</button>
             </div>
         </div>
-        <br />
-        <div class="row">
+        <div class="row mb-2">
             <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
             <div class="col-auto">
                 <input type="text" id="gameCode" class="form-control gameCode" @bind="gameCode" placeholder="enter code" />
@@ -29,45 +28,50 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-auto">
-                <br />
-                <small>version <code style="color: inherit;">23.01.09.01</code></small>
+                <small>version <code style="color: inherit;">23.01.10.01</code></small>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-secondary" title="Settings" @onclick="ChangeOptions"><span class="gear"></span></button>
             </div>
         </div>
     }
-    @if (gameMode == GameMode.Playing)
-    {<BingoCard GameCode="@gameCode"></BingoCard>}
-    @if (gameMode == GameMode.Calling)
-    {<BingoCaller></BingoCaller>}
+    @if (gameState == GameState.Play)
+    {
+        <BingoCard GameCode="@gameCode"></BingoCard>
+    }
+    @if (gameState == GameState.Host)
+    {
+        <BingoCaller></BingoCaller>
+    }
+    @if (gameState == GameState.Options)
+    {
+        <GameOptions @ref="settings"></GameOptions>        
+    }
 </CascadingValue>
 
 @code {
-    protected Settings settings = new ();
+    protected GameOptions? settings;
 
-    string gameCode = string.Empty;
+    protected string gameCode = string.Empty;
 
-    public enum GameMode
+    public enum GameState
     {
-        Initializing,
-        Starting,
-        Joining,
-        Waiting,
-        Playing,
-        Hosting,
-        Calling
+        Startup,
+        Play,
+        Host,
+        Options
     }
 
-    protected GameMode gameMode;
+    protected GameState gameState;
 
     protected override async Task OnInitializedAsync()
     {
+        settings = new GameOptions();
         try
         {
-            settings.PlayerName = await localStorage.GetItemAsync<string>("playerName");
-            settings.GamesPlayed = await localStorage.GetItemAsync<int>("gamesPlayed");
-            settings.GamesWon = await localStorage.GetItemAsync<int>("gamesWon");
-            gameMode = GameMode.Initializing;
+            gameState = GameState.Startup;
 #if DEBUG
-            gameCode = "0000";
+    gameCode = "0000";
 #endif
         }
         catch (Exception ex)
@@ -76,17 +80,16 @@
         }
     }
 
-    async Task NameChanged(ChangeEventArgs e)
-    {
-        settings!.PlayerName = e?.Value?.ToString() ?? string.Empty;
-        await localStorage.SetItemAsync("playerName", settings!.PlayerName);
-    }
     private void Host()
     {
-        gameMode = GameMode.Calling;
+        gameState = GameState.Host;
     }
     private void Join()
     {
-        gameMode = GameMode.Playing;
+        gameState = GameState.Play;
+    }
+    private void ChangeOptions()
+    {
+        gameState = GameState.Options;
     }
 }
