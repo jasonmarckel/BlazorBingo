@@ -18,15 +18,15 @@
     background-color: dodgerblue;
     padding: 0 0.7rem 0.7rem 0.7rem;
     border-radius: 0.9rem;
+    max-width: 13cm;
 }
 
 #BingoCard table[b-uya85sbas0] {
     width: 100%;
-    background-color: dodgerblue;
 }
 
     #BingoCard td[b-uya85sbas0] {
-        border: 3px solid black;
+        border: 2px solid black;
         width: 20%;
         text-align: center;
         font-weight: bold;
@@ -39,23 +39,24 @@
     }
 
     #BingoCard thead td[b-uya85sbas0] {
-        font-size: x-large;
-        font-weight: 900;
         font-size: 3rem;
+        font-weight: 900;
         padding: 0;
+        border-style: none;
         border-color: dodgerblue;
         background-color: dodgerblue;
         color: white;
     }
 
+    #BingoCard tbody tr:first-child td[b-uya85sbas0] {
+        border-top-style: none;
+    }
     #BingoCard tbody tr:last-child td[b-uya85sbas0] {
         border-bottom-style: none;
     }
-
     #BingoCard tbody td:first-child[b-uya85sbas0] {
         border-left-style: none;
     }
-
     #BingoCard tbody td:last-child[b-uya85sbas0] {
         border-right-style: none;
     }
@@ -63,14 +64,14 @@
 #flashboard[b-rje6ibnkdw] {
     border-style: solid;
     border-color: black;
-    border-radius: 0.5rem;
-    display: inline-block;
-    padding: 0.3rem;
+    border-radius: 0.3rem;
     background-color: black;
+    max-width: 13cm;
+    overflow-x: auto;
 }
 
 #flashboard table[b-rje6ibnkdw] {
-    background-color: black;
+    width: 100%;
 }
 
     #flashboard td[b-rje6ibnkdw] {
@@ -78,19 +79,19 @@
         background-color: black;
         color: white;
         text-align: center;
-        padding-left: 0.3rem;
-        padding-right: 0.3rem;
+        padding-left: 1px;
+        padding-right: 1px;
         border-color: #400000;
         border-width: 1px;
     }
 
     #flashboard td:first-child[b-rje6ibnkdw] {
+        border-style: none;
         text-align: center;
         background-color: white;
         color: red;
-        padding-left: 0.3rem;
-        padding-right: 0.3rem;
-        border-width: 0;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     #flashboard tr:first-child td[b-rje6ibnkdw] {
@@ -105,101 +106,9 @@
         border-right-style: none;
     }
 
-.showNumber[b-rje6ibnkdw] {
-    visibility: visible;
-}
-
-.hideNumber[b-rje6ibnkdw] {
-    visibility: hidden;
-}
-
-#flashboard td.lastCalled[b-rje6ibnkdw] {
+#flashboard td .lastCalled[b-rje6ibnkdw] {
     visibility: visible;
     color: yellow;
-}
-/* /Shared/MainLayout.razor.rz.scp.css */
-.page[b-wo9qagrdy7] {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-main[b-wo9qagrdy7] {
-    flex: 1;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.sidebar[b-wo9qagrdy7] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
-.top-row[b-wo9qagrdy7] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-}
-
-    .top-row[b-wo9qagrdy7]  a, .top-row[b-wo9qagrdy7]  .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
-
-    .top-row[b-wo9qagrdy7]  a:hover, .top-row[b-wo9qagrdy7]  .btn-link:hover {
-        text-decoration: underline;
-    }
-
-    .top-row[b-wo9qagrdy7]  a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-@media (max-width: 640.98px) {
-    .top-row:not(.auth)[b-wo9qagrdy7] {
-        display: none;
-    }
-
-    .top-row.auth[b-wo9qagrdy7] {
-        justify-content: space-between;
-    }
-
-    .top-row[b-wo9qagrdy7]  a, .top-row[b-wo9qagrdy7]  .btn-link {
-        margin-left: 0;
-    }
-}
-
-@media (min-width: 641px) {
-    .page[b-wo9qagrdy7] {
-        flex-direction: row;
-    }
-
-    .sidebar[b-wo9qagrdy7] {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
-    .top-row[b-wo9qagrdy7] {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-    }
-
-    .top-row.auth[b-wo9qagrdy7]  a:first-child {
-        flex: 1;
-        text-align: right;
-        width: 0;
-    }
-
-    .top-row[b-wo9qagrdy7], article[b-wo9qagrdy7] {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
-    }
 }
 /* /Shared/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-t9txfadedz] {

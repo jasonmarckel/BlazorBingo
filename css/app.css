@@ -1,9 +1,9 @@
 /* @import url('open-iconic/font/css/open-iconic-bootstrap.min.css'); */
 
-html, body {
+/*html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
+*/
 h1:focus {
     outline: none;
 }
@@ -110,10 +110,12 @@ input.gameCode {
     text-transform: uppercase;
 }
 
-:root {
     /* https://css-tricks.com/snippets/css/system-font-stack/ */
+/*
+    :root {
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+*/
 .symbol {
     font-family: var(--system-ui);
 }
@@ -131,15 +133,24 @@ input.gameCode {
     content: "\1F5D7";
 }
 
+.mute:before {
+    content: "\1F507";
+}
+
+.unmute:before,
+.speaker:before {
+    content: "\1F508";
+}
+
 /* stamps */
 
 .stamp {
-    font-family: var(--system-ui);
+    /* font-family: var(--system-ui); */
     position: absolute;
     left: 0px;
     width: 100%;
     z-index: 1;
-    font-size: clamp(3rem, 9vw, 8rem);
+    font-size: clamp(2.5rem, 8vw, 2cm);
     line-height: max(32px, 1rem);
     display: inline-block;
     opacity: 0.87;
