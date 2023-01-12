@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-uXMTeFEFKgyk5g2FWHVyGiWfIf0bqSZ281SYaEpLTMc=",
+      "hash": "sha256-0PRyrQL34awHYptgHzpglS7I56l1P1ezT+YTf9CyGNM=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-8FXHk3S92T2HeAEIWu75SxVZ26Qm3Qju2WFwJhLHQpo=",
+      "hash": "sha256-pmGchncncIGVPNTYDVaCmCXIZdJzHyxvf2IEUuoQ+8M=",
       "url": "_framework\/BlazorBingo.dll"
     },
     {
@@ -201,11 +201,11 @@
       "url": "_framework\/System.Threading.dll"
     },
     {
-      "hash": "sha256-eIAce7EN4OziZodc7FI5ZBGagb0S5fIcvnUyaPHVwgw=",
+      "hash": "sha256-uiqa0qPvXMQeXTthatCZDHmjdKZAPWA0d\/L7wESGjYA=",
       "url": "BlazorBingo.styles.css"
     },
     {
-      "hash": "sha256-2HOlXtLqVpkg2qmNc4Dvar\/a8SgklrUXlEstGCXc61E=",
+      "hash": "sha256-oRf9Z5Tl6aAwcSXAHmnwF8zhBV\/r6jsW8U+ubV9\/Q2g=",
       "url": "css\/app.css"
     },
     {
@@ -241,5 +241,5 @@
       "url": "script\/interop.js"
     }
   ],
-  "version": "SKpAtojn"
+  "version": "3Krdcq4o"
 };
