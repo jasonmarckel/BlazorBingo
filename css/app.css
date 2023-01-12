@@ -118,7 +118,7 @@ input.gameCode {
 }
 
 .symbol {
-    font-family: var(--system-ui);
+    /* font-family: var(--system-ui); */
 }
 
 .info-circle:before {
@@ -190,7 +190,7 @@ input.gameCode {
 .kiss:before { content: "\1F48B"; }
 .moneybag:before { content: "\1F4B0"; }
 .musicalnote:before { content: "\1F3B5"; }
-.pawprints:before { content: "\1F43E"; }
+.pawprints:before { content: "\1F43E"; color: #333333; }
 .penguin:before { content: "\1F427"; }
 .pingpong:before { content: "\1F3D3"; }
 .present:before { content: "\1F381"; }
