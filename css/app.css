@@ -148,13 +148,11 @@ input.gameCode {
 .stamp {
     /* font-family: var(--system-ui); */
     position: absolute;
-    left: 0;
-    top: 0;
+    top: -0.25rem;
     width: 100%;
     z-index: 1;
-    display: flow-root;
     opacity: 0.87;
-    aspect-ratio: 1/1;
+    font-size: 1.2em;
 }
 
 /* https://unicode-table.com/en/ */
