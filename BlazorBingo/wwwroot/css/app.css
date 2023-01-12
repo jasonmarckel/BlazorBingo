@@ -110,12 +110,13 @@ input.gameCode {
     text-transform: uppercase;
 }
 
-    /* https://css-tricks.com/snippets/css/system-font-stack/ */
-/*
-    :root {
-    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+:root {
+    /* 
+        https://css-tricks.com/snippets/css/system-font-stack/ 
+        --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    */
 }
-*/
+
 .symbol {
     font-family: var(--system-ui);
 }
@@ -147,13 +148,13 @@ input.gameCode {
 .stamp {
     /* font-family: var(--system-ui); */
     position: absolute;
-    left: 0px;
+    left: 0;
+    top: 0;
     width: 100%;
     z-index: 1;
-    font-size: clamp(2.5rem, 8vw, 2cm);
-    line-height: max(32px, 1rem);
-    display: inline-block;
+    display: flow-root;
     opacity: 0.87;
+    aspect-ratio: 1/1;
 }
 
 /* https://unicode-table.com/en/ */
