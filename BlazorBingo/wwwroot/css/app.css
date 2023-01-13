@@ -1,5 +1,7 @@
 /* @import url('open-iconic/font/css/open-iconic-bootstrap.min.css'); */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
+
 /*html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -113,8 +115,9 @@ input.gameCode {
 :root {
     /* 
         https://css-tricks.com/snippets/css/system-font-stack/ 
-        --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
     */
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Noto Sans Symbols 2";
 }
 
 .symbol {
