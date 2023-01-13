@@ -117,11 +117,11 @@ input.gameCode {
         https://css-tricks.com/snippets/css/system-font-stack/ 
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
     */
-    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Noto Sans Symbols 2";
+    --symbols: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Noto Sans Symbols 2";
 }
 
 .symbol {
-    /* font-family: var(--system-ui); */
+     font-family: var(--symbols); 
 }
 
 .info-circle:before {
@@ -177,6 +177,7 @@ input.gameCode {
 .basketball:before { content: "\1F3C0"; }
 .cat:before { content: "\1F408"; }
 .catface:before { content: "\1F431"; }
+.catwithhearteyes:before { content: "\1F63B"; }
 .cherries:before { content: "\1F352"; }
 .christmastree:before { content: "\1F384"; }
 .cookie:before { content: "\1F36A"; }
@@ -184,6 +185,7 @@ input.gameCode {
 .dogface:before { content: "\1F436"; }
 .dollar:before { content: "$"; color: #85bb65; }
 .doughnut:before { content: "\1F369"; }
+.elephant:before { content: "\1F418"; }
 .football:before { content: "\1F3C8"; }
 .golfer:before { content: "\1F3CC"; }
 .heart:before { content: "\2764"; color: red; }
@@ -193,11 +195,12 @@ input.gameCode {
 .kiss:before { content: "\1F48B"; }
 .moneybag:before { content: "\1F4B0"; }
 .musicalnote:before { content: "\1F3B5"; }
-.pawprints:before { content: "\1F43E"; color: #333333; }
+.pawprints:before { content: "\1F43E"; color: #333333 !important; }
 .penguin:before { content: "\1F427"; }
 .pingpong:before { content: "\1F3D3"; }
 .present:before { content: "\1F381"; }
 .scooter:before { content: "\1F6F5"; }
+.shark:before { content: "\1F988"; }
 .smiley:before { content: "\1F603"; }
 .snowman:before { content: "\26C4"; }
 .soccer:before { content: "\26BD"; }
