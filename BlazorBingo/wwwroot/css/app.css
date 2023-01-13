@@ -116,12 +116,14 @@ input.gameCode {
     /* 
         https://css-tricks.com/snippets/css/system-font-stack/ 
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
+    --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
-    --symbols: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Noto Sans Symbols 2";
+    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Segoe UI Symbol", "Noto Sans Symbols 2";
+    --app-emoji: system-ui, -apple-system, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
 }
 
 .symbol {
-     font-family: var(--symbols); 
+     font-family: var(--app-symbols); 
 }
 
 .info-circle:before {
@@ -149,12 +151,11 @@ input.gameCode {
 /* stamps */
 
 .stamp {
-    /* font-family: var(--system-ui); */
+    font-family: var(--app-emoji);
     position: absolute;
     top: -0.25rem;
     width: 100%;
     z-index: 1;
-    opacity: 0.87;
     font-size: 1.2em;
 }
 
