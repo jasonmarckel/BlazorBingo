@@ -118,8 +118,15 @@ input.gameCode {
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
-    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Segoe UI Symbol", "Noto Sans Symbols 2";
-    --app-emoji: system-ui, -apple-system, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
+    --app-emoji: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+
+    --card-red: #b32121;
+    --card-green: #26b050;
+    --card-blue: #1e90ff; /* dodgerblue */
+    --card-orange: #ff6a00;
+    --card-yellow: #ffd800;
+    --card-black: #000000;
 }
 
 .symbol {
@@ -137,6 +144,11 @@ input.gameCode {
 /* overlap == copy icon! == &#128471; */
 .copy:before {
     content: "\1F5D7";
+}
+
+/* bust in silhouette == user icon == &#128100; */
+.silhouettebust:before {
+    content: "\1F464";
 }
 
 .mute:before {
@@ -157,6 +169,7 @@ input.gameCode {
     width: 100%;
     z-index: 1;
     font-size: 1.2em;
+    background-color: white;
 }
 
 /* https://unicode-table.com/en/ */
@@ -165,8 +178,23 @@ input.gameCode {
     content: "\2605";
 }
 
-.blue {
-    color: dodgerblue;
+.solidstar .green {
+    color: var(--card-green);
+}
+.solidstar .blue {
+    color: var(--card-blue);
+}
+.solidstar .red {
+    color: var(--card-red);
+}
+.solidstar .orange {
+    color: var(--card-orange);
+}
+.solidstar .yellow {
+    color: var(--card-yellow);
+}
+.solidstar .black {
+    color: var(--card-black);
 }
 
 .random:before {
@@ -176,9 +204,10 @@ input.gameCode {
 .anchor:before { content: "\2693"; }
 .banana:before { content: "\1F34C"; }
 .basketball:before { content: "\1F3C0"; }
+.beermug:before { content: "\1F37A"; }
 .cat:before { content: "\1F408"; }
 .catface:before { content: "\1F431"; }
-.catwithhearteyes:before { content: "\1F63B"; }
+.catfacewithhearteyes:before { content: "\1F63B"; }
 .cherries:before { content: "\1F352"; }
 .christmastree:before { content: "\1F384"; }
 .cookie:before { content: "\1F36A"; }
@@ -186,8 +215,10 @@ input.gameCode {
 .dogface:before { content: "\1F436"; }
 .dollar:before { content: "$"; color: #85bb65; }
 .doughnut:before { content: "\1F369"; }
+.dragon:before { content: "\1F409"; }
 .elephant:before { content: "\1F418"; }
 .football:before { content: "\1F3C8"; }
+.fox:before { content: "\1F98A"; }
 .golfer:before { content: "\1F3CC"; }
 .heart:before { content: "\2764"; color: red; }
 .hotdog:before { content: "\1F32D"; }
@@ -207,7 +238,9 @@ input.gameCode {
 .soccer:before { content: "\26BD"; }
 .statueofliberty:before { content: "\1F5FD"; }
 .strawberry:before { content: "\1F353"; }
+.t-rex:before { content: "\1F996"; }
 .tennis:before { content: "\1F3BE"; }
 .tractor:before { content: "\1F69C"; }
 .trident:before { content: "\1F531"; }
 .videogamecontroller:before { content: "\1F3AE"; }
+.waterwave:before { content: "\1F30A"; }

@@ -3,14 +3,12 @@
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
 
 const synth = window.speechSynthesis;
-let voiceSelect;
 let voices = [];
 
 function populateVoiceList() {
     voices = synth.getVoices().sort(function (a, b) {      
         const aname = a.name.toUpperCase();
         const bname = b.name.toUpperCase();
-
         // sort by language and then by speaker name
         if (a.lang < b.lang) {
             return -1;
@@ -24,59 +22,50 @@ function populateVoiceList() {
             return +1;
         }
     });
-    var selectedIndex = voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
-    voiceSelect.innerHTML = "";
-
-    var preferredLanguage = navigator.language.toUpperCase();
-
-    for (let i = 0; i < voices.length; i++) {
-        // select the first speaker whose language matches the user's preferred language
-        if (selectedIndex == 0 && voices[i].lang.toUpperCase() === preferredLanguage) { selectedIndex = i; }
-        const option = document.createElement("option");
-        option.textContent = `${voices[i].name} (${voices[i].lang})`;
-
-        if (voices[i].default) {
-            option.textContent += " -- DEFAULT";
-        }
-
-        option.setAttribute("data-lang", voices[i].lang);
-        option.setAttribute("data-name", voices[i].name);
-        voiceSelect.appendChild(option);
-    }
-    voiceSelect.selectedIndex = selectedIndex;
 }
 
-export async function initVoices() {
-    voiceSelect = document.getElementById("voiceSelect");
+export async function getVoices() {
     populateVoiceList();
-
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-        speechSynthesis.onvoiceschanged = populateVoiceList;
+    var voiceList = [];
+    for (let i = 0; i < voices.length; i++) {
+        voiceList.push({
+            "lang": voices[i].lang,
+            "name": voices[i].name,
+            "isDefault": voices[i].default,
+            "localService": voices[i].localService
+        });
     }
+    return JSON.stringify(voiceList);
 }
 
-export async function speak(inputText) {
+//export async function initVoices() {
+//    populateVoiceList();
+//    if (speechSynthesis.onvoiceschanged !== undefined) {
+//        speechSynthesis.onvoiceschanged = populateVoiceList;
+//    }
+//}
+
+export async function speak(inputText, voiceName) {
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");
         return;
-    }
+    } 
 
     if (inputText !== "") {
         const utterThis = new SpeechSynthesisUtterance(inputText);
 
         utterThis.onend = function (event) {
-            console.log("SpeechSynthesisUtterance.onend");
+            //console.log("SpeechSynthesisUtterance.onend");
         };
 
         utterThis.onerror = function (event) {
-            console.error("SpeechSynthesisUtterance.onerror");
+            //console.error("SpeechSynthesisUtterance.onerror");
         };
 
-        var selectedOption = voiceSelect.options[voiceSelect.selectedIndex].getAttribute("data-name");
-            //voiceSelect.selectedOptions[0].getAttribute("data-name");
+        if (voices.length === 0) { voices = synth.getVoices(); }
 
         for (let i = 0; i < voices.length; i++) {
-            if (voices[i].name === selectedOption) {
+            if (voices[i].name === voiceName) {
                 utterThis.voice = voices[i];
                 break;
             }
