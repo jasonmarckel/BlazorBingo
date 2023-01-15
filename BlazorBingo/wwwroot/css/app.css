@@ -118,8 +118,15 @@ input.gameCode {
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
-    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Segoe UI Symbol", "Noto Sans Symbols 2";
-    --app-emoji: system-ui, -apple-system, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
+    --app-emoji: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+
+    --card-red: #b32121;
+    --card-green: #26b050;
+    --card-blue: #1e90ff; /* dodgerblue */
+    --card-orange: #ff6a00;
+    --card-yellow: #ffd800;
+    --card-black: #000000;
 }
 
 .symbol {
@@ -137,6 +144,11 @@ input.gameCode {
 /* overlap == copy icon! == &#128471; */
 .copy:before {
     content: "\1F5D7";
+}
+
+/* bust in silhouette == user icon == &#128100; */
+.silhouettebust:before {
+    content: "\1F464";
 }
 
 .mute:before {
@@ -166,8 +178,23 @@ input.gameCode {
     content: "\2605";
 }
 
-.blue {
-    color: dodgerblue;
+.solidstar .green {
+    color: var(--card-green);
+}
+.solidstar .blue {
+    color: var(--card-blue);
+}
+.solidstar .red {
+    color: var(--card-red);
+}
+.solidstar .orange {
+    color: var(--card-orange);
+}
+.solidstar .yellow {
+    color: var(--card-yellow);
+}
+.solidstar .black {
+    color: var(--card-black);
 }
 
 .random:before {

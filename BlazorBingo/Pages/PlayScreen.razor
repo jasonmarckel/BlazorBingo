@@ -1,8 +1,10 @@
-﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+﻿@page "/play/{gamecode}"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager Navigation
 
 <Flashboard @ref="flashboard"></Flashboard>
 
-<div id="BingoCard" class="prevent-select mb-1">
+<div id="BingoCard" class="@settings.CardTheme prevent-select mb-1">
     <table>
         <thead>
             <tr>
@@ -19,9 +21,11 @@
             <tr>
                 @for (int c = 0; c < 5; c++)
                 {
+                    var square = squares[r, c];                    
+                    if(square == null) { continue;  }
                     var row = r;
                     var col = c;
-                    <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)squares[r,c].Value)<div class="@squares[r,c].StampClass" style="transform: rotate(@(squares[r,c].StampRotation)deg);"></div></td>
+                    <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)square.Value)<div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div></td>
                 }
             </tr>
         }
@@ -31,35 +35,33 @@
 
 <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
 
-<button type="button" class="btn btn-outline-secondary" title="Settings"><span class="gear"></span></button>
+<a role="button" class="btn btn-outline-secondary" title="Settings" href="/settings"><span class="gear"></span></a>
 
-<button type="button" class="btn btn-outline-secondary" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker")"></span></button>
+<button type="button" class="btn btn-outline-secondary" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
 
 @code {
     [Parameter]
-    required public string GameCode { get; set; }
+    public string? GameCode { get; set; }
 
-    private bool isMuted;
+    protected GameSettings settings = new GameSettings();
 
-    private string playerName = string.Empty;
+    protected bool isMuted;
 
-    private Flashboard? flashboard { get; set; }
-    private const int boardSize = 75;
+    protected Flashboard? flashboard { get; set; }
+    protected const int boardSize = 75;
 
-    private string dauber = string.Empty;
-
-    private string StamperCssClass
+    protected string StamperCssClass
     {
         get
         {
-            return dauber == "random" ? GameOptions.Stampers[rnd.Next(1, GameOptions.Stampers.Length)].CssName() : dauber;
+            return settings.Dauber == "random" ? SettingsScreen.Daubers[rnd.Next(1, SettingsScreen.Daubers.Length)].CssName() : settings.Dauber;
         }
     }
 
     // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
 
-    private readonly Square[,] squares = new Square[5, 5];
-    private Random rnd = new Random();
+    protected readonly Square[,] squares = new Square[5, 5];
+    protected Random rnd = new Random();  // random number generator (RNG)
 
     protected void ToggleMute()
     {
@@ -95,7 +97,7 @@
                 if (c == 2 && r == 2)
                 {
                     squares[r, c].Value = "&nbsp;"; //FREE
-                    squares[r, c].StampClass = "stamp solidstar blue";
+                    squares[r, c].StampClass = "stamp solidstar"; //TODO: theme the star
                 }
             }
         }
@@ -132,16 +134,25 @@
 
     protected void CallBingo()
     {
-        Interop.NotifyHost("bingo", playerName);
+        Interop.NotifyHost("bingo", settings.PlayerName);
     }
 
     protected override async Task OnInitializedAsync()
     {
+        if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("/"); return; }
+        // GenerateNewCard() must be called prior to the await/async operations
+        // otherwise the page will try to render before each Square in the 'squares' field
+        // has been instantiated.  This will lead to a null reference exception
+        // in the loop rendering the squares.
+        // https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#handle-incomplete-async-actions-at-render
+        // https://aryehsilver.co.uk/blazor-attempts-to-render-before-oninitializedasync-method-has-finished/
         GenerateNewCard();
-        dauber = await localStorage.GetItemAsync<string>("stampClass") ?? "random";
-        playerName = await localStorage.GetItemAsync<string>("playerName");
-        //await Interop.InitVoices();
-        await Interop.Connect(this, GameCode.ToUpperInvariant(), playerName);
+        settings = await localStorage.GetItemAsync<GameSettings>("Settings");
+        await Interop.Connect(this, GameCode!.ToUpperInvariant(), settings.PlayerName);
     }
 
+    //protected override Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    return base.OnAfterRenderAsync(firstRender);
+    //}
 }

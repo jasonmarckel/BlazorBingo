@@ -1,4 +1,6 @@
-﻿<h3>
+﻿@page "/host"
+
+<h3>
     Bingo Hall ~
     <span style="font-family:monospace; font-weight:bold; font-size:smaller;">@gameCode</span><button @onclick="Copy" title="copy" class="symbol" style="border:none; background-color:transparent;">&#128471;</button>
 </h3>
@@ -19,18 +21,18 @@
 </div>
 
 @code {
-    private const string BINGO = "BINGO";
-    private const int boardSize = 75;
-    private HashSet<int> calledNumbers = new HashSet<int>();
-    private Random rnd = new Random();
-    private string lastCalled = string.Empty;
-    private string gameCode = string.Empty;
-    private SortedSet<string> players = new();
-    private string notificationMessage = string.Empty;
+    protected const string BINGO = "BINGO";
+    protected const int boardSize = 75;
+    protected HashSet<int> calledNumbers = new HashSet<int>();
+    protected Random rnd = new Random();
+    protected string lastCalled = string.Empty;
+    protected string gameCode = string.Empty;
+    protected SortedSet<string> players = new();
+    protected string notificationMessage = string.Empty;
 
-    private Flashboard? flashboard { get; set; }
+    protected Flashboard? flashboard { get; set; }
 
-    private const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
+    protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,7 +43,7 @@
         await Interop.Host(this, gameCode);
     }
 
-    private async void Pick()
+    protected async void Pick()
     {
         if (calledNumbers.Count == boardSize) { return; }
         int x;
@@ -56,12 +58,12 @@
         await Interop.Broadcast("pick", lastCalled);
     }
 
-    private async void Copy()
+    protected async void Copy()
     {
         await Interop.CopyToClipboard(gameCode);
     }
 
-    private async void Restart()
+    protected async void Restart()
     {
         flashboard!.ClearBoard();
         calledNumbers.Clear();
@@ -69,5 +71,4 @@
         notificationMessage = string.Empty;
         await Interop.Broadcast("restart", "");
     }
-
 }

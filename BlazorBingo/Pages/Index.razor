@@ -1,95 +1,69 @@
 ﻿@page "/"
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
-@using BlazorBingo.Components
+@inject NavigationManager Navigation
 
-<PageTitle>BINGO</PageTitle>
+<PageTitle>Blazor Bingo</PageTitle>
 
-<CascadingValue Value="@settings">
-    @if (gameState == GameState.Startup)
-    {
-        <div class="row mb-2">
-            <label for="playerName" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-auto">
-                <input type="text" id="playerName" class="form-control" @bind="settings!.PlayerName" placeholder="player name" />
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-outline-secondary" @onclick="Host">Host</button>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
-            <div class="col-auto">
-                <input type="text" id="gameCode" class="form-control gameCode" @bind="gameCode" placeholder="enter code" />
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-auto">
-                <small>version <code style="color: inherit;">23.01.12.03</code></small>
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-outline-secondary" title="Settings" @onclick="ChangeOptions"><span class="gear"></span></button>
-            </div>
-        </div>
-    }
-    @if (gameState == GameState.Play)
-    {
-        <BingoCard GameCode="@gameCode"></BingoCard>
-    }
-    @if (gameState == GameState.Host)
-    {
-        <BingoCaller></BingoCaller>
-    }
-    @if (gameState == GameState.Options)
-    {
-        <GameOptions @ref="settings"></GameOptions>        
-    }
-</CascadingValue>
+<h1>Blazor Bingo</h1>
 
+<div class="row mb-2">
+    <label for="playerName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-auto">
+        <input type="text" id="playerName" class="form-control" @bind="@playerName" @bind:after="SavePlayerNameAsync" placeholder="player name" />
+    </div>
+    <div class="col-auto">
+        <a role="button" class="btn btn-outline-secondary" title="Host" href="/host">Host</a>
+    </div>
+</div>
+<div class="row mb-2">
+    <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
+    <div class="col-auto">
+        <input type="text" id="gameCode" class="form-control gameCode" @bind="gameCode" placeholder="enter code" />
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-sm-2"></div>
+    <div class="col-auto">
+        <small>version <code style="color: inherit;">23.01.15.01</code></small>
+    </div>
+    <div class="col-auto">
+        <a role="button" class="btn btn-outline-secondary" title="Settings" href="/settings"><span class="gear"></span></a>
+    </div>
+</div>
+                                                                       
 @code {
-    protected GameOptions? settings;
-
+    protected GameSettings? settings;
     protected string gameCode = string.Empty;
-
-    public enum GameState
-    {
-        Startup,
-        Play,
-        Host,
-        Options
-    }
-
-    protected GameState gameState;
+    protected string playerName = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        settings = new GameOptions();
-        try
+        settings = await localStorage.GetItemAsync<GameSettings>("Settings");
+        if (settings == null) 
+        { 
+            Navigation.NavigateTo("/settings");
+            return;
+        }
+        else
         {
-            gameState = GameState.Startup;
+            playerName = settings.PlayerName;            
+        }
 #if DEBUG
-    gameCode = "0000";
+        gameCode = "0000";
 #endif
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
     }
 
-    private void Host()
+    protected async Task SavePlayerNameAsync()
     {
-        gameState = GameState.Host;
+        settings!.PlayerName = playerName;
+        await localStorage.SetItemAsync<GameSettings>("Settings", settings!);
     }
-    private void Join()
+
+    protected void Join()
     {
-        gameState = GameState.Play;
-    }
-    private void ChangeOptions()
-    {
-        gameState = GameState.Options;
+        Navigation.NavigateTo($"/play/{gameCode.ToUpper()}");
     }
 }

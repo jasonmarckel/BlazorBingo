@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Versioning;
 
-namespace BlazorBingo.Components;
+namespace BlazorBingo.Pages;
 
 [SupportedOSPlatform("browser")]
-public partial class BingoCard : IMessageHandler
+public partial class PlayScreen : IMessageHandler
 {
     public void HandleMessage(string messageType, string data)
     {
@@ -12,7 +12,7 @@ public partial class BingoCard : IMessageHandler
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.Add(Convert.ToInt32(data.Substring(2)));
-                if (!isMuted) { Interop.Speak(data.Replace("-", " - ")); }
+                if (!isMuted) { Interop.Speak(data.Replace("-", " - "), settings.CallerVoice); }
                 break;
             case "restart":
                 ClearCard();

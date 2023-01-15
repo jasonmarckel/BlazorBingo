@@ -1,6 +1,6 @@
-﻿namespace BlazorBingo.Components;
+﻿namespace BlazorBingo.Pages;
 
-public partial class BingoCaller : IMessageHandler
+public partial class HostScreen : IMessageHandler
 {
     public void HandleMessage(string messageType, string data)
     {

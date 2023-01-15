@@ -1,0 +1,146 @@
+﻿@page "/settings"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager Navigation
+@implements IDisposable
+@using System.Text.Json
+@using System.Text.Json.Serialization
+
+<h3>Game Settings</h3>
+
+@if (isLoaded)
+{
+<div class="row mb-2">
+    <label for="playerName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-auto">
+        <input type="text" id="playerName" class="form-control" @bind="settings.PlayerName" placeholder="player name" />
+    </div>
+</div>
+
+<div class="row mb-2">
+    <label>Dauber</label>
+    <InputSelect @bind-Value="settings.Dauber">
+        @foreach (var dauber in Daubers)
+        {
+            <option value="@dauber.CssName()">@dauber</option>
+        }
+    </InputSelect>
+</div>
+
+<div class="row mb-2">
+    <label>Card Theme</label>
+    <InputSelect @bind-Value="settings.CardTheme">
+        @foreach (var cardTheme in CardThemes)
+        {
+            <option value="@cardTheme.CssName()">@cardTheme</option>
+        }
+    </InputSelect>
+</div>
+
+<div class="row mb-2">
+    <label>Caller Voice</label>
+    <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
+        @foreach(var voice in voices!)
+        {
+            <option value="@voice.name">@voice.name</option>                
+        }
+    </InputSelect>
+</div>
+}
+
+@code {
+    protected GameSettings settings { get; set; } = new GameSettings();
+    protected bool isLoaded;
+    protected Voice[]? voices;
+
+    // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#handleprevent-location-changes
+    private IDisposable? registration;
+
+    protected override async Task OnInitializedAsync()
+    {
+        settings = await localStorage.GetItemAsync<GameSettings>("Settings") ?? new GameSettings();
+        string voicesJson = await Interop.GetVoices();
+        voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
+        isLoaded = true;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            registration = Navigation.RegisterLocationChangingHandler(OnLocationChanging);
+        }
+    }
+
+    private ValueTask OnLocationChanging(LocationChangingContext context)
+    {
+        localStorage.SetItemAsync<GameSettings>("Settings", settings);
+        return ValueTask.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        registration?.Dispose();
+    }
+
+    public static readonly string[] CardThemes = new string[]
+    {
+        "Black",
+        "Blue",
+        "Green",
+        "Orange",
+        "Red",
+        "Yellow"
+    };
+
+    public static readonly string[] Daubers = new string[]
+    {
+        "Random",
+        "Banana",
+        "Basketball",
+        "Beer Mug",
+        "Cat",
+        "Cat Face with Heart Eyes",
+        "Cherries",
+        "Christmas Tree",
+        "Cookie",
+        "Curling",
+        "Dog Face",
+        "Doughnut",
+        "Dragon",
+        "Elephant",
+        "Football",
+        "Fox",
+        "Golfer",
+        "Heart",
+        "Hot Dog",
+        "Ice Cream",
+        "Kangaroo",
+        "Kiss",
+        "Money Bag",
+        "Musical Note",
+        "Paw Prints",
+        "Penguin",
+        "Ping Pong",
+        "Present",
+        "Scooter",
+        "Shark",
+        "Smiley",
+        "Snowman",
+        "Soccer",
+        "Strawberry",
+        "T-Rex",
+        "Tennis",
+        "Tractor",
+        "Trident",
+        "Video Game Controller",
+        "Water Wave"
+    };
+
+    public record Voice
+    {
+        public required string name { get; set; }
+        public required string lang { get; set; }
+        public bool isDefault { get; set; }
+        public bool localService { get; set; }
+    }
+}

@@ -1,11 +1,29 @@
 ﻿#BingoCard {
-    background-color: dodgerblue;
     padding: 0 0.7rem 0.7rem 0.7rem;
     border-radius: 0.9rem;
     max-width: 13cm;
     min-width: 5cm;
     font-size: clamp(1rem, 9vw, 1.3cm);
 }
+
+    #BingoCard.green {
+        background-color: var(--card-green);
+    }
+    #BingoCard.blue {
+        background-color: var(--card-blue);
+    }
+    #BingoCard.red {
+        background-color: var(--card-red);
+    }
+    #BingoCard.orange {
+        background-color: var(--card-orange);
+    }
+    #BingoCard.yellow {
+        background-color: var(--card-yellow);
+    }
+    #BingoCard.black {
+        background-color: var(--card-black);
+    }
 
 #BingoCard table {
     width: 100%;
@@ -30,7 +48,7 @@
         font-weight: 900;
         padding: 0;
         border-style: none;
-        background-color: dodgerblue;
+        background-color: transparent;
         color: white;
     }
 
