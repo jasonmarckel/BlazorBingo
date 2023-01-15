@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BlazorBingo.dll": "sha256-Gt+LSXVU+SoBcPhsUvTgiSzKUr0h5RBVY9NasYNxDso=",
+      "BlazorBingo.dll": "sha256-cRczKY5DUzGa49cgVyTVChNhlkKEv2gyoXe5PyinsxA=",
       "Blazored.LocalStorage.dll": "sha256-eXVgTw72kEn74FZgDQbLtvAmXbiZDSj5gzUnxVmwowQ=",
       "Microsoft.AspNetCore.Components.dll": "sha256-JfO4\/gaeaQV9awOl2xI5twrWwhcMQA\/m3SWx7sFssP8=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-KreRAGEKJQUGD335XeJUAis4Sr+4tkV6gXtJcd7FgKo=",
