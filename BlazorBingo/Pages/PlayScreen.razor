@@ -35,7 +35,7 @@
 
 <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
 
-<a role="button" class="btn btn-outline-secondary" title="Settings" href="/settings"><span class="gear"></span></a>
+<a role="button" class="btn btn-outline-secondary" title="Settings" href="./settings"><span class="gear"></span></a>
 
 <button type="button" class="btn btn-outline-secondary" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
 
@@ -139,7 +139,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("/"); return; }
+        if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("./"); return; }
         // GenerateNewCard() must be called prior to the await/async operations
         // otherwise the page will try to render before each Square in the 'squares' field
         // has been instantiated.  This will lead to a null reference exception
