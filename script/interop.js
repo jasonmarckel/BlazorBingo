@@ -61,15 +61,49 @@ export async function speak(inputText, voiceName) {
             //console.error("SpeechSynthesisUtterance.onerror");
         };
 
+        console.log("Requested voice: " + voiceName);
+
         for (let i = 0; i < voices.length; i++) {
             if (voices[i].name === voiceName) {
                 utterThis.voice = voices[i];
+                console.log("Found match for requested voice.")
                 break;
             }
         }
         //utterThis.pitch = pitch.value;
         //utterThis.rate = rate.value;
         synth.speak(utterThis);
+    }
+}
+
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API
+
+// Create a reference for the Wake Lock.
+let wakeLock = null;
+
+export async function requestWakeLock() {
+    if ('wakeLock' in navigator) {
+        // create an async function to request a wake lock
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+            wakeLock.addEventListener('release', () => {
+                // the wake lock has been released
+                console.log('Wake Lock has been released');
+            });
+        } catch (err) {
+            // The Wake Lock request has failed - usually system related, such as battery.
+            console.log(`${err.name}, ${err.message}`);
+        }
+    }
+}
+
+export async function releaseWakeLock() {
+    if (wakeLock !== null) {
+        wakeLock.release()
+            .then(() => {
+                wakeLock = null;
+            });
     }
 }
 

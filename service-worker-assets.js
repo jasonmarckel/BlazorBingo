@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-L3GLvqwsuWW0JHomtBdPC\/tbsKeK1g\/4PUQZ8GLZ+wI=",
+      "hash": "sha256-KN5dh8xIpb4onpOSWeVBBiLhURQEvpjhHSDsR0AsTJI=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-nUMEcEpPATNnGwchZnrkdmUMrThY9tD4L9Y2tRffk\/c=",
+      "hash": "sha256-eN8I1DEzj8cA26PsWzzTiilZqPmzLAqRO+WfvC5zH3o=",
       "url": "_framework\/BlazorBingo.dll"
     },
     {
@@ -45,7 +45,7 @@
       "url": "_framework\/Blazored.LocalStorage.dll"
     },
     {
-      "hash": "sha256-K6VKF6SJRSc7laFBC4zGnc5octYmr5IDAn7oBKrWjS8=",
+      "hash": "sha256-SvbP0CgYrh\/in8KQrzfVPuNOW7B7MoPDUPl1Yb4F6EU=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
@@ -57,7 +57,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
-      "hash": "sha256-lE+oV23bIN6jVqMpLKxAkd0DERkRfGacCdWYwiYZ8o0=",
+      "hash": "sha256-jj0gEWGz0IP5DtImmDS2JCnL7nDJvw39GXaOgt9q2BU=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.dll"
     },
     {
@@ -73,7 +73,7 @@
       "url": "_framework\/Microsoft.Extensions.Configuration.Json.dll"
     },
     {
-      "hash": "sha256-7K40xNmwRvvPyoMmnYjiY9k\/cn+Zai4JPWd117WCQWI=",
+      "hash": "sha256-CQAZkIiWdR3Ef4H3DFn3sGcBxQ\/4IErV1mQLCIrfLEc=",
       "url": "_framework\/Microsoft.Extensions.DependencyInjection.Abstractions.dll"
     },
     {
@@ -165,7 +165,7 @@
       "url": "_framework\/System.ObjectModel.dll"
     },
     {
-      "hash": "sha256-P7VczFcuzAUK+wqunRqqnMk6mG0NYN968go3QZROwHE=",
+      "hash": "sha256-hSDCpZW7N9y1LEfEiX\/xOtXBhGvry0s9mMyWsOwW8lY=",
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
@@ -237,9 +237,9 @@
       "url": "manifest.json"
     },
     {
-      "hash": "sha256-YQc\/JniHQ12S7+rJx9EPzmpsPb2q2JIhdFEPv68\/ATU=",
+      "hash": "sha256-yXfmBc63Nrwv\/cDAM3NntvOoFdzwb+Cdi+m1b09XQF8=",
       "url": "script\/interop.js"
     }
   ],
-  "version": "7Uhlu5hO"
+  "version": "A4wRpYuD"
 };
