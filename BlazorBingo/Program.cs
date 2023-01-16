@@ -12,6 +12,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddBlazoredLocalStorage();
 
+builder.Services.AddScoped<GameSettings>();
+
 await JSHost.ImportAsync("interopModule", "../script/interop.js");
 
 await builder.Build().RunAsync();

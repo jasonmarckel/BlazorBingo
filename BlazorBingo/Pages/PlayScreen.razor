@@ -1,5 +1,6 @@
-﻿@page "/play/{gamecode}"
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
+﻿@page "/play/{gamecode?}"
+@implements IDisposable
+@inject GameSettings settings
 @inject NavigationManager Navigation
 
 <Flashboard @ref="flashboard"></Flashboard>
@@ -35,17 +36,22 @@
 
 <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
 
-<a role="button" class="btn btn-outline-secondary" title="Settings" href="./settings"><span class="gear"></span></a>
+<button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
 
-<button type="button" class="btn btn-outline-secondary" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
+<button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
+
+@if (showSettings)
+{
+    <SettingsScreen></SettingsScreen>
+}
 
 @code {
     [Parameter]
     public string? GameCode { get; set; }
 
-    protected GameSettings settings = new GameSettings();
-
     protected bool isMuted;
+
+    protected bool showSettings;
 
     protected Flashboard? flashboard { get; set; }
     protected const int boardSize = 75;
@@ -137,6 +143,16 @@
         Interop.NotifyHost("bingo", settings.PlayerName);
     }
 
+    protected override void OnInitialized()
+    {
+        settings.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        settings.OnChange -= StateHasChanged;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("./"); return; }
@@ -147,7 +163,6 @@
         // https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#handle-incomplete-async-actions-at-render
         // https://aryehsilver.co.uk/blazor-attempts-to-render-before-oninitializedasync-method-has-finished/
         GenerateNewCard();
-        settings = await localStorage.GetItemAsync<GameSettings>("Settings");
         await Interop.Connect(this, GameCode!.ToUpperInvariant(), settings.PlayerName);
         await Interop.RequestWakeLock();
         await Interop.InitVoices();
@@ -157,4 +172,11 @@
     //{
     //    return base.OnAfterRenderAsync(firstRender);
     //}
+
+    protected void ToggleSettings()
+    {
+        showSettings = !showSettings;
+        //Navigation.NavigateTo($"./settings");
+    }
+
 }

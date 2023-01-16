@@ -1,5 +1,6 @@
 ﻿@page "/"
-@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@implements IDisposable
+@inject GameSettings settings
 @inject NavigationManager Navigation
 
 <PageTitle>Blazor Bingo</PageTitle>
@@ -32,48 +33,57 @@
         <small>version <code style="color: inherit;">23.01.16.01</code></small>
     </div>
     <div class="col-auto">
-        <a role="button" class="btn btn-outline-secondary" title="Settings" href="./settings"><span class="gear"></span></a>
+        <a role="button" class="symbolbutton" title="Settings" href="./settings"><span class="gear"></span></a>
     </div>
 </div>
                                                                        
 @code {
-    protected GameSettings? settings;
     protected string gameCode = string.Empty;
     protected string playerName = string.Empty;
     protected bool canJoin;
 
+    protected override void OnInitialized()
+    {
+        settings.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        settings.OnChange -= StateHasChanged;
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        settings = await localStorage.GetItemAsync<GameSettings>("Settings");
-        if (settings == null) 
-        { 
-            Navigation.NavigateTo("./settings");
-            return;
-        }
-        else
-        {
-            playerName = settings.PlayerName;            
-        }
+        await settings.LoadAsync();
+        playerName = settings.PlayerName;
 #if DEBUG
     gameCode = "0000";
-    canJoin = true;
+    RefreshCanJoin();
 #endif
     }
 
+    private void RefreshCanJoin()
+    {
+        canJoin =
+            !string.IsNullOrWhiteSpace(playerName) &&
+            !string.IsNullOrWhiteSpace(gameCode) &&
+            gameCode.Length == 4;
+
+    }
     protected async Task SavePlayerNameAsync()
     {
-        settings!.PlayerName = playerName;
-        await localStorage.SetItemAsync<GameSettings>("Settings", settings!);
+        RefreshCanJoin();
     }
 
     protected void OnGameCodeInput(string value)
     {
         gameCode = value;
-        canJoin = !string.IsNullOrWhiteSpace(gameCode) && gameCode.Length == 4;
+        RefreshCanJoin();
     }
 
     protected void Join()
     {
+        settings!.PlayerName = playerName;
         Navigation.NavigateTo($"./play/{gameCode.ToUpperInvariant()}");
     }
 }

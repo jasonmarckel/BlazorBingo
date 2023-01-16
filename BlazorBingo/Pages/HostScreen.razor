@@ -62,7 +62,7 @@
         flashboard!.Add(x);
         notificationMessage = string.Empty;
         await Interop.Broadcast("pick", lastCalled);
-        await Task.Delay(3500); // wait a few seconds before the next pick can be made
+        await Task.Delay(3000); // wait a few seconds before the next pick can be made
         IsCalling = false;
         StateHasChanged(); // refresh the UI
 
