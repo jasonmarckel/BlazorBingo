@@ -1,23 +1,27 @@
 ﻿@page "/host"
 
-<h3>
-    Bingo Hall ~
-    <span style="font-family:monospace; font-weight:bold; font-size:smaller;">@gameCode</span><button @onclick="Copy" title="copy" class="symbol" style="border:none; background-color:transparent;">&#128471;</button>
-</h3>
+<div class="row">
+    <div class="col-auto">
+        Bingo Hall
+        &nbsp;
+        <span style="font-family:monospace; font-weight:bold;">@gameCode</span><button @onclick="Copy" title="copy" class="symbolbutton">&#128471;</button>
+    </div>
+    <div class="col-auto">
+        <label><span class="symbol silhouettebust"></span> @players.Count</label>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="symbolbutton" @onclick="Restart" title="restart" style="font-size:16pt; line-height:16pt; padding:0;">&#8634;</button>
+    </div>
+</div>
 
 <Flashboard @ref="flashboard"></Flashboard>
 
 <div>
-    <label>Players: @players.Count</label>
-    <button type="button" class="btn btn-outline-secondary btn-sm" @onclick="Restart" style="float:right;">New Game</button>
+    <button type="button" class="btn btn-primary" @onclick="Pick" disabled="@IsCalling">Pick</button>
 </div>
 
 <div>
     @notificationMessage
-</div>
-
-<div style="text-align:center; margin-top:0.5rem;">
-    <button type="button" class="btn btn-primary" @onclick="Pick">Pick</button>
 </div>
 
 @code {
@@ -29,6 +33,7 @@
     protected string gameCode = string.Empty;
     protected SortedSet<string> players = new();
     protected string notificationMessage = string.Empty;
+    protected bool IsCalling;
 
     protected Flashboard? flashboard { get; set; }
 
@@ -46,6 +51,7 @@
     protected async void Pick()
     {
         if (calledNumbers.Count == boardSize) { return; }
+        IsCalling = true;
         int x;
         do
         {
@@ -56,6 +62,10 @@
         flashboard!.Add(x);
         notificationMessage = string.Empty;
         await Interop.Broadcast("pick", lastCalled);
+        await Task.Delay(5000); // wait 5 seconds before next pick can be made
+        IsCalling = false;
+        StateHasChanged(); // refresh the UI
+
     }
 
     protected async void Copy()
