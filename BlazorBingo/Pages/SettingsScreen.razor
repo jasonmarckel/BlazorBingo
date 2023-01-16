@@ -1,7 +1,5 @@
 ﻿@page "/settings"
 @inject GameSettings settings
-@inject NavigationManager Navigation
-@*@implements IDisposable*@
 @using System.Text.Json
 @using System.Text.Json.Serialization
 
@@ -9,15 +7,6 @@
 
 @if (isLoaded)
 {
-@*
-<div class="row mb-2">
-    <label for="playerName" class="col-sm-2 col-form-label">Name</label>
-    <div class="col-auto">
-        <input type="text" id="playerName" class="form-control" @bind="settings.PlayerName" placeholder="player name" />
-    </div>
-</div>
-*@
-
 <div class="row mb-2">
     <label>Dauber</label>
     <InputSelect @bind-Value="settings.Dauber">
@@ -53,9 +42,6 @@
     protected bool isLoaded;
     protected Voice[]? voices;
 
-    // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#handleprevent-location-changes
-    //private IDisposable? registration;
-
     protected override async Task OnInitializedAsync()
     {
         await Interop.InitVoices();
@@ -63,24 +49,6 @@
         voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
         isLoaded = true;
     }
-
-    //protected override void OnAfterRender(bool firstRender)
-    //{
-    //    if (firstRender)
-    //    {
-    //        registration = Navigation.RegisterLocationChangingHandler(OnLocationChanging);
-    //    }
-    //}
-
-    //private ValueTask OnLocationChanging(LocationChangingContext context)
-    //{
-    //    return ValueTask.CompletedTask;
-    //}
-
-    //public void Dispose()
-    //{
-    //    registration?.Dispose();
-    //}
 
     public static readonly string[] CardThemes = new string[]
     {

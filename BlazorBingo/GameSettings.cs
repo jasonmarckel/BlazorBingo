@@ -65,7 +65,7 @@ public class GameSettings
 
     public async Task LoadAsync()
     {
-        settings = await localStorage.GetItemAsync<Settings>("Settings");
+        settings = await localStorage.GetItemAsync<Settings>("Settings") ?? new Settings();
     }
 
     public async Task SaveAsync()

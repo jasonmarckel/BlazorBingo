@@ -169,6 +169,27 @@
     //    return base.OnAfterRenderAsync(firstRender);
     //}
 
+    // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#handleprevent-location-changes
+    //private IDisposable? registration;
+
+    //protected override void OnAfterRender(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        registration = Navigation.RegisterLocationChangingHandler(OnLocationChanging);
+    //    }
+    //}
+
+    //private ValueTask OnLocationChanging(LocationChangingContext context)
+    //{
+    //    return ValueTask.CompletedTask;
+    //}
+
+    //public void Dispose()
+    //{
+    //    registration?.Dispose();
+    //}
+
     protected void ToggleSettings()
     {
         showSettings = !showSettings;
