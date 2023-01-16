@@ -70,8 +70,8 @@ export async function speak(inputText, voiceName) {
                 break;
             }
         }
-        //utterThis.pitch = pitch.value;
-        //utterThis.rate = rate.value;
+        utterThis.pitch = 1.0;
+        utterThis.rate = 1.0;
         synth.speak(utterThis);
     }
 }

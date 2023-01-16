@@ -1,5 +1,4 @@
 ﻿@page "/"
-@implements IDisposable
 @inject GameSettings settings
 @inject NavigationManager Navigation
 
@@ -10,7 +9,7 @@
 <div class="row mb-2">
     <label for="playerName" class="col-sm-2 col-form-label">Name</label>
     <div class="col-auto">
-        <input type="text" id="playerName" class="form-control" @bind="playerName" @bind:after="SavePlayerNameAsync" placeholder="player name" maxlength="32" />
+        <input type="text" id="playerName" class="form-control" @bind="playerName" @bind:after="RefreshCanJoin" placeholder="player name" maxlength="32" />
     </div>
     <div class="col-auto">
         <a role="button" class="btn btn-outline-secondary" title="Host" href="./host">Host</a>
@@ -30,10 +29,7 @@
 <div class="row mb-2">
     <div class="col-sm-2"></div>
     <div class="col-auto">
-        <small>version <code style="color: inherit;">23.01.16.01</code></small>
-    </div>
-    <div class="col-auto">
-        <a role="button" class="symbolbutton" title="Settings" href="./settings"><span class="gear"></span></a>
+        <small>version <code style="color: inherit;">23.01.16.02</code></small>
     </div>
 </div>
                                                                        
@@ -41,16 +37,6 @@
     protected string gameCode = string.Empty;
     protected string playerName = string.Empty;
     protected bool canJoin;
-
-    protected override void OnInitialized()
-    {
-        settings.OnChange += StateHasChanged;
-    }
-
-    public void Dispose()
-    {
-        settings.OnChange -= StateHasChanged;
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -60,6 +46,7 @@
     gameCode = "0000";
     RefreshCanJoin();
 #endif
+        await Interop.ReleaseWakeLock();
     }
 
     private void RefreshCanJoin()
@@ -69,10 +56,6 @@
             !string.IsNullOrWhiteSpace(gameCode) &&
             gameCode.Length == 4;
 
-    }
-    protected async Task SavePlayerNameAsync()
-    {
-        RefreshCanJoin();
     }
 
     protected void OnGameCodeInput(string value)

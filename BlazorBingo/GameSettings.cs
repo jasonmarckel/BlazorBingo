@@ -12,7 +12,7 @@ public class GameSettings
         public string playerName { get; set; } = string.Empty;
         public string dauber { get; set; } = "random";
         public string callerVoice { get; set; } = string.Empty;
-        public string cardTheme { get; set; } = string.Empty;
+        public string cardTheme { get; set; } = "blue";
     }
 
     private Settings settings = new();

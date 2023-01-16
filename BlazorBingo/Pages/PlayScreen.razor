@@ -145,6 +145,7 @@
 
     protected override void OnInitialized()
     {
+        GenerateNewCard();
         settings.OnChange += StateHasChanged;
     }
 
@@ -156,13 +157,8 @@
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("./"); return; }
-        // GenerateNewCard() must be called prior to the await/async operations
-        // otherwise the page will try to render before each Square in the 'squares' field
-        // has been instantiated.  This will lead to a null reference exception
-        // in the loop rendering the squares.
         // https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#handle-incomplete-async-actions-at-render
         // https://aryehsilver.co.uk/blazor-attempts-to-render-before-oninitializedasync-method-has-finished/
-        GenerateNewCard();
         await Interop.Connect(this, GameCode!.ToUpperInvariant(), settings.PlayerName);
         await Interop.RequestWakeLock();
         await Interop.InitVoices();

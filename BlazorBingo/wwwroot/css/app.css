@@ -138,6 +138,10 @@ input.gameCode {
     font-family: var(--app-symbols);
     border: none;
     background-color: transparent;
+    text-decoration: none;
+    font-size: 24pt;
+    line-height: 24pt;
+    vertical-align: middle;
 }
 
 .info-circle:before {
