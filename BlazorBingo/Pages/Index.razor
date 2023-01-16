@@ -9,7 +9,7 @@
 <div class="row mb-2">
     <label for="playerName" class="col-sm-2 col-form-label">Name</label>
     <div class="col-auto">
-        <input type="text" id="playerName" class="form-control" @bind="@playerName" @bind:after="SavePlayerNameAsync" placeholder="player name" />
+        <input type="text" id="playerName" class="form-control" @bind="playerName" @bind:after="SavePlayerNameAsync" placeholder="player name" maxlength="32" />
     </div>
     <div class="col-auto">
         <a role="button" class="btn btn-outline-secondary" title="Host" href="./host">Host</a>
@@ -18,10 +18,12 @@
 <div class="row mb-2">
     <label for="gameCode" class="col-sm-2 col-form-label">Bingo Hall</label>
     <div class="col-auto">
-        <input type="text" id="gameCode" class="form-control gameCode" @bind="gameCode" placeholder="enter code" />
+        <input type="text" id="gameCode" class="form-control gameCode" 
+        @bind:event="oninput" @bind:get="gameCode" @bind:set="OnGameCodeInput" 
+        placeholder="enter code" maxlength="4" minlength="4" pattern="[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]{4}" />
     </div>
     <div class="col-auto">
-        <button type="button" class="btn btn-primary" @onclick="Join">Join</button>
+        <button type="button" class="btn btn-primary" @onclick="Join" disabled="@(!canJoin)">Join</button>
     </div>
 </div>
 <div class="row mb-2">
@@ -38,6 +40,7 @@
     protected GameSettings? settings;
     protected string gameCode = string.Empty;
     protected string playerName = string.Empty;
+    protected bool canJoin;
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,7 +55,8 @@
             playerName = settings.PlayerName;            
         }
 #if DEBUG
-        gameCode = "0000";
+    gameCode = "0000";
+    canJoin = true;
 #endif
     }
 
@@ -62,8 +66,14 @@
         await localStorage.SetItemAsync<GameSettings>("Settings", settings!);
     }
 
+    protected void OnGameCodeInput(string value)
+    {
+        gameCode = value;
+        canJoin = !string.IsNullOrWhiteSpace(gameCode) && gameCode.Length == 4;
+    }
+
     protected void Join()
     {
-        Navigation.NavigateTo($"./play/{gameCode.ToUpper()}");
+        Navigation.NavigateTo($"./play/{gameCode.ToUpperInvariant()}");
     }
 }
