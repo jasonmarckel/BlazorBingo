@@ -25,7 +25,6 @@ function populateVoiceList() {
 }
 
 export async function getVoices() {
-    populateVoiceList();
     var voiceList = [];
     for (let i = 0; i < voices.length; i++) {
         voiceList.push({
@@ -38,12 +37,12 @@ export async function getVoices() {
     return JSON.stringify(voiceList);
 }
 
-//export async function initVoices() {
-//    populateVoiceList();
-//    if (speechSynthesis.onvoiceschanged !== undefined) {
-//        speechSynthesis.onvoiceschanged = populateVoiceList;
-//    }
-//}
+export async function initVoices() {
+    populateVoiceList();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+}
 
 export async function speak(inputText, voiceName) {
     if (synth.speaking) {
@@ -61,8 +60,6 @@ export async function speak(inputText, voiceName) {
         utterThis.onerror = function (event) {
             //console.error("SpeechSynthesisUtterance.onerror");
         };
-
-        if (voices.length === 0) { voices = synth.getVoices(); }
 
         for (let i = 0; i < voices.length; i++) {
             if (voices[i].name === voiceName) {

@@ -116,11 +116,13 @@ input.gameCode {
     /* 
         https://css-tricks.com/snippets/css/system-font-stack/ 
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
+        https://developer.apple.com/fonts/system-fonts/
+        https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2
+        https://unicode-table.com/en/
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
     --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
     --app-emoji: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
-
     --card-red: #b32121;
     --card-green: #26b050;
     --card-blue: #1e90ff; /* dodgerblue */
@@ -131,6 +133,11 @@ input.gameCode {
 
 .symbol {
      font-family: var(--app-symbols); 
+}
+.symbolbutton {
+    font-family: var(--app-symbols);
+    border: none;
+    background-color: transparent;
 }
 
 .info-circle:before {
@@ -149,6 +156,23 @@ input.gameCode {
 /* bust in silhouette == user icon == &#128100; */
 .silhouettebust:before {
     content: "\1F464";
+}
+
+.refresh:before {
+    content: "\27F3";
+}
+
+.refresh2:before {
+    content: "\1F5D8";
+}
+
+/* &#8634; */
+.anticlockwiseciclearrow {
+    content: "\21BA";
+}
+/* &#11119; */
+.anticlockwisecicletriangle {
+    content: "\2B6F";
 }
 
 .mute:before {
@@ -171,8 +195,6 @@ input.gameCode {
     font-size: 1.2em;
     background-color: white;
 }
-
-/* https://unicode-table.com/en/ */
 
 .solidstar:before {
     content: "\2605";
