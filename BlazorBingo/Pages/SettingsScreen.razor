@@ -58,6 +58,7 @@
     protected override async Task OnInitializedAsync()
     {
         settings = await localStorage.GetItemAsync<GameSettings>("Settings") ?? new GameSettings();
+        await Interop.InitVoices();
         string voicesJson = await Interop.GetVoices();
         voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
         isLoaded = true;

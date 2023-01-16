@@ -62,8 +62,8 @@ public partial class Interop
     [JSImport("globalThis.navigator.clipboard.writeText")]
     internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
 
-    //[JSImport("initVoices", "interopModule")]
-    //internal static partial Task InitVoices();
+    [JSImport("initVoices", "interopModule")]
+    internal static partial Task InitVoices();
 
     [JSImport("getVoices", "interopModule")]
     internal static partial Task<string> GetVoices();
