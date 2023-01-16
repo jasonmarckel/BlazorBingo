@@ -1,6 +1,16 @@
+export async function getLanguage() {
+    return window.navigator.language;
+}
+
+export async function getPlatform() {
+    return window.navigator.platform;
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
 // https://github.com/mdn/dom-examples/tree/main/web-speech-api/speak-easy-synthesis
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
+// https://talkrapp.com/speechSynthesis.html
+// https://stackoverflow.com/questions/52769453/trying-to-use-speechsynthesis-api-in-ios-webview-app
 
 const synth = window.speechSynthesis;
 let voices = [];
@@ -72,6 +82,8 @@ export async function speak(inputText, voiceName) {
         }
         utterThis.pitch = 1.0;
         utterThis.rate = 1.0;
+        //utterThis.lang = 'en-US';
+        utterThis.volume = inputText === "init" ? 0 : 1;
         synth.speak(utterThis);
     }
 }

@@ -3,50 +3,69 @@
 @using System.Text.Json
 @using System.Text.Json.Serialization
 
-<h3>Game Settings</h3>
-
-@if (isLoaded)
-{
-<div class="row mb-2">
-    <label>Dauber</label>
-    <InputSelect @bind-Value="settings.Dauber">
-        @foreach (var dauber in Daubers)
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Game Settings</h5>
+        @if (isLoaded)
         {
-            <option value="@dauber.CssName()">@dauber</option>
-        }
-    </InputSelect>
-</div>
+            <div class="row mb-2">
+                <label>Dauber</label>
+                <InputSelect @bind-Value="settings.Dauber">
+                    @foreach (var dauber in Daubers)
+                    {
+                        <option value="@dauber.CssName()">@dauber</option>
+                    }
+                </InputSelect>
+            </div>
 
-<div class="row mb-2">
-    <label>Card Theme</label>
-    <InputSelect @bind-Value="settings.CardTheme">
-        @foreach (var cardTheme in CardThemes)
-        {
-            <option value="@cardTheme.CssName()">@cardTheme</option>
-        }
-    </InputSelect>
-</div>
+            <div class="row mb-2">
+                <label>Card Theme</label>
+                <InputSelect @bind-Value="settings.CardTheme">
+                    @foreach (var cardTheme in CardThemes)
+                    {
+                        <option value="@cardTheme.CssName()">@cardTheme</option>
+                    }
+                </InputSelect>
+            </div>
 
-<div class="row mb-2">
-    <label>Caller Voice</label>
-    <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
-        @foreach(var voice in voices!)
-        {
-            <option value="@voice.name">@voice.name</option>                
-        }
-    </InputSelect>
+            @if (!platform!.Equals("Android", StringComparison.OrdinalIgnoreCase))
+                {
+                    <div class="row mb-2">
+                        <label>Language</label>
+                        <InputSelect @bind-Value="language">
+                            @foreach (var lang in voices!.Select(x => x.lang).Distinct().Order())
+                            {
+                                <option>@lang</option>
+                            }
+                        </InputSelect>
+                    </div>
+                    <div class="row mb-2">
+                        <label>Caller Voice</label>
+                        <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
+                            @foreach (var voice in voices!.Where(x => x.lang == language))
+                            {
+                                <option value="@voice.name" data-lang="@voice.lang.Replace('_', '-')">@voice.name.Replace("Microsoft ", string.Empty)</option>
+                            }
+                        </InputSelect>
+                    </div>
+                }
+            }
+    </div>
 </div>
-}
 
 @code {
     protected bool isLoaded;
     protected Voice[]? voices;
+    protected string? language;
+    protected string? platform;
 
     protected override async Task OnInitializedAsync()
     {
         await Interop.InitVoices();
         string voicesJson = await Interop.GetVoices();
         voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
+        language = await Interop.GetLanguage();
+        platform = await Interop.GetPlatform();
         isLoaded = true;
     }
 

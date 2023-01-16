@@ -12,7 +12,7 @@
         <input type="text" id="playerName" class="form-control" @bind="playerName" @bind:after="RefreshCanJoin" placeholder="player name" maxlength="32" />
     </div>
     <div class="col-auto">
-        <a role="button" class="btn btn-outline-secondary" title="Host" href="./host">Host</a>
+        <button type="button" class="btn btn-outline-secondary" title="Host" @onclick="Host">Host</button>
     </div>
 </div>
 <div class="row mb-2">
@@ -64,9 +64,17 @@
         RefreshCanJoin();
     }
 
+    protected void Host()
+    {
+        settings!.PlayerName = playerName;
+        Interop.Speak("init", settings.CallerVoice);  // prime speechSynthesis for iOS
+        Navigation.NavigateTo("./host");
+    }
+
     protected void Join()
     {
         settings!.PlayerName = playerName;
+        Interop.Speak("init", settings.CallerVoice);  // prime speechSynthesis for iOS
         Navigation.NavigateTo($"./play/{gameCode.ToUpperInvariant()}");
     }
 }
