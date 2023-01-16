@@ -149,6 +149,7 @@
         GenerateNewCard();
         settings = await localStorage.GetItemAsync<GameSettings>("Settings");
         await Interop.Connect(this, GameCode!.ToUpperInvariant(), settings.PlayerName);
+        await Interop.RequestWakeLock();
         await Interop.InitVoices();
     }
 
