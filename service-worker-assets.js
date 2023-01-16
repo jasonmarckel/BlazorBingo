@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-KN5dh8xIpb4onpOSWeVBBiLhURQEvpjhHSDsR0AsTJI=",
+      "hash": "sha256-Oy0Fi5uRCkzebo8pbdoUNpxfs8Fad7CS+lWtXheFRGU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-eN8I1DEzj8cA26PsWzzTiilZqPmzLAqRO+WfvC5zH3o=",
+      "hash": "sha256-1FLh9tGVZ8kLYAT91XNkoq0WMIwjUx2\/MlYwHw0O0u0=",
       "url": "_framework\/BlazorBingo.dll"
     },
     {
@@ -45,7 +45,7 @@
       "url": "_framework\/Blazored.LocalStorage.dll"
     },
     {
-      "hash": "sha256-SvbP0CgYrh\/in8KQrzfVPuNOW7B7MoPDUPl1Yb4F6EU=",
+      "hash": "sha256-a0ShM482H+VXKweHaLYNHgT08QbdsTmm6nvK23f8Uio=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
@@ -205,7 +205,7 @@
       "url": "BlazorBingo.styles.css"
     },
     {
-      "hash": "sha256-503kmHMonInCNjekkxxOVu5NL8hj4Q7h9a45pZl8n+Y=",
+      "hash": "sha256-h4InWHnGrC5aey27\/BleJkoOtXfhbaldFfVe2IfSsic=",
       "url": "css\/app.css"
     },
     {
@@ -237,9 +237,9 @@
       "url": "manifest.json"
     },
     {
-      "hash": "sha256-yXfmBc63Nrwv\/cDAM3NntvOoFdzwb+Cdi+m1b09XQF8=",
+      "hash": "sha256-3CsB58iUJXgP3iEmVKa3Ro7TpbSr9LEQ9ebq60Rdr2g=",
       "url": "script\/interop.js"
     }
   ],
-  "version": "A4wRpYuD"
+  "version": "ItPUO5vh"
 };
