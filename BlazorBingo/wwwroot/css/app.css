@@ -118,7 +118,9 @@ input.gameCode {
         https://getbootstrap.com/docs/5.2/content/reboot/#native-font-stack
         https://developer.apple.com/fonts/system-fonts/
         https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2
+        https://fonts.google.com/icons?icon.platform=web
         https://unicode-table.com/en/
+        https://www.vertex42.com/ExcelTips/unicode-symbols.html
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
     --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";

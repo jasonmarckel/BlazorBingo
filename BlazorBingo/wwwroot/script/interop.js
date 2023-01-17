@@ -8,9 +8,10 @@ export async function getUserAgent() {
 
 // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
 // https://github.com/mdn/dom-examples/tree/main/web-speech-api/speak-easy-synthesis
-// https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
-// https://talkrapp.com/speechSynthesis.html
+// https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/ // live demo
+// https://talkrapp.com/speechSynthesis.html // lessons learned
 // https://stackoverflow.com/questions/52769453/trying-to-use-speechsynthesis-api-in-ios-webview-app
+// https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/
 
 const synth = window.speechSynthesis;
 let voices = [];
