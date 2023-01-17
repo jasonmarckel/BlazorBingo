@@ -10,6 +10,8 @@ export async function getUserAgent() {
 // https://github.com/mdn/dom-examples/tree/main/web-speech-api/speak-easy-synthesis
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/ // live demo
 // https://talkrapp.com/speechSynthesis.html // lessons learned
+// https://weboutloud.io/bulletin/speech_synthesis_in_safari/ // iOS-specific lessons learned
+// https://codersblock.com/blog/javascript-text-to-speech-and-its-many-quirks/
 // https://stackoverflow.com/questions/52769453/trying-to-use-speechsynthesis-api-in-ios-webview-app
 // https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/
 
@@ -82,7 +84,7 @@ export async function speak(inputText, voiceName, language) {
             }
         }
         utterThis.pitch = 1.0;
-        utterThis.rate = inputText === "ha" ? 3 : 1;
+        utterThis.rate = inputText === "ha" ? 2 : 1;
         //utterThis.lang = language;
         utterThis.volume = inputText === "ha" ? 0 : 1;
         synth.speak(utterThis);
