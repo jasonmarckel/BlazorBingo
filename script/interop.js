@@ -54,7 +54,7 @@ export async function initVoices() {
     }
 }
 
-export async function speak(inputText, voiceName) {
+export async function speak(inputText, voiceName, language) {
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");
         return;
@@ -74,7 +74,7 @@ export async function speak(inputText, voiceName) {
         console.log("Requested voice: " + voiceName);
 
         for (let i = 0; i < voices.length; i++) {
-            if (voices[i].name === voiceName) {
+            if (voices[i].name === voiceName && voices[i].lang == language) {
                 utterThis.voice = voices[i];
                 console.log("Found match for requested voice.")
                 break;
