@@ -164,10 +164,12 @@ input.gameCode {
     content: "\1F464";
 }
 
+/* clockwise circle arrow */
 .refresh:before {
     content: "\27F3";
 }
 
+/* clockwise right and left semicircle arrows */
 .refresh2:before {
     content: "\1F5D8";
 }
@@ -245,6 +247,7 @@ input.gameCode {
 .doughnut:before { content: "\1F369"; }
 .dragon:before { content: "\1F409"; }
 .elephant:before { content: "\1F418"; }
+.fire:before { content: "\1F525"; }
 .football:before { content: "\1F3C8"; }
 .fox:before { content: "\1F98A"; }
 .golfer:before { content: "\1F3CC"; }

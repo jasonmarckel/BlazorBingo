@@ -41,6 +41,7 @@
     <div class="col" style="text-align:end;">
         <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
         <button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
+        <button type="button" class="symbolbutton" title="New card" @onclick="GenerateNewCard" disabled="@gameStarted"><span class="refresh"></span></button>
     </div>
 </div>
 
@@ -56,7 +57,7 @@
     protected bool isMuted;
 
     protected bool showSettings;
-
+    protected bool gameStarted;
     protected Flashboard? flashboard { get; set; }
     protected const int boardSize = 75;
 
@@ -199,7 +200,6 @@
     protected void ToggleSettings()
     {
         showSettings = !showSettings;
-        //Navigation.NavigateTo($"./settings");
     }
 
 }
