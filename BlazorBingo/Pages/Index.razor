@@ -29,7 +29,7 @@
 <div class="row mb-2">
     <div class="col-sm-2"></div>
     <div class="col-auto">
-        <small>version <code style="color: inherit;">23.01.16.03</code></small>
+        <small>version <code style="color: inherit;">23.01.16.04</code></small>
     </div>
 </div>
                                                                        
@@ -42,6 +42,7 @@
     {
         await settings.LoadAsync();
         playerName = settings.PlayerName;
+        if (string.IsNullOrEmpty(settings!.SelectedLanguage)) { settings.SelectedLanguage = await Interop.GetLanguage(); }
 #if DEBUG
     gameCode = "0000";
     RefreshCanJoin();
@@ -66,15 +67,15 @@
 
     protected void Host()
     {
-        settings!.PlayerName = playerName;
-        Interop.Speak("init", settings.CallerVoice);  // prime speechSynthesis for iOS
+        settings.PlayerName = playerName;
+        Interop.Speak("init", settings.CallerVoice, settings.SelectedLanguage);  // prime speechSynthesis for iOS
         Navigation.NavigateTo("./host");
     }
 
     protected void Join()
     {
-        settings!.PlayerName = playerName;
-        Interop.Speak("init", settings.CallerVoice);  // prime speechSynthesis for iOS
+        settings.PlayerName = playerName;
+        Interop.Speak("init", settings.CallerVoice, settings.SelectedLanguage);  // prime speechSynthesis for iOS
         Navigation.NavigateTo($"./play/{gameCode.ToUpperInvariant()}");
     }
 }

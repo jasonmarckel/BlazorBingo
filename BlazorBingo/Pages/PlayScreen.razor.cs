@@ -12,7 +12,7 @@ public partial class PlayScreen : IMessageHandler
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.Add(Convert.ToInt32(data.Substring(2)));
-                if (!isMuted) { Interop.Speak(data.Replace("-", " - "), settings.CallerVoice); }
+                if (!isMuted) { Interop.Speak(data.Replace("-", " - "), settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
                 ClearCard();

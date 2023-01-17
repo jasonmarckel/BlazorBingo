@@ -13,6 +13,7 @@ public class GameSettings
         public string dauber { get; set; } = "random";
         public string callerVoice { get; set; } = string.Empty;
         public string cardTheme { get; set; } = "blue";
+        public string selectedLanguage { get; set; } = string.Empty;
     }
 
     private Settings settings = new();
@@ -43,6 +44,16 @@ public class GameSettings
         set
         {
             settings.callerVoice = value;
+            _ = SaveAsync();
+            NotifyStateChanged();
+        }
+    }
+    public string SelectedLanguage
+    {
+        get => settings.selectedLanguage;
+        set
+        {
+            settings.selectedLanguage = value;
             _ = SaveAsync();
             NotifyStateChanged();
         }

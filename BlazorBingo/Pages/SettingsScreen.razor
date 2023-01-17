@@ -32,7 +32,7 @@
                 {
                     <div class="row mb-2">
                         <label>Language</label>
-                        <InputSelect @bind-Value="language">
+                        <InputSelect @bind-Value="settings.SelectedLanguage">
                             @foreach (var lang in voices!.Select(x => x.lang).Distinct().Order())
                             {
                                 <option>@lang</option>
@@ -42,7 +42,7 @@
                     <div class="row mb-2">
                         <label>Caller Voice</label>
                         <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
-                            @foreach (var voice in voices!.Where(x => x.lang == language))
+                            @foreach (var voice in voices!.Where(x => x.lang == settings.SelectedLanguage))
                             {
                                 <option value="@voice.name" data-lang="@voice.lang.Replace('_', '-')">@voice.name.Replace("Microsoft ", string.Empty)</option>
                             }
@@ -56,7 +56,6 @@
 @code {
     protected bool isLoaded;
     protected Voice[]? voices;
-    protected string? language;
     protected string? platform;
 
     protected override async Task OnInitializedAsync()
@@ -64,7 +63,6 @@
         await Interop.InitVoices();
         string voicesJson = await Interop.GetVoices();
         voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
-        language = await Interop.GetLanguage();
         platform = await Interop.GetPlatform();
         isLoaded = true;
     }

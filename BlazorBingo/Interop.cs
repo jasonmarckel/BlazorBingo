@@ -77,7 +77,8 @@ public partial class Interop
     [JSImport("speak", "interopModule")]
     internal static partial Task Speak(
         [JSMarshalAs<JSType.String>] string inputText, 
-        [JSMarshalAs<JSType.String>] string voiceName);
+        [JSMarshalAs<JSType.String>] string voiceName,
+        [JSMarshalAs<JSType.String>] string language);
 
     [JSImport("requestWakeLock", "interopModule")]
     internal static partial Task RequestWakeLock();
