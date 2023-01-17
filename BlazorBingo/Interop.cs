@@ -65,8 +65,8 @@ public partial class Interop
     [JSImport("getLanguage", "interopModule")]
     internal static partial Task<string> GetLanguage();
 
-    [JSImport("getPlatform", "interopModule")]
-    internal static partial Task<string> GetPlatform();
+    [JSImport("getUserAgent", "interopModule")]
+    internal static partial Task<string> GetUserAgent();
 
     [JSImport("initVoices", "interopModule")]
     internal static partial Task InitVoices();
@@ -79,6 +79,11 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string inputText, 
         [JSMarshalAs<JSType.String>] string voiceName,
         [JSMarshalAs<JSType.String>] string language);
+
+    internal static void PrimeVoiceSynthesis(string voiceName, string language)
+    {
+        Speak("ha", voiceName, language);
+    }
 
     [JSImport("requestWakeLock", "interopModule")]
     internal static partial Task RequestWakeLock();

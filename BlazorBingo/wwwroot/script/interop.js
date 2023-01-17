@@ -2,8 +2,8 @@ export async function getLanguage() {
     return window.navigator.language;
 }
 
-export async function getPlatform() {
-    return window.navigator.platform;
+export async function getUserAgent() {
+    return window.navigator.userAgent;
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
@@ -63,15 +63,15 @@ export async function speak(inputText, voiceName, language) {
     if (inputText !== "") {
         const utterThis = new SpeechSynthesisUtterance(inputText);
 
-        utterThis.onend = function (event) {
-            //console.log("SpeechSynthesisUtterance.onend");
-        };
+        //utterThis.onend = function (event) {
+        //    console.log("SpeechSynthesisUtterance.onend");
+        //};
 
-        utterThis.onerror = function (event) {
-            //console.error("SpeechSynthesisUtterance.onerror");
-        };
+        //utterThis.onerror = function (event) {
+        //    console.error("SpeechSynthesisUtterance.onerror");
+        //};
 
-        console.log("Requested voice: " + voiceName);
+        //console.log("Requested voice: " + voiceName);
 
         for (let i = 0; i < voices.length; i++) {
             if (voices[i].name === voiceName && voices[i].lang == language) {
@@ -81,9 +81,9 @@ export async function speak(inputText, voiceName, language) {
             }
         }
         utterThis.pitch = 1.0;
-        utterThis.rate = 1.0;
-        //utterThis.lang = 'en-US';
-        utterThis.volume = inputText === "init" ? 0 : 1;
+        utterThis.rate = inputText === "ha" ? 3 : 1;
+        //utterThis.lang = language;
+        utterThis.volume = inputText === "ha" ? 0 : 1;
         synth.speak(utterThis);
     }
 }

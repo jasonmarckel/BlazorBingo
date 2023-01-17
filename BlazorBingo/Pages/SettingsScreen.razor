@@ -28,7 +28,7 @@
                 </InputSelect>
             </div>
 
-            @if (!platform!.Equals("Android", StringComparison.OrdinalIgnoreCase))
+            @if (!userAgent!.Contains("Android", StringComparison.OrdinalIgnoreCase))
                 {
                     <div class="row mb-2">
                         <label>Language</label>
@@ -44,7 +44,7 @@
                         <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
                             @foreach (var voice in voices!.Where(x => x.lang == settings.SelectedLanguage))
                             {
-                                <option value="@voice.name" data-lang="@voice.lang.Replace('_', '-')">@voice.name.Replace("Microsoft ", string.Empty)</option>
+                                <option value="@voice.name" data-lang="@voice.lang">@voice.name.Replace("Microsoft ", string.Empty)</option>
                             }
                         </InputSelect>
                     </div>
@@ -56,14 +56,14 @@
 @code {
     protected bool isLoaded;
     protected Voice[]? voices;
-    protected string? platform;
+    protected string? userAgent;
 
     protected override async Task OnInitializedAsync()
     {
         await Interop.InitVoices();
         string voicesJson = await Interop.GetVoices();
         voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
-        platform = await Interop.GetPlatform();
+        userAgent = await Interop.GetUserAgent();
         isLoaded = true;
     }
 

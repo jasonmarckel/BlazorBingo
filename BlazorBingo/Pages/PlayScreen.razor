@@ -34,11 +34,15 @@
     </table>
 </div>
 
-<button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
-
-<button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
-
-<button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
+<div class="row mb-1" style="max-width:13cm;">
+    <div class="col" style="text-align:center;">
+        <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
+    </div>
+    <div class="col" style="text-align:end;">
+        <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
+        <button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
+    </div>
+</div>
 
 @if (showSettings)
 {
@@ -72,6 +76,7 @@
     protected void ToggleMute()
     {
         isMuted = !isMuted;
+        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // keep speechSynthesis for iOS alive
     }
 
     protected void GenerateNewCard()
@@ -123,6 +128,7 @@
         var square = squares[row, col];
         square.StampRotation = rnd.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
+        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // keep speechSynthesis for iOS alive
     }
 
     protected void ClearCard()
