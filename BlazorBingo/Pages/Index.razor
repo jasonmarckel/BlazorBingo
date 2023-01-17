@@ -20,7 +20,8 @@
     <div class="col-auto">
         <input type="text" id="gameCode" class="form-control gameCode" 
         @bind:event="oninput" @bind:get="gameCode" @bind:set="OnGameCodeInput" 
-        placeholder="enter code" maxlength="4" minlength="4" pattern="[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]{4}" />
+        placeholder="enter code" maxlength="4" minlength="4"
+        autocapitalize="characters" pattern="[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]{4}" />
     </div>
     <div class="col-auto">
         <button type="button" class="btn btn-primary" @onclick="Join" disabled="@(!canJoin)">Join</button>
@@ -29,7 +30,7 @@
 <div class="row mb-2">
     <div class="col-sm-2"></div>
     <div class="col-auto">
-        <small>version <code style="color: inherit;">2023.01.17.01</code></small>
+        <small>version <code style="color: inherit;">2023.01.17.02</code></small>
     </div>
 </div>
                                                                        
