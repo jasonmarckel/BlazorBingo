@@ -4,7 +4,7 @@ public partial class HostScreen : IMessageHandler
 {
     public void HandleMessage(string messageType, string data)
     {
-        switch (messageType.ToLowerInvariant())
+        switch (messageType.ToLower())
         {
             case "connected":
                 players.Add(data); // playerName

@@ -7,7 +7,7 @@ public partial class PlayScreen : IMessageHandler
 {
     public void HandleMessage(string messageType, string data)
     {
-        switch (messageType.ToLowerInvariant())
+        switch (messageType.ToLower())
         {
             case "pick":
                 Console.WriteLine($"pick: {data}");
