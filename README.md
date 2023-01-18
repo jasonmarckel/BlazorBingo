@@ -16,12 +16,13 @@ BlazorBingo can be installed/pinned to the homescreen and launched as a full scr
 Note: there are some peculiarities to updating PWA apps (not specific to Blazor).  Launch the app, and it detects a new version in the background.  Close all instances and launch again to get the updated version.
 
 **TODO**:
-* Validate the player's card when Bingo! is declared.
-* Test that called numbers are indeed making it to all clients when using the 'reliable' connection of PeerJS.
-  * It could be that data was sent but UI is not updated properly?
+* Validate the player's card when Bingo! is declared and notify all players.
 * Allow the Host to select various Bingo patterns.
-* Add statistics (games played, games won, minutes/hours/days played).
 * Allow the Host to play as well as call numbers.
 * Add special effects for winner (confetti, fireworks, etc.)
+* User Interface (UI) improvements
+  * Adjust layout for landscape display.
+  * Scale flashboard or autoscroll flashboard to the called number on very narrow screens.
 * Figure out a better way of the PWA app to self-update.
   * Maybe notify that a new version is available and instruct the user to close and re-launch?
+* Add statistics (games played, games won, minutes/hours/days played).
