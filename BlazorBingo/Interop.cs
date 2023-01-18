@@ -68,6 +68,9 @@ public partial class Interop
     [JSImport("getUserAgent", "interopModule")]
     internal static partial Task<string> GetUserAgent();
 
+    [JSImport("getPlatform", "interopModule")]
+    internal static partial Task<string> GetPlatform();
+
     [JSImport("initVoices", "interopModule")]
     internal static partial Task InitVoices();
 

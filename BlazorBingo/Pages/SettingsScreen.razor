@@ -3,7 +3,7 @@
 @using System.Text.Json
 @using System.Text.Json.Serialization
 
-<div class="card">
+<div class="card mb-1">
     <div class="card-body">
         <h5 class="card-title">Game Settings</h5>
         @if (isLoaded)
@@ -52,18 +52,30 @@
             }
     </div>
 </div>
+<div class="card mb-1">
+    <div class="card-body">
+        <h5 class="card-title">System Info</h5>
+        <p>User-Agent: @userAgent</p>
+        <p>Platform: @platform</p>
+        <p>Language: @language</p>
+    </div>
+</div>
 
 @code {
     protected bool isLoaded;
-    protected Voice[]? voices;
+    protected IEnumerable<Voice>? voices;
     protected string? userAgent;
+    protected string? platform;
+    protected string? language;
 
     protected override async Task OnInitializedAsync()
     {
         await Interop.InitVoices();
         string voicesJson = await Interop.GetVoices();
-        voices = JsonSerializer.Deserialize<Voice[]>(voicesJson);
+        voices = JsonSerializer.Deserialize<IEnumerable<Voice>>(voicesJson)?.Where(x => !x.name.StartsWith("Android"));
         userAgent = await Interop.GetUserAgent();
+        platform = await Interop.GetPlatform();
+        language = await Interop.GetLanguage();
         isLoaded = true;
     }
 

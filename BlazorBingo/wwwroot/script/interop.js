@@ -6,6 +6,10 @@ export async function getUserAgent() {
     return window.navigator.userAgent;
 }
 
+export async function getPlatform() {
+    return window.navigator.platform;
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
 // https://github.com/mdn/dom-examples/tree/main/web-speech-api/speak-easy-synthesis
 // https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/ // live demo
@@ -17,6 +21,7 @@ export async function getUserAgent() {
 
 const synth = window.speechSynthesis;
 let voices = [];
+const isIOS = window.navigator.platform === "iPhone" || window.navigator.platform === "iPad";
 
 function populateVoiceList() {
     voices = synth.getVoices().sort(function (a, b) {      
@@ -83,10 +88,13 @@ export async function speak(inputText, voiceName, language) {
                 break;
             }
         }
+        // "ha" is used to trigger a silent utterance to prime text-to-speech synthesis on iOS devices
+        // which require an action to be taken by the user (i.e. a button click) to engage 
+        // the voice synthesis.  
         utterThis.pitch = 1.0;
-        utterThis.rate = inputText === "ha" ? 2 : 1;
+        utterThis.rate = (isIOS && inputText === "ha") ? 2 : 1;
         //utterThis.lang = language;
-        utterThis.volume = inputText === "ha" ? 0 : 1;
+        utterThis.volume = (isIOS && inputText === "ha") ? 0 : 1;
         synth.speak(utterThis);
     }
 }
