@@ -63,6 +63,11 @@ export async function initVoices() {
 }
 
 export async function speak(inputText, voiceName, language) {
+    // "ha" is used to trigger a silent utterance to prime text-to-speech synthesis on iOS devices
+    // which require an action to be taken by the user (i.e. a button click) to engage 
+    // the voice synthesis.  Other devices can skip this voice synthesis 'priming'.
+    if (!isIOS && inputText === "ha") { return; }
+
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");
         return;
@@ -88,13 +93,10 @@ export async function speak(inputText, voiceName, language) {
                 break;
             }
         }
-        // "ha" is used to trigger a silent utterance to prime text-to-speech synthesis on iOS devices
-        // which require an action to be taken by the user (i.e. a button click) to engage 
-        // the voice synthesis.  
         utterThis.pitch = 1.0;
-        utterThis.rate = (isIOS && inputText === "ha") ? 2 : 1;
+        utterThis.rate = inputText === "ha" ? 2 : 1;
         //utterThis.lang = language;
-        utterThis.volume = (isIOS && inputText === "ha") ? 0 : 1;
+        utterThis.volume = inputText === "ha" ? 0 : 1;
         synth.speak(utterThis);
     }
 }
