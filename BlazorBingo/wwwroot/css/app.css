@@ -194,16 +194,6 @@ input.gameCode {
 
 /* stamps */
 
-.stamp {
-    font-family: var(--app-emoji);
-    position: absolute;
-    top: -0.25rem;
-    width: 100%;
-    z-index: 1;
-    font-size: 1.2em;
-    background-color: white;
-}
-
 .solidstar:before {
     content: "\2605";
 }

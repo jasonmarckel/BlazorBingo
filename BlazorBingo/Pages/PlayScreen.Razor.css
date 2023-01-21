@@ -4,6 +4,8 @@
     max-width: 13cm;
     min-width: 5cm;
     font-size: clamp(1rem, 9vw, 1.3cm);
+    margin-left: auto;
+    margin-right: auto;
 }
 
     #BingoCard.green {
@@ -25,23 +27,36 @@
         background-color: var(--card-black);
     }
 
-#BingoCard table {
-    width: 100%;
-}
+    #BingoCard table {
+        width: 100%;
+    }
 
     #BingoCard td {
         border: 2px solid black;
         width: 20%;
         text-align: center;
         font-weight: bold;
-        position: relative;
         background-color: white;
         color: black;
-        aspect-ratio: 1/1;
-        display: inline-block;
         padding: 0;
         overflow: hidden;
     }
+
+        #BingoCard td div.square {
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 0;
+            aspect-ratio: 1/1;
+        }
+
+            #BingoCard td div.square div {
+                grid-row-start: 1;
+                grid-column-start: 1;
+            }
+
+                #BingoCard td div.square div:first-child {
+                    margin-top: 0.5vh;
+                }
 
     #BingoCard thead td {
         font-size: clamp(1rem,11vw, 1.5cm);
@@ -55,12 +70,30 @@
     #BingoCard tbody tr:first-child td {
         border-top-style: none;
     }
+
     #BingoCard tbody tr:last-child td {
         border-bottom-style: none;
     }
+
     #BingoCard tbody td:first-child {
         border-left-style: none;
     }
+
     #BingoCard tbody td:last-child {
         border-right-style: none;
     }
+
+.stamp {
+    font-family: var(--app-emoji);
+    z-index: 1;
+    font-size: 1.2em;
+    background-color: white;
+    margin-top: -0.5vw;
+}
+
+#PlayerControls {
+    max-width: 13cm;
+    min-width: 5cm;
+    margin-left: auto;
+    margin-right: auto;
+}

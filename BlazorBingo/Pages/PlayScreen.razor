@@ -23,10 +23,15 @@
                 @for (int c = 0; c < 5; c++)
                 {
                     var square = squares[r, c];                    
-                    if(square == null) { continue;  }
+                    if(square == null) { continue; }
                     var row = r;
                     var col = c;
-                    <td @onclick="eventargs => StampSquare(eventargs, row, col)">@((MarkupString)square.Value)<div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div></td>
+                    <td>
+                        <div class="square" @onclick="eventargs => StampSquare(eventargs, row, col)">
+                            <div>@((MarkupString)square.Value)</div>
+                            <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>
+                        </div>
+                    </td>
                 }
             </tr>
         }
@@ -34,7 +39,7 @@
     </table>
 </div>
 
-<div class="row mb-2" style="max-width:13cm;">
+<div id="PlayerControls" class="row mb-2" style="max-width:13cm;">
     <div class="col" style="text-align:center;">
         <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
     </div>
