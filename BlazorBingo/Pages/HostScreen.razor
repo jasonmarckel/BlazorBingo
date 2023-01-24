@@ -28,7 +28,6 @@
     protected const string BINGO = "BINGO";
     protected const int boardSize = 75;
     protected HashSet<int> calledNumbers = new HashSet<int>();
-    protected Random rnd = new Random();
     protected string lastCalled = string.Empty;
     protected string gameCode = string.Empty;
     protected SortedSet<string> players = new();
@@ -55,7 +54,7 @@
         int x;
         do
         {
-            x = rnd.Next(1, boardSize + 1);
+            x = ThreadSafeRandom.ThisThreadsRandom.Next(1, boardSize + 1);
         } while (!calledNumbers.Add(x));
         int col = ((x - 1) / 15);
         lastCalled = $"{BINGO[col]}-{x}";

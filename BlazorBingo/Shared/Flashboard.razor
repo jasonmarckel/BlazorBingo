@@ -18,7 +18,7 @@
     private const string BINGO = "BINGO";
     private const int boardSize = 75;
     private int z = boardSize / 5;
-    private HashSet<int> calledNumbers = new HashSet<int>();
+    public HashSet<int> calledNumbers = new HashSet<int>();
     private int lastCalled = 0;
 
     private string GetCssClass(int n)

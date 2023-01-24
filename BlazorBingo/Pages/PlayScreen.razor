@@ -28,7 +28,7 @@
                     var col = c;
                     <td>
                         <div class="square" @onclick="eventargs => StampSquare(eventargs, row, col)">
-                            <div>@((MarkupString)square.Value)</div>
+                            <div>@((MarkupString)square.Value.ToString())</div>
                             <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>
                         </div>
                     </td>
@@ -60,7 +60,6 @@
     public string? GameCode { get; set; }
 
     protected bool isMuted;
-
     protected bool showSettings;
     protected bool gameStarted;
     protected Flashboard? flashboard { get; set; }
@@ -70,14 +69,13 @@
     {
         get
         {
-            return settings.Dauber == "random" ? SettingsScreen.Daubers[rnd.Next(1, SettingsScreen.Daubers.Length)].CssName() : settings.Dauber;
+            return settings.Dauber == "random" ? SettingsScreen.Daubers[ThreadSafeRandom.ThisThreadsRandom.Next(1, SettingsScreen.Daubers.Length)].CssName() : settings.Dauber;
         }
     }
 
     // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
 
     protected readonly Square[,] squares = new Square[5, 5];
-    protected Random rnd = new Random();  // random number generator (RNG)
 
     protected void ToggleMute()
     {
@@ -87,33 +85,23 @@
 
     protected void GenerateNewCard()
     {
-        var uniqueValues = new HashSet<int>();
         int numberOfValuesPerColumn = boardSize / 5;
 
         // generate a set of 5 unique integers for each column
         for (int c = 0; c < 5; c++)
         {
-            // determine the low and high numbers for the column
-            int minValue = (c * numberOfValuesPerColumn) + 1;
-            int maxValue = (c * numberOfValuesPerColumn) + numberOfValuesPerColumn;
-            // initialize the HashSet for the column to hold the uniqe values
-            uniqueValues.Clear();
-            // generate random numbers until we have 5 unique numbers for the column
-            while (uniqueValues.Count < 5)
-            {
-                // generate a random number
-                int x = rnd.Next(minValue, maxValue);
-                // the number will only be added to the HashSet if it
-                // does not already exist in the HashSet
-                uniqueValues.Add(x);
-            }
+            // determine the start number for the column
+            int startValue = (c * numberOfValuesPerColumn) + 1;
+            // generate the range of numbers and shuffle
+            var uniqueValues = new List<int>(Enumerable.Range(startValue, numberOfValuesPerColumn));
+            uniqueValues.Shuffle();
             // copy the unique values for the column to the card
             for (int r = 0; r < 5; r++)
             {
-                squares[r, c] = new Square() { Value = uniqueValues.ElementAt(r).ToString() };
+                squares[r, c] = new Square() { Value = uniqueValues.ElementAt(r) };
                 if (c == 2 && r == 2)
                 {
-                    squares[r, c].Value = "&nbsp;"; //FREE
+                    squares[r, c].Value = 0; //FREE
                     squares[r, c].StampClass = "stamp solidstar"; //TODO: theme the star
                 }
             }
@@ -122,7 +110,7 @@
 
     protected class Square
     {
-        public string Value { get; set; } = string.Empty;
+        public int Value { get; set; }
         public string StampClass { get; set; } = string.Empty;
         public int StampRotation { get; set; }
         public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
@@ -132,7 +120,7 @@
     {
         if (row == 2 && col == 2) { return; }
         var square = squares[row, col];
-        square.StampRotation = rnd.Next(-30, 30);
+        square.StampRotation = ThreadSafeRandom.ThisThreadsRandom.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
         Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // keep speechSynthesis for iOS alive
     }
@@ -153,6 +141,24 @@
     protected void CallBingo()
     {
         Interop.NotifyHost("bingo", settings.PlayerName);
+    }
+
+    private bool IsValidCard()
+    {
+        var card = new bool[5,5];
+        for(var r = 0; r < 5; r++)
+        {
+            for(var c = 0; c < 5; c++)
+            {
+                card[r, c] = squares[r, c].IsStamped && (flashboard!.calledNumbers.Contains(squares[r, c].Value) || squares[r, c].Value == 0);
+            }
+        }
+
+        // traditional
+        // check rows
+
+        bool isValid = false;
+        return isValid;
     }
 
     protected override void OnInitialized()
