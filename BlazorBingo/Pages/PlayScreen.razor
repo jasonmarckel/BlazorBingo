@@ -140,24 +140,28 @@
 
     protected void CallBingo()
     {
-        Interop.NotifyHost("bingo", settings.PlayerName);
+        var messageType = IsValidCard() ? "bingo" : "falsie";
+        Interop.NotifyHost(messageType, settings.PlayerName);
     }
 
     private bool IsValidCard()
     {
-        var card = new bool[5,5];
+        uint card = 0;
         for(var r = 0; r < 5; r++)
         {
             for(var c = 0; c < 5; c++)
             {
-                card[r, c] = squares[r, c].IsStamped && (flashboard!.calledNumbers.Contains(squares[r, c].Value) || squares[r, c].Value == 0);
+                card <<= 1;
+                card |= (squares[r, c].IsStamped && (flashboard!.calledNumbers.Contains(squares[r, c].Value) || squares[r, c].Value == 0)) ? (uint)1 : (uint)0;
             }
         }
 
-        // traditional
-        // check rows
-
         bool isValid = false;
+        foreach (var pattern in SettingsScreen.TraditionalPatterns)
+        {
+            if ((pattern & card) == pattern) { isValid = true; break; }
+        }
+        Console.WriteLine($"Is valid Bingo? {isValid}");
         return isValid;
     }
 
