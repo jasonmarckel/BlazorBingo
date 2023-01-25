@@ -28,7 +28,7 @@
                 </InputSelect>
             </div>
 
-            @if (!userAgent!.Contains("Android", StringComparison.OrdinalIgnoreCase))
+            @if (showVoiceSelection)
                 {
                     <div class="row mb-2">
                         <label>Language</label>
@@ -54,10 +54,14 @@
 </div>
 <div class="card mb-1">
     <div class="card-body">
-        <h5 class="card-title">System Info</h5>
-        <p>User-Agent: @userAgent</p>
-        <p>Platform: @platform</p>
-        <p>Language: @language</p>
+        <details>
+            <summary class="card-title">System Info</summary>
+            <ul>
+                <li>User-Agent: @userAgent</li>
+                <li>Platform: @platform</li>
+                <li>Language: @language</li>
+            </ul>
+        </details>
     </div>
 </div>
 
@@ -67,6 +71,7 @@
     protected string? userAgent;
     protected string? platform;
     protected string? language;
+    protected bool showVoiceSelection;
 
     protected override async Task OnInitializedAsync()
     {
@@ -77,6 +82,7 @@
         platform = await Interop.GetPlatform();
         language = await Interop.GetLanguage();
         isLoaded = true;
+        showVoiceSelection = !userAgent.Contains("Android", StringComparison.OrdinalIgnoreCase) || userAgent.Contains("Surface Duo", StringComparison.OrdinalIgnoreCase);
     }
 
     public static readonly string[] CardThemes = new string[]
