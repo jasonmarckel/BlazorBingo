@@ -80,7 +80,7 @@
     protected void ToggleMute()
     {
         isMuted = !isMuted;
-        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // keep speechSynthesis for iOS alive
+        //Interop.PrimeSpeechSynthesis();  // keep speechSynthesis for iOS alive
     }
 
     protected void GenerateNewCard()
@@ -122,7 +122,7 @@
         var square = squares[row, col];
         square.StampRotation = ThreadSafeRandom.ThisThreadsRandom.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
-        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // keep speechSynthesis for iOS alive
+        //Interop.PrimeSpeechSynthesis();  // keep speechSynthesis for iOS alive
     }
 
     protected void ClearCard()

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Versioning;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
@@ -47,10 +45,6 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string data)
     {
         ((IMessageHandler)component).HandleMessage(messageType, data);
-        //Console.WriteLine(messageType + ": " + data);
-        //DetectHands detectHands = (DetectHands)component;
-        //detectHands.DetectionResult = JsonSerializer.Deserialize<DetectionResult>(json, DetectionResult.SerializeOptions);
-        //detectHands.StateHasChanged();
     }
 
     [JSImport("shareUrl", "interopModule")]
@@ -83,10 +77,8 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string voiceName,
         [JSMarshalAs<JSType.String>] string language);
 
-    internal static void PrimeVoiceSynthesis(string voiceName, string language)
-    {
-        Speak("ha", voiceName, language);
-    }
+    [JSImport("primeSpeechSynthesis", "interopModule")]
+    internal static partial Task PrimeSpeechSynthesis();
 
     [JSImport("requestWakeLock", "interopModule")]
     internal static partial Task RequestWakeLock();

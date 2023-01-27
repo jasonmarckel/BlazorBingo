@@ -30,7 +30,7 @@
 <div class="row mb-2">
     <div class="col-sm-2"></div>
     <div class="col-auto">
-        <small>version <code style="color: inherit;">2023.01.25.01</code></small>
+        <small>version <code style="color: inherit;">2023.01.26.01</code></small>
     </div>
 </div>
                                                                        
@@ -69,14 +69,14 @@
     protected void Host()
     {
         settings.PlayerName = playerName;
-        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // prime speechSynthesis for iOS
+        Interop.PrimeSpeechSynthesis();  // prime speechSynthesis for iOS
         Navigation.NavigateTo("./host");
     }
 
     protected void Join()
     {
         settings.PlayerName = playerName;
-        Interop.PrimeVoiceSynthesis(settings.CallerVoice, settings.SelectedLanguage);  // prime speechSynthesis for iOS
+        Interop.PrimeSpeechSynthesis();  // prime speechSynthesis for iOS
         Navigation.NavigateTo($"./play/{gameCode.ToUpper()}");
     }
 }
