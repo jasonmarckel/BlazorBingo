@@ -73,6 +73,10 @@ export async function speak(inputText, voiceName, language) {
         return;
     } 
 
+    if (synth.paused) {
+        synth.resume();
+    }
+
     if (inputText !== "") {
         const utterThis = new SpeechSynthesisUtterance(inputText);
 
@@ -101,6 +105,9 @@ export async function speak(inputText, voiceName, language) {
     }
 }
 
+export async function primeSpeechSynthesis() {
+    speak("ha", "", "");
+}
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API
 
