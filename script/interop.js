@@ -73,9 +73,11 @@ export async function speak(inputText, voiceName, language) {
         return;
     } 
 
-    if (synth.paused) {
-        synth.resume();
-    }
+    //if (synth.paused) {
+    //    synth.resume();
+    //}
+
+    synth.cancel();
 
     if (inputText !== "") {
         const utterThis = new SpeechSynthesisUtterance(inputText);
