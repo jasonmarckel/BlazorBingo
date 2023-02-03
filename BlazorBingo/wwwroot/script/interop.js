@@ -20,6 +20,7 @@ export async function getPlatform() {
 // https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/
 
 const synth = window.speechSynthesis;
+const utterance = new SpeechSynthesisUtterance();
 let voices = [];
 const isIOS = window.navigator.platform === "iPhone" || window.navigator.platform === "iPad";
 
@@ -73,37 +74,24 @@ export async function speak(inputText, voiceName, language) {
         return;
     } 
 
-    //if (synth.paused) {
-    //    synth.resume();
-    //}
-
-    synth.cancel();
-
     if (inputText !== "") {
-        const utterThis = new SpeechSynthesisUtterance(inputText);
-
-        //utterThis.onend = function (event) {
-        //    console.log("SpeechSynthesisUtterance.onend");
-        //};
-
-        //utterThis.onerror = function (event) {
+ 
+        //utterance.onerror = function (event) {
         //    console.error("SpeechSynthesisUtterance.onerror");
         //};
 
-        //console.log("Requested voice: " + voiceName);
-
         for (let i = 0; i < voices.length; i++) {
             if (voices[i].name === voiceName && voices[i].lang == language) {
-                utterThis.voice = voices[i];
+                utterance.voice = voices[i];
                 console.log("Found match for requested voice.")
                 break;
             }
         }
-        utterThis.pitch = 1.0;
-        utterThis.rate = inputText === "ha" ? 2 : 1;
-        //utterThis.lang = language;
-        utterThis.volume = inputText === "ha" ? 0 : 1;
-        synth.speak(utterThis);
+        utterance.text = inputText;
+        utterance.pitch = 1.0;
+        utterance.rate = inputText === "ha" ? 2 : 1;
+        utterance.volume = inputText === "ha" ? 0 : 1;
+        synth.speak(utterance);
     }
 }
 
