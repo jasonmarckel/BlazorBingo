@@ -21,7 +21,7 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3.0.3
       with: 
-        dotnet-version: 7.0.103
+        dotnet-version: 7.x
     
     # Changes the base tag in index.html from root to match the GitHub Pages repository subdirectory
     - name: Change base-tag in index.html
