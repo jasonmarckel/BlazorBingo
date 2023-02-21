@@ -108,6 +108,11 @@ a, .btn-link {
     user-select: none; /* Standard syntax */
 }
 
+.container-md {
+    padding-left: calc(var(--bs-gutter-x) * 0.1);
+    padding-right: calc(var(--bs-gutter-x) * 0.1);
+}
+
 input.gameCode {
     text-transform: uppercase;
 }
@@ -143,6 +148,9 @@ input.gameCode {
     text-decoration: none;
     font-size: 24pt;
     line-height: 24pt;
+    padding: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     vertical-align: middle;
 }
 
