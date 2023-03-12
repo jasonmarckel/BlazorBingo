@@ -97,3 +97,18 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.called {
+    background-color: yellow;
+}
+
+#CallerCard {
+    width: 100%;
+}
+
+    #CallerCard td {
+        border: 3px solid black;
+        width: 20%;
+        text-align: center;
+        font-weight: bold;
+    }
