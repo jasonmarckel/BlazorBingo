@@ -1,5 +1,4 @@
 ﻿using BlazorBingo.Shared;
-//using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 
@@ -22,15 +21,19 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected string notificationMessage = string.Empty;
     protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
 
-    public void HandleMessage(string messageType, string data)
+    public async Task HandleMessage(string messageType, string data)
     {
         switch (messageType.ToLower())
         {
+            case "pattern":
+                Console.WriteLine($"pattern: {data}");
+                settings.SelectedPattern = data;
+                break;
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.UpdateCalledNumbersCSV(data);
                 gameStarted = true;
-                if (!isMuted) { Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
+                if (!isMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
                 flashboard!.ClearBoard();
@@ -45,6 +48,13 @@ public partial class PlayScreen : IMessageHandler, IDisposable
                 break;
             case "bingo":
                 notificationMessage = $"We have a winner! {data} called BINGO!";
+                if (isHost)
+                {
+                    await Interop.Broadcast("bingo", data);
+                }
+                break;
+            case "falsie":
+                notificationMessage = $"Social Error: {data}";
                 break;
         }
         this.StateHasChanged(); // force the UI to refresh
@@ -120,10 +130,28 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         }
     }
 
-    protected void CallBingo()
+    protected async Task CallBingo()
     {
-        var messageType = IsValidCard() ? "bingo" : "falsie";
-        Interop.NotifyHost(messageType, settings.PlayerName);
+        string messageType = string.Empty;
+        if (IsValidCard())
+        {
+            messageType = "bingo";
+            notificationMessage = $"We have a winner! {settings.PlayerName} called BINGO!";
+        }
+        else
+        {
+            messageType = "falsie";
+            notificationMessage = $"Social Error: {settings.PlayerName}";
+        }
+        this.StateHasChanged(); // force the UI to refresh
+        if (isHost)
+        {
+            await Interop.Broadcast(messageType, settings.PlayerName);
+        }
+        else
+        {
+           await Interop.NotifyHost(messageType, settings.PlayerName);
+        }
     }
 
     private bool IsValidCard()
@@ -134,11 +162,12 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             for (var c = 0; c < 5; c++)
             {
                 card <<= 1;
-                card |= (squares[r, c].IsStamped && (flashboard!.CalledNumbers.Contains(squares[r, c].Value) || squares[r, c].Value == 0)) ? (uint)1 : (uint)0;
+                card |= (squares[r, c].IsStamped && (flashboard!.CalledNumbers.Contains(squares[r, c].Value) || squares[r, c].Value == 0)) ? 1U : 0U;
             }
         }
         bool isValid = false;
-        foreach (var pattern in SettingsScreen.StraightLinePatterns)
+        var patterns = GamePatterns.GetPatterns(settings.SelectedPattern);
+        foreach (var pattern in patterns)
         {
             if ((pattern & card) == pattern) { isValid = true; break; }
         }
@@ -218,7 +247,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     {        
         isCalling = true;
         flashboard!.Pick();
-        notificationMessage = string.Empty;        
+        notificationMessage = string.Empty;
+        await Interop.Broadcast("pattern", settings.SelectedPattern);
         await Interop.Broadcast("pick", flashboard!.CalledNumbersCSV);
         if (!isMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
         await Task.Delay(3000); // wait a few seconds before the next pick can be made

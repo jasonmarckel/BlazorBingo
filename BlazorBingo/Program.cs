@@ -14,6 +14,8 @@ builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddScoped<GameSettings>();
 
+#pragma warning disable CA1416 // Validate platform compatibility
 await JSHost.ImportAsync("interopModule", "../script/interop.js");
+#pragma warning restore CA1416 // Validate platform compatibility
 
 await builder.Build().RunAsync();

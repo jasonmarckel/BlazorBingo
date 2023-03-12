@@ -39,12 +39,12 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string message);
 
     [JSExport]
-    internal static void OnDataReceived(
+    internal static async void OnDataReceived(
         [JSMarshalAs<JSType.Any>] object component,
         [JSMarshalAs<JSType.String>] string messageType,
         [JSMarshalAs<JSType.String>] string data)
     {
-        ((IMessageHandler)component).HandleMessage(messageType, data);
+        await ((IMessageHandler)component).HandleMessage(messageType, data);
     }
 
     [JSImport("shareUrl", "interopModule")]

@@ -14,6 +14,7 @@ public class GameSettings
         public string callerVoice { get; set; } = string.Empty;
         public string cardTheme { get; set; } = "blue";
         public string selectedLanguage { get; set; } = string.Empty;
+        public string selectedPattern { get; set; } = "StraightLine"; // traditional
     }
 
     private Settings settings = new();
@@ -54,6 +55,16 @@ public class GameSettings
         set
         {
             settings.selectedLanguage = value;
+            _ = SaveAsync();
+            NotifyStateChanged();
+        }
+    }
+    public string SelectedPattern
+    {
+        get => settings.selectedPattern;
+        set
+        {
+            settings.selectedPattern = value;
             _ = SaveAsync();
             NotifyStateChanged();
         }

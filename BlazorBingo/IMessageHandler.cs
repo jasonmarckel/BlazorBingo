@@ -2,5 +2,5 @@
 
 public interface IMessageHandler
 {
-    void HandleMessage(string messageType, string data);
+    Task HandleMessage(string messageType, string data);
 }

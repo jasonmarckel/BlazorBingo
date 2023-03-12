@@ -16,8 +16,7 @@ BlazorBingo can be installed/pinned to the homescreen and launched as a full scr
 Note: there are some peculiarities to updating PWA apps (not specific to Blazor).  Launch the app, and it detects a new version in the background.  Close all instances and launch again to get the updated version.
 
 **TODO**:
-* Validate the player's card when Bingo! is declared and notify all players.
-* Allow the Host to select various Bingo patterns.
+* Display the selectd game pattern.
 * Add special effects for winner (confetti, fireworks, etc.)
 * User Interface (UI) improvements
   * Adjust layout for landscape display.
