@@ -1,18 +1,3 @@
-/* /Pages/HostScreen.razor.rz.scp.css */
-.called[b-mqhqwdu2qi] {
-    background-color: yellow;
-}
-
-#CallerCard[b-mqhqwdu2qi] {
-    width: 100%;
-}
-
-    #CallerCard td[b-mqhqwdu2qi] {
-        border: 3px solid black;
-        width: 20%;
-        text-align: center;
-        font-weight: bold;
-    }
 /* /Pages/PlayScreen.Razor.rz.scp.css */
 #BingoCard[b-y0f698hn72] {
     padding: 0 0.7rem 0.7rem 0.7rem;
@@ -113,6 +98,21 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.called[b-y0f698hn72] {
+    background-color: yellow;
+}
+
+#CallerCard[b-y0f698hn72] {
+    width: 100%;
+}
+
+    #CallerCard td[b-y0f698hn72] {
+        border: 3px solid black;
+        width: 20%;
+        text-align: center;
+        font-weight: bold;
+    }
 /* /Shared/Flashboard.razor.rz.scp.css */
 #flashboard[b-lqaltyyei1] {
     border-style: solid;
