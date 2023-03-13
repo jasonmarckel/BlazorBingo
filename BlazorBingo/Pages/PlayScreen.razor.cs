@@ -36,9 +36,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
                 if (!isMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
-                flashboard!.ClearBoard();
-                ClearCard();
-                gameStarted = false;
+                Restart();
                 break;
             case "connected":
                 players.Add(data); // playerName
@@ -210,38 +208,10 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         await Interop.InitVoices();
     }
 
-    //protected override Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    return base.OnAfterRenderAsync(firstRender);
-    //}
-
-    // https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?view=aspnetcore-7.0#handleprevent-location-changes
-    //private IDisposable? registration;
-
-    //protected override void OnAfterRender(bool firstRender)
-    //{
-    //    if (firstRender)
-    //    {
-    //        registration = Navigation.RegisterLocationChangingHandler(OnLocationChanging);
-    //    }
-    //}
-
-    //private ValueTask OnLocationChanging(LocationChangingContext context)
-    //{
-    //    return ValueTask.CompletedTask;
-    //}
-
-    //public void Dispose()
-    //{
-    //    registration?.Dispose();
-    //}
-
     protected void ToggleSettings()
     {
         showSettings = !showSettings;
     }
-
-    #region "Host"
 
     protected async void Pick()
     {        
@@ -256,7 +226,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         StateHasChanged(); // refresh the UI
     }
 
-    protected async void Copy()
+    protected async void CopyGameCode()
     {
         await Interop.CopyToClipboard(GameCode!);
     }
@@ -264,9 +234,12 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected async void Restart()
     {
         flashboard!.ClearBoard();
+        ClearCard();
+        gameStarted= false;
         notificationMessage = string.Empty;
-        await Interop.Broadcast("restart", "");
+        if (isHost)
+        {
+            await Interop.Broadcast("restart", "");
+        }
     }
-
-    #endregion
 }
