@@ -14,7 +14,7 @@ public class GamePatterns
 
     private static SortedDictionary<string, uint> PatternsDict = new()
     {
-        { "StraighLine", 0U }, // placeholder
+        { "StraightLine", 0U }, // placeholder
         { "RovingL", 0U }, // placeholder
         { "Row1", 0b00000001111100000000000000000000 },
         { "Row2", 0b00000000000011111000000000000000 },
@@ -38,7 +38,6 @@ public class GamePatterns
         { "Cross", 0b00000000010011111001000010000100 },
         { "LargeBox", 0b00000001111110001100011000111111 }, // Row1 | Col5 | Row5 | Col1
         { "SmallBox", 0b00000000000001110010100111000000 },
-        { "Smiley", 0b00000000101000000100011000101110 },
         { "Diamond", 0b00000000010001010100010101000100 },
         { "Hash", 0b00000000101011111010101111101010 }, // Row2 | Row4 | Col2 | Col4
         { "Alien1", 0b00000001111110101111110111011011 },
@@ -60,12 +59,12 @@ public class GamePatterns
         { "LetterM", 0b00000001000111011101011000110001 },
         { "LetterN", 0b00000001000111001101011001110001 }, // Col1 | Backslash | Col5
         { "LetterO", 0b00000000111010001100011000101110 },
-        { "LetterP", 0b00000001111010001100011111010000 },
+        { "LetterP", 0b00000001111010010111101000010000 },
         { "LetterQ", 0b00000000110010010100101001001101 },
         { "LetterR", 0b00000001110010010111001010010010 },
         { "LetterS", 0b00000001111110000111110000111111 },
         { "LetterT", 0b00000001111100100001000010000100 },
-        { "LetterU", 0b00000001000110001100011000101110 },
+        { "LetterU", 0b00000001000110001100011000111111 },
         { "LetterV", 0b00000001000110001100010101000100 },
         { "LetterW", 0b00000001000110001101011101110001 },
         { "LetterX", 0b00000001000101010001000101010001 }, // ForwardSlash | Backslash
@@ -82,7 +81,12 @@ public class GamePatterns
         return PatternsDict.Keys;
     }
 
-    public static IEnumerable<uint> GetPatterns(string patternName)
+    public static uint GetPattern(string patternName)
+    {
+        return PatternsDict[patternName];
+    }
+
+    public static IEnumerable<uint> GetPatternSet(string patternName)
     {
         var returnValues = Enumerable.Empty<uint>();
         switch (patternName)

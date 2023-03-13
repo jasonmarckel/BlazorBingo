@@ -166,7 +166,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             }
         }
         bool isValid = false;
-        var patterns = GamePatterns.GetPatterns(settings.SelectedPattern);
+        var patterns = GamePatterns.GetPatternSet(settings.SelectedPattern);
         foreach (var pattern in patterns)
         {
             if ((pattern & card) == pattern) { isValid = true; break; }
@@ -176,7 +176,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     }
 
     protected override void OnInitialized()
-    {
+    {        
         GenerateNewCard();
         settings.OnChange += StateHasChanged;
     }
