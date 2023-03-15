@@ -94,7 +94,7 @@ public class GamePatterns
         var returnValues = Enumerable.Empty<uint>();
         switch (patternName)
         {
-            case "StraighLine":
+            case Default:
                 yield return PatternsDict["Row1"];
                 yield return PatternsDict["Row2"];
                 yield return PatternsDict["Row3"];
