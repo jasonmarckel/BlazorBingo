@@ -29,52 +29,7 @@
 </div>
 <div class="row mb-2 justify-content-center">
     <div class="col-auto">
-        <small>version <code style="color: inherit;">2023.03.13.02</code></small>
+        <small>version <code style="color: inherit;">2023.03.14.01</code></small>
     </div>
 </div>
                                                                        
-@code {
-    protected string gameCode = string.Empty;
-    protected string playerName = string.Empty;
-    protected bool canJoin;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await settings.LoadAsync();
-        playerName = settings.PlayerName;
-        if (string.IsNullOrEmpty(settings!.SelectedLanguage)) { settings.SelectedLanguage = await Interop.GetLanguage(); }
-#if DEBUG
-    gameCode = "0000";
-    RefreshCanJoin();
-#endif
-        await Interop.ReleaseWakeLock();
-    }
-
-    private void RefreshCanJoin()
-    {
-        canJoin =
-            !string.IsNullOrWhiteSpace(playerName) &&
-            !string.IsNullOrWhiteSpace(gameCode) &&
-            gameCode.Length == 4;
-    }
-
-    protected void OnGameCodeInput(string value)
-    {
-        gameCode = value;
-        RefreshCanJoin();
-    }
-
-    protected void Host()
-    {
-        settings.PlayerName = playerName;
-        Interop.PrimeSpeechSynthesis();  // prime speechSynthesis for iOS
-        Navigation.NavigateTo("./host");
-    }
-
-    protected void Join()
-    {
-        settings.PlayerName = playerName;
-        Interop.PrimeSpeechSynthesis();  // prime speechSynthesis for iOS
-        Navigation.NavigateTo($"./play/{gameCode.ToUpper()}");
-    }
-}
