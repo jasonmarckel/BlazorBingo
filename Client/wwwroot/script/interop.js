@@ -155,7 +155,7 @@ const hostDomain = "net-marckel-blazorbingo-";
 export async function host(component, id) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
-    dotnetExports = await getAssemblyExports("BlazorBingo.dll");
+    dotnetExports = await getAssemblyExports("BlazorBingo.Client.dll");
 
     await insertGlobalScript('https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js');
 
@@ -189,7 +189,7 @@ export async function host(component, id) {
 export async function connect(component, remoteId, playerName) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
-    dotnetExports = await getAssemblyExports("BlazorBingo.dll");
+    dotnetExports = await getAssemblyExports("BlazorBingo.Client.dll");
 
     await insertGlobalScript('https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js');
 

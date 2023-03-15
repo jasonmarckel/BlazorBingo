@@ -1,4 +1,4 @@
-﻿namespace BlazorBingo;
+﻿namespace BlazorBingo.Client;
 
 public interface IMessageHandler
 {

@@ -1,8 +1,8 @@
-﻿using BlazorBingo.Shared;
+﻿using BlazorBingo.Client.Shared;
 using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 
-namespace BlazorBingo.Pages;
+namespace BlazorBingo.Client.Pages;
 
 [SupportedOSPlatform("browser")]
 public partial class PlayScreen : IMessageHandler, IDisposable
@@ -171,6 +171,14 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         }
         Console.WriteLine($"Is valid Bingo? {isValid}");
         return isValid;
+    }
+
+    protected int NumberOfCalls
+    {
+        get
+        {
+            return flashboard?.CalledNumbers.Count ?? 0;
+        }
     }
 
     protected override void OnInitialized()

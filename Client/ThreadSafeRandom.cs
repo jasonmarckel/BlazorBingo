@@ -1,4 +1,4 @@
-﻿namespace BlazorBingo;
+﻿namespace BlazorBingo.Client;
 
 public static class ThreadSafeRandom
 {

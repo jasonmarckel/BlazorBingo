@@ -1,4 +1,4 @@
-﻿namespace BlazorBingo;
+﻿namespace BlazorBingo.Client;
 
 // In-memory state container service
 // https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-7.0&pivots=webassembly#in-memory-state-container-service-wasm

@@ -6,7 +6,7 @@ using System.Text.Json.Serialization.Metadata;
 
 // https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/import-export-interop?view=aspnetcore-7.0#call-javascript-from-net
 
-namespace BlazorBingo;
+namespace BlazorBingo.Client;
 
 [SupportedOSPlatform("browser")]
 public partial class Interop

@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices.JavaScript;
-using BlazorBingo;
+using BlazorBingo.Client;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

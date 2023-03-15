@@ -1,6 +1,6 @@
 using System.Runtime.Versioning;
 
-namespace BlazorBingo.Pages;
+namespace BlazorBingo.Client.Pages;
 
 [SupportedOSPlatform("browser")]
 public partial class Index

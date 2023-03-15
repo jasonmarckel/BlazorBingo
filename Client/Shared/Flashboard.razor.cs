@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorBingo.Shared;
+namespace BlazorBingo.Client.Shared;
 
 public partial class Flashboard
 {
