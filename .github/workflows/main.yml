@@ -29,7 +29,7 @@ jobs:
     
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish BlazorBingo.csproj -c Release -o release --nologo
+      run: dotnet publish BlazorBingo.Client.csproj -c Release -o release --nologo
       
     # Copy index.html to 404.html to serve the same file when a file is not found
     - name: copy index.html to 404.html
@@ -44,4 +44,4 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: BlazorBingo/release/wwwroot
+        FOLDER: Client/release/wwwroot
