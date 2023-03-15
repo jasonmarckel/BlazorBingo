@@ -10,12 +10,14 @@ public class GamePatterns
     // ..... ..... ..... XXXXX ..... X.... .X... ..X.. ...X. ....X ...X. .X...
     // ..... ..... ..... ..... XXXXX X.... .X... ..X.. ...X. ....X ....X X....
 
-    //public static ImmutableDictionary<string, uint> PatternsDict = ImmutableDictionary.CreateRange(new Dictionary<string, uint>()
+    public const string Default = "-StraightLine-";
+
+    // 0U == placeholder for set of patterns
 
     private static SortedDictionary<string, uint> PatternsDict = new()
     {
-        { "StraightLine", 0U }, // placeholder
-        { "RovingL", 0U }, // placeholder
+        { Default, 0U },
+        { "RovingL", 0U },
         { "Row1", 0b00000001111100000000000000000000 },
         { "Row2", 0b00000000000011111000000000000000 },
         { "Row3", 0b00000000000000000111110000000000 },
@@ -35,6 +37,7 @@ public class GamePatterns
         { "PostageStamp", 0b00000000001100011000000000000000 },
         { "FourCorners", 0b00000001000100000000000000010001 },
         { "FourBlocker", 0b00000001101111011000001101111011 },
+        { "FourAngles", 0b00000001101110001000001000111011 },
         { "Cross", 0b00000000010011111001000010000100 },
         { "LargeBox", 0b00000001111110001100011000111111 }, // Row1 | Col5 | Row5 | Col1
         { "SmallBox", 0b00000000000001110010100111000000 },

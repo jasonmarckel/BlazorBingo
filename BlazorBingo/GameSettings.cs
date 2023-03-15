@@ -14,7 +14,7 @@ public class GameSettings
         public string callerVoice { get; set; } = string.Empty;
         public string cardTheme { get; set; } = "blue";
         public string selectedLanguage { get; set; } = string.Empty;
-        public string selectedPattern { get; set; } = "StraightLine"; // traditional
+        public string selectedPattern { get; set; } = GamePatterns.Default; // traditional
     }
 
     private Settings settings = new();
