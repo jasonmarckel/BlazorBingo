@@ -1,5 +1,5 @@
 /* /Pages/PlayScreen.Razor.rz.scp.css */
-#BingoCard[b-y0f698hn72] {
+#BingoCard[b-wtrxhdz6k8] {
     padding: 0 0.7rem 0.7rem 0.7rem;
     border-radius: 0.9rem;
     max-width: 13cm;
@@ -9,30 +9,30 @@
     margin-right: auto;
 }
 
-    #BingoCard.green[b-y0f698hn72] {
+    #BingoCard.green[b-wtrxhdz6k8] {
         background-color: var(--card-green);
     }
-    #BingoCard.blue[b-y0f698hn72] {
+    #BingoCard.blue[b-wtrxhdz6k8] {
         background-color: var(--card-blue);
     }
-    #BingoCard.red[b-y0f698hn72] {
+    #BingoCard.red[b-wtrxhdz6k8] {
         background-color: var(--card-red);
     }
-    #BingoCard.orange[b-y0f698hn72] {
+    #BingoCard.orange[b-wtrxhdz6k8] {
         background-color: var(--card-orange);
     }
-    #BingoCard.yellow[b-y0f698hn72] {
+    #BingoCard.yellow[b-wtrxhdz6k8] {
         background-color: var(--card-yellow);
     }
-    #BingoCard.black[b-y0f698hn72] {
+    #BingoCard.black[b-wtrxhdz6k8] {
         background-color: var(--card-black);
     }
 
-    #BingoCard table[b-y0f698hn72] {
+    #BingoCard table[b-wtrxhdz6k8] {
         width: 100%;
     }
 
-    #BingoCard td[b-y0f698hn72] {
+    #BingoCard td[b-wtrxhdz6k8] {
         border: 2px solid black;
         width: 20%;
         text-align: center;
@@ -43,23 +43,23 @@
         overflow: hidden;
     }
 
-        #BingoCard td div.square[b-y0f698hn72] {
+        #BingoCard td div.square[b-wtrxhdz6k8] {
             display: grid;
             grid-template-columns: 1fr;
             padding: 0;
             aspect-ratio: 1/1;
         }
 
-            #BingoCard td div.square div[b-y0f698hn72] {
+            #BingoCard td div.square div[b-wtrxhdz6k8] {
                 grid-row-start: 1;
                 grid-column-start: 1;
             }
 
-                #BingoCard td div.square div:first-child[b-y0f698hn72] {
+                #BingoCard td div.square div:first-child[b-wtrxhdz6k8] {
                     margin-top: 0.5vh;
                 }
 
-    #BingoCard thead td[b-y0f698hn72] {
+    #BingoCard thead td[b-wtrxhdz6k8] {
         font-size: clamp(1rem,11vw, 1.5cm);
         font-weight: 900;
         padding: 0;
@@ -68,23 +68,23 @@
         color: white;
     }
 
-    #BingoCard tbody tr:first-child td[b-y0f698hn72] {
+    #BingoCard tbody tr:first-child td[b-wtrxhdz6k8] {
         border-top-style: none;
     }
 
-    #BingoCard tbody tr:last-child td[b-y0f698hn72] {
+    #BingoCard tbody tr:last-child td[b-wtrxhdz6k8] {
         border-bottom-style: none;
     }
 
-    #BingoCard tbody td:first-child[b-y0f698hn72] {
+    #BingoCard tbody td:first-child[b-wtrxhdz6k8] {
         border-left-style: none;
     }
 
-    #BingoCard tbody td:last-child[b-y0f698hn72] {
+    #BingoCard tbody td:last-child[b-wtrxhdz6k8] {
         border-right-style: none;
     }
 
-.stamp[b-y0f698hn72] {
+.stamp[b-wtrxhdz6k8] {
     font-family: var(--app-emoji);
     z-index: 1;
     font-size: 1.2em;
@@ -92,29 +92,29 @@
     margin-top: -0.5vw;
 }
 
-#PlayerControls[b-y0f698hn72] {
+#PlayerControls[b-wtrxhdz6k8] {
     max-width: 13cm;
     min-width: 5cm;
     margin-left: auto;
     margin-right: auto;
 }
 
-.called[b-y0f698hn72] {
+.called[b-wtrxhdz6k8] {
     background-color: yellow;
 }
 
-#CallerCard[b-y0f698hn72] {
+#CallerCard[b-wtrxhdz6k8] {
     width: 100%;
 }
 
-    #CallerCard td[b-y0f698hn72] {
+    #CallerCard td[b-wtrxhdz6k8] {
         border: 3px solid black;
         width: 20%;
         text-align: center;
         font-weight: bold;
     }
 /* /Shared/Flashboard.razor.rz.scp.css */
-#flashboard[b-lqaltyyei1] {
+#flashboard[b-1j6imljcde] {
     border-style: solid;
     border-color: black;
     border-radius: 0.3rem;
@@ -125,11 +125,11 @@
     margin-right: auto;
 }
 
-#flashboard table[b-lqaltyyei1] {
+#flashboard table[b-1j6imljcde] {
     width: 100%;
 }
 
-    #flashboard td[b-lqaltyyei1] {
+    #flashboard td[b-1j6imljcde] {
         font-weight: bold;
         background-color: black;
         color: white;
@@ -140,7 +140,7 @@
         border-width: 1px;
     }
 
-    #flashboard td:first-child[b-lqaltyyei1] {
+    #flashboard td:first-child[b-1j6imljcde] {
         border-style: none;
         text-align: center;
         background-color: white;
@@ -149,19 +149,19 @@
         padding-right: 2px;
     }
 
-    #flashboard tr:first-child td[b-lqaltyyei1] {
+    #flashboard tr:first-child td[b-1j6imljcde] {
         border-top-style: none;
     }
 
-    #flashboard tr:last-child td[b-lqaltyyei1] {
+    #flashboard tr:last-child td[b-1j6imljcde] {
         border-bottom-style: none;
     }
 
-    #flashboard td:last-child[b-lqaltyyei1] {
+    #flashboard td:last-child[b-1j6imljcde] {
         border-right-style: none;
     }
 
-#flashboard td .lastCalled[b-lqaltyyei1] {
+#flashboard td .lastCalled[b-1j6imljcde] {
     visibility: visible;
     color: yellow;
 }

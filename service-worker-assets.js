@@ -29,31 +29,31 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-CN97qonltXVmufryFJg4UJ18quBEz+fgMjC4CHDfOe4=",
+      "hash": "sha256-ffyzzxtt3oMjhQ19tG+UjdfxUWK5bFukHGU8omLPV\/8=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-Dxtxs1MSracTgCoe0Pe5iAPQbSDkVxO+wfTQ2DyQqG8=",
-      "url": "_framework\/BlazorBingo.dll"
+      "hash": "sha256-wWojs9DbXaoYjd57HQWe7c2\/aHZZWvqRJOiYeO3SYcQ=",
+      "url": "_framework\/BlazorBingo.Client.dll"
     },
     {
       "hash": "sha256-eXVgTw72kEn74FZgDQbLtvAmXbiZDSj5gzUnxVmwowQ=",
       "url": "_framework\/Blazored.LocalStorage.dll"
     },
     {
-      "hash": "sha256-2JmQRkN7x8FuuT7zHi1u971NH\/zuVQ7WI2Y43ayRmUQ=",
+      "hash": "sha256-yKZd5NNoQ0o+iHx9sEkdotk3S1Tdff2b0nKL3A08ZxI=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
-      "hash": "sha256-rdT9swKzRQEOehVLLyL7HiXLv1DC95n28XYt9REcE6M=",
+      "hash": "sha256-Ggd4ASTBFCJSw4gixv0hhWkXwNo2dL\/c2j8an3rKga0=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Forms.dll"
     },
     {
-      "hash": "sha256-Agxyl60Gwy9hcItnlWzqOWTp9pwMgxpDf5Ct6KDV+0g=",
+      "hash": "sha256-lA9pwqvDCiDZKR1qW\/XTLJ3FGmNEy+ZJS4UMYyQWsuo=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
-      "hash": "sha256-VoOExk2fEE249K3Jayw1Nymq9Bc8LlKEWiOG9\/0GiNY=",
+      "hash": "sha256-jZLGUNi\/PCnw9q3fv9CISkfeqzfFrPm143LIAsZYEO4=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.dll"
     },
     {
@@ -93,11 +93,11 @@
       "url": "_framework\/Microsoft.Extensions.Primitives.dll"
     },
     {
-      "hash": "sha256-BUUaeY9KsnzhawxX\/lNwvX8BEk8F1vtZXud3CNQED7E=",
+      "hash": "sha256-URCpvFbczu3GFfSybf5P7VXyYq1\/wSKHT\/X1+tDsYEo=",
       "url": "_framework\/Microsoft.JSInterop.dll"
     },
     {
-      "hash": "sha256-hUxOrW0i2d4N\/3At6wRqsDMpya9fFCtdE6YcQJb8d40=",
+      "hash": "sha256-slx0GTjKTzH0al2gU4HdJ4yyw\/+8nhGoRKJASx\/1mE4=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
@@ -201,8 +201,8 @@
       "url": "_framework\/System.Threading.Thread.dll"
     },
     {
-      "hash": "sha256-nrDwkTCBBbEtj6frijtbPMyKiQ4Er9pAASx\/KTIoMxs=",
-      "url": "BlazorBingo.styles.css"
+      "hash": "sha256-w+IeZt9Tnh0Zf4lJMK0+NgQqGsQo\/ziwvlMev4HUfbc=",
+      "url": "BlazorBingo.Client.styles.css"
     },
     {
       "hash": "sha256-Y6DNY8fVnVL0ZuZSLEtaHvU44KunoeBzOTCyfN7r5N4=",
@@ -221,7 +221,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-YBDtNQNB8joBaFPh6tY9MrzlnspLcsm7RNMvzCetBpI=",
+      "hash": "sha256-pYBOFrEFVRcZGKiAsmLc5khf4foHvcZk94gjq3uG8tI=",
       "url": "index.html"
     },
     {
@@ -237,9 +237,9 @@
       "url": "manifest.json"
     },
     {
-      "hash": "sha256-y24\/OeO2WlDv4ubcaQfsGjPxtiE+t2XDtS9V7uxeckk=",
+      "hash": "sha256-aZqDmu\/NzfTbDUYe9AOeVQoIZT2RGlzsgwvQjal+RZY=",
       "url": "script\/interop.js"
     }
   ],
-  "version": "R3jtdzk9"
+  "version": "oRcgi6J4"
 };
