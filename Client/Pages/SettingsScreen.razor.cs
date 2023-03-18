@@ -24,6 +24,10 @@ public partial class SettingsScreen
         isLoaded = true;
         showVoiceSelection = !userAgent.Contains("Android", StringComparison.OrdinalIgnoreCase) || userAgent.Contains("Surface Duo", StringComparison.OrdinalIgnoreCase);
     }
+    protected void ToggleMute()
+    {
+        settings.IsMuted = !settings.IsMuted;
+    }
 
     public static readonly string[] CardThemes = new string[]
     {

@@ -21,6 +21,9 @@
     <div class="col-auto">
         Call # @NumberOfCalls
     </div>
+    <div class="col-auto">
+        <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline;"><span class="gear"></span></button>
+    </div>
 </div>
 
 <Flashboard @ref="flashboard" BoardSize="75"></Flashboard>
@@ -67,13 +70,11 @@
         </div>
     }
     <div class="col" style="text-align:center;">
-        <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
+        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" disabled="@(!gameStarted)">Bingo!</button>
+        <button type="button" class="btn btn-secondary btn-sm" title="New card" @onclick="GenerateNewCard" hidden="@gameStarted"><span class="symbolbutton refresh"></span> New Card</button>
     </div>
-    <div class="col" style="text-align:end;">
-        <GamePatternDisplay Pattern="@settings.SelectedPattern"></GamePatternDisplay>
-        <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
-        <button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
-        <button type="button" class="symbolbutton" title="New card" @onclick="GenerateNewCard" disabled="@gameStarted"><span class="refresh"></span></button>
+    <div class="col" style="text-align:center;">
+        <GamePatternDisplay Pattern="@settings.SelectedPattern"></GamePatternDisplay>        
     </div>
 </div>
 

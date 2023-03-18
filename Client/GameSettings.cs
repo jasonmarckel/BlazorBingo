@@ -15,6 +15,7 @@ public class GameSettings
         public string cardTheme { get; set; } = "blue";
         public string selectedLanguage { get; set; } = string.Empty;
         public string selectedPattern { get; set; } = GamePatterns.Default; // traditional
+        public bool isMuted { get; set; }
     }
 
     private Settings settings = new();
@@ -45,6 +46,16 @@ public class GameSettings
         set
         {
             settings.callerVoice = value;
+            _ = SaveAsync();
+            NotifyStateChanged();
+        }
+    }
+    public bool IsMuted
+    {
+        get => settings.isMuted;
+        set
+        {
+            settings.isMuted = value;
             _ = SaveAsync();
             NotifyStateChanged();
         }

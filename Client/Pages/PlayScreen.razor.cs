@@ -8,7 +8,6 @@ namespace BlazorBingo.Client.Pages;
 public partial class PlayScreen : IMessageHandler, IDisposable
 {
     protected bool isHost;
-    protected bool isMuted;
     protected bool isCalling;
     protected bool showSettings;
     protected bool gameStarted;
@@ -33,7 +32,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
                 Console.WriteLine($"pick: {data}");
                 flashboard!.UpdateCalledNumbersCSV(data);
                 gameStarted = true;
-                if (!isMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
+                if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
                 Restart();
@@ -69,11 +68,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
 
     protected readonly Square[,] squares = new Square[5, 5];
-
-    protected void ToggleMute()
-    {
-        isMuted = !isMuted;
-    }
 
     protected void GenerateNewCard()
     {
@@ -228,7 +222,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         notificationMessage = string.Empty;
         await Interop.Broadcast("pattern", settings.SelectedPattern);
         await Interop.Broadcast("pick", flashboard!.CalledNumbersCSV);
-        if (!isMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
+        if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
         await Task.Delay(3000); // wait a few seconds before the next pick can be made
         isCalling = false;
         StateHasChanged(); // refresh the UI
