@@ -111,6 +111,7 @@ a, .btn-link {
 .container-md {
     padding-left: calc(var(--bs-gutter-x) * 0.1);
     padding-right: calc(var(--bs-gutter-x) * 0.1);
+    max-width: 13cm;
 }
 
 input.gameCode {
@@ -128,8 +129,8 @@ input.gameCode {
         https://www.vertex42.com/ExcelTips/unicode-symbols.html
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
-    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
-    --app-emoji: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+    --app-symbols: "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", emoji, -apple-system, Arial, system-ui, sans-serif,;
+    --app-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji, system-ui;
     --card-red: #b32121;
     --card-green: #26b050;
     --card-blue: #1e90ff; /* dodgerblue */
