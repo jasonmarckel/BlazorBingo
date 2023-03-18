@@ -70,30 +70,7 @@
         <button type="button" class="btn btn-success" @onclick="CallBingo">Bingo!</button>
     </div>
     <div class="col" style="text-align:end;">
-        <div style="width:2.2cm; float:left;" title="@settings.SelectedPattern">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <rect x="0" y="0" width="100" height="100" fill="black"></rect>
-                <defs>
-                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse" viewBox="0 0 20 20">
-                        <line x1="0" y1="0" x2="20" y2="0" stroke="white" stroke-width="1"></line>
-                        <line x1="0" y1="0" x2="0" y2="20" stroke="white" stroke-width="1"></line>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-                <g>
-                    @{
-                        var patternGrid = GamePatterns.GetPattern(settings.SelectedPattern);
-                        for (int i = 0; i < 25; i++)
-                        {
-                            int row = i / 5;
-                            int col = i % 5;
-                            int gridSize = 20;
-                            <circle cx="@((col + 0.5) * gridSize)" cy="@((row + 0.5) * gridSize)" r="6" fill="@(((patternGrid >> (24 - i)) & 1U) == 1U ? "hotpink" : "dimgray")"></circle>
-                        }
-                    }
-                </g>
-            </svg>
-        </div>
+        <GamePatternDisplay Pattern="@settings.SelectedPattern"></GamePatternDisplay>
         <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings"><span class="gear"></span></button>
         <button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( isMuted ? "mute" : "speaker" )"></span></button>
         <button type="button" class="symbolbutton" title="New card" @onclick="GenerateNewCard" disabled="@gameStarted"><span class="refresh"></span></button>
