@@ -5,7 +5,7 @@
 * The Web Speech API and SpeechSynthesisUtterance (text-to-speech) is used to announce the numbers called on the player instances.
 * Platform-native emoji characters are used for stamping the bingo cards.
 * Screen Wake Lock API is used to keep the screen from timing out / turning off on devices that have support for it.
-* GitHub Actions is used to build and publish the Blazor WASM app to GitHub pages.
+* GitHub Actions is used to build and [publish the Blazor WASM app to GitHub pages](https://swimburger.net/blog/dotnet/how-to-deploy-aspnet-blazor-webassembly-to-github-pages).
 * Dynamically updates an inline SVG representing the game pattern by binding values from an array of bits (UInt32).
 
 Play a game at https://jasonmarckel.github.io/BlazorBingo.
