@@ -13,6 +13,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected bool isHost;
     protected bool isCalling;
+    protected bool isBingoButtonClicked;  // used to prevent multiple clicks
     protected bool showSettings;
     protected int NumberOfCalls { get { return flashboard?.CalledNumbers.Count ?? 0; } }
     protected bool isGameStarted { get { return NumberOfCalls > 0;  } }
@@ -35,6 +36,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
                 break;
             case "pick":
                 Console.WriteLine($"pick: {data}");
+                isBingoButtonClicked = false;
                 flashboard!.UpdateCalledNumbersCSV(data);
                 if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
@@ -128,6 +130,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected async Task CallBingo()
     {
+        isBingoButtonClicked = true;
         string messageType = string.Empty;
         if (IsValidCard())
         {
@@ -212,7 +215,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     }
 
     protected async void Pick()
-    {        
+    {
+        isBingoButtonClicked = false;
         isCalling = true;
         flashboard!.Pick();
         notificationMessage = string.Empty;
@@ -233,6 +237,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     {
         flashboard!.ClearBoard();
         ClearCard();
+        isBingoButtonClicked = false;
         notificationMessage = string.Empty;
         if (isHost)
         {

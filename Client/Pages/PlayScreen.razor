@@ -70,7 +70,7 @@
         </div>
     }
     <div class="col" style="text-align:center;">
-        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)">Bingo!</button>
+        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)" disabled="@isBingoButtonClicked">Bingo!</button>
         <button type="button" class="btn btn-secondary" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted"><span class="refresh"></span> New Card</button>        
     </div>
     <div class="col" style="text-align:center;">
