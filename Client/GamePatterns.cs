@@ -135,7 +135,7 @@ public class GamePatterns
                 yield return PatternsDict["Forward Slash"];
                 yield return PatternsDict["Backslash"];
                 break;
-            case "RovingL":
+            case "Roving L":
                 yield return PatternsDict["Northwest"];
                 yield return PatternsDict["Northeast"];
                 yield return PatternsDict["Southwest"];
