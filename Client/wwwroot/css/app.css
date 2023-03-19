@@ -130,8 +130,8 @@ input.gameCode {
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
 
-    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
-    --app-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji;
+    --app-symbols: system-ui, -apple-system, Arial, "Apple Symbols", "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif;
+    --app-emoji: "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", emoji;
     --card-red: #b32121;
     --card-green: #26b050;
     --card-blue: #1e90ff; /* dodgerblue */

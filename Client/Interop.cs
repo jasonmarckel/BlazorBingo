@@ -53,6 +53,9 @@ public partial class Interop
         [JSMarshalAs<JSType.String>] string text,
         [JSMarshalAs<JSType.String>] string? url);
 
+    // the Clipboard feature is available only in secure contexts (HTTPS)
+    // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard
+
     [JSImport("globalThis.navigator.clipboard.writeText")]
     internal static partial Task CopyToClipboard([JSMarshalAs<JSType.String>] string text);
 
