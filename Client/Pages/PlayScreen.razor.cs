@@ -10,7 +10,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected bool isHost;
     protected bool isCalling;
     protected bool showSettings;
-    protected bool gameStarted;
+    protected bool gameStarted { get; set; }
 
     protected Flashboard? flashboard { get; set; }
 
@@ -217,6 +217,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected async void Pick()
     {        
+        gameStarted = true;
         isCalling = true;
         flashboard!.Pick();
         notificationMessage = string.Empty;
