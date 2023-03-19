@@ -70,8 +70,8 @@
         </div>
     }
     <div class="col" style="text-align:center;">
-        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!gameStarted)">Bingo!</button>
-        <button type="button" class="btn btn-secondary" title="New card" @onclick="GenerateNewCard" hidden="@gameStarted"><span class="refresh"></span> New Card</button>        
+        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)">Bingo!</button>
+        <button type="button" class="btn btn-secondary" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted"><span class="refresh"></span> New Card</button>        
     </div>
     <div class="col" style="text-align:center;">
         <GamePatternDisplay Pattern="@settings.SelectedPattern"></GamePatternDisplay>        
@@ -84,10 +84,5 @@
 
 @if (showSettings)
 {
-    <SettingsScreen></SettingsScreen>
-}
-
-@code {
-    [Parameter]
-    public string? GameCode { get; set; }
+    <SettingsScreen isGameStarted="@isGameStarted"></SettingsScreen>
 }

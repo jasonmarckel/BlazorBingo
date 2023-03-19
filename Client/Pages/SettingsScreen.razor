@@ -30,7 +30,7 @@
 
             <div class="row mb-2">
                 <label>Game Pattern</label>
-                <InputSelect @bind-Value="settings.SelectedPattern">
+                <InputSelect @bind-Value="settings.SelectedPattern" disabled="@isGameStarted">
                     @foreach (var pattern in GamePatterns.GetPatternNames())
                     {
                         <option value="@pattern">@pattern</option>
@@ -78,5 +78,3 @@
         </details>
     </div>
 </div>
-
-

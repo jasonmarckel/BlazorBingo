@@ -1,4 +1,5 @@
 ﻿using BlazorBingo.Client.Shared;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 
@@ -7,10 +8,13 @@ namespace BlazorBingo.Client.Pages;
 [SupportedOSPlatform("browser")]
 public partial class PlayScreen : IMessageHandler, IDisposable
 {
+    [Parameter]
+    public string? GameCode { get; set; }
+
     protected bool isHost;
     protected bool isCalling;
     protected bool showSettings;
-    protected bool gameStarted { get; set; }
+    protected bool isGameStarted;
 
     protected Flashboard? flashboard { get; set; }
 
@@ -31,7 +35,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.UpdateCalledNumbersCSV(data);
-                gameStarted = true;
+                isGameStarted = true;
                 if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
@@ -217,7 +221,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected async void Pick()
     {        
-        gameStarted = true;
+        isGameStarted = true;
         isCalling = true;
         flashboard!.Pick();
         notificationMessage = string.Empty;
@@ -238,7 +242,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     {
         flashboard!.ClearBoard();
         ClearCard();
-        gameStarted= false;
+        isGameStarted= false;
         notificationMessage = string.Empty;
         if (isHost)
         {

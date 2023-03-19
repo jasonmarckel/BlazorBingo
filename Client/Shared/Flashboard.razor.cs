@@ -33,7 +33,6 @@ public partial class Flashboard
         {
             return "lastCalled";
         }
-
         return CalledNumbers.Contains(n) ? "visible" : "invisible";
     }
 

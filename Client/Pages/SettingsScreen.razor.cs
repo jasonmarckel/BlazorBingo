@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using System.Runtime.Versioning;
 using System.Text.Json;
 
@@ -6,6 +7,9 @@ namespace BlazorBingo.Client.Pages;
 [SupportedOSPlatform("browser")]
 public partial class SettingsScreen
 {
+    [Parameter]
+    public bool isGameStarted { get; set; }
+
     protected bool isLoaded;
     protected bool showVoiceSelection;
     protected IEnumerable<Voice>? voices;
