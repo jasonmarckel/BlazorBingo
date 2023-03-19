@@ -10,7 +10,7 @@ public class GamePatterns
     // ..... ..... ..... XXXXX ..... X.... .X... ..X.. ...X. ....X ...X. .X...
     // ..... ..... ..... ..... XXXXX X.... .X... ..X.. ...X. ....X ....X X....
 
-    public const string Default = "-Straight Line-";
+    public const string Default = "Straight Line";
 
     // 0U == placeholder for set of patterns
 

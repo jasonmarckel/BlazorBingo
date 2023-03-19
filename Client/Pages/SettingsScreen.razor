@@ -40,7 +40,7 @@
 
             <div class="row mb-2">
                 <label>Caller</label>
-                <button type="button" class="symbolbutton" title="mute or unmute" @onclick="ToggleMute"><span class="@( settings.IsMuted ? "mute" : "speaker" )"></span></button>
+                <button type="button" class="symbolbutton" title="toggle mute" @onclick="ToggleMute"><span class="@( settings.IsMuted ? "speakermuted" : "speaker" )"></span></button>
             </div>
             @if (showVoiceSelection)
                 {

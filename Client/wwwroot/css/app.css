@@ -125,12 +125,13 @@ input.gameCode {
         https://developer.apple.com/fonts/system-fonts/
         https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2
         https://fonts.google.com/icons?icon.platform=web
-        https://unicode-table.com/en/
         https://www.vertex42.com/ExcelTips/unicode-symbols.html
+        https://symbl.cc/en/
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     */
-    --app-symbols: "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", emoji, -apple-system, Arial, system-ui, sans-serif,;
-    --app-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji, system-ui;
+
+    --app-symbols: system-ui, -apple-system, Arial, sans-serif, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2";
+    --app-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", emoji;
     --card-red: #b32121;
     --card-green: #26b050;
     --card-blue: #1e90ff; /* dodgerblue */
@@ -161,11 +162,13 @@ input.gameCode {
 
 .gear:before {
     content: "\2699";
+    font-family: var(--app-emoji);
 }
 
 /* overlap == copy icon! == &#128471; */
 .copy:before {
     content: "\1F5D7";
+    color: black;
 }
 
 /* bust in silhouette == user icon == &#128100; */
@@ -192,13 +195,14 @@ input.gameCode {
     content: "\2B6F";
 }
 
-.mute:before {
+.speakermuted:before {
     content: "\1F507";
+    font-family: var(--app-emoji);
 }
 
-.unmute:before,
 .speaker:before {
     content: "\1F508";
+    font-family: var(--app-emoji);
 }
 
 /* stamps */
@@ -257,7 +261,7 @@ input.gameCode {
 .kiss:before { content: "\1F48B"; }
 .moneybag:before { content: "\1F4B0"; }
 .musicalnote:before { content: "\1F3B5"; }
-.pawprints:before { content: "\1F43E"; color: #333333 !important; }
+.pawprints:before { content: "\1F43E"; color: #000000 !important; }
 .penguin:before { content: "\1F427"; }
 .pingpong:before { content: "\1F3D3"; }
 .present:before { content: "\1F381"; }

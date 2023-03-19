@@ -7,7 +7,7 @@
     <div class="col-auto">
         Bingo Hall
         &nbsp;
-        <span style="font-family:monospace; font-weight:bold;">@GameCode</span>&nbsp;<button @onclick="CopyGameCode" title="copy" class="symbolbutton" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline;">&#128471;</button>
+        <span style="font-family:monospace; font-weight:bold;">@GameCode</span>&nbsp;<button @onclick="CopyGameCode" title="copy" class="symbolbutton" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline; border:none; background-color:transparent;">&#128471;</button>
     </div>
 @if (isHost)
 {
@@ -19,7 +19,7 @@
     </div>
 }
     <div class="col-auto">
-        Call # @NumberOfCalls
+        Call# @NumberOfCalls
     </div>
     <div class="col-auto">
         <button type="button" class="symbolbutton" title="Settings" @onclick="ToggleSettings" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline;"><span class="gear"></span></button>
@@ -71,7 +71,7 @@
     }
     <div class="col" style="text-align:center;">
         <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)" disabled="@isBingoButtonClicked">Bingo!</button>
-        <button type="button" class="btn btn-secondary" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted"><span class="refresh"></span> New Card</button>        
+        <button type="button" class="btn btn-secondary text-nowrap" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted">New Card</button>        
     </div>
     <div class="col" style="text-align:center;">
         <GamePatternDisplay Pattern="@settings.SelectedPattern"></GamePatternDisplay>        
