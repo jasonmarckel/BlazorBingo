@@ -29,11 +29,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-HoZL2fydsQJJ2LzVLARQ+7scpDFrOkY5+p46sm6\/lZc=",
+      "hash": "sha256-uEQT+GPv+26z2AtU0cgha5NXvlywXGUGTlyV1TKBdBg=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-Gex3u5oqh\/FgFyaA+149ABGu+exxnp5+l1jf0yyvPig=",
+      "hash": "sha256-5F4euWN951HCp3sKY9+R1ujDOQlGefIfa47OoL\/rXrs=",
       "url": "_framework\/BlazorBingo.Client.dll"
     },
     {
@@ -205,7 +205,7 @@
       "url": "BlazorBingo.Client.styles.css"
     },
     {
-      "hash": "sha256-lEP1AJznQfPPce4DdepmaJW02ieU0kgnylZkpLlYO3w=",
+      "hash": "sha256-6zeiDFHt6b6Vf9xP\/E+hoCwTH17Q90jj3NZ3kp6tRIg=",
       "url": "css\/app.css"
     },
     {
@@ -241,5 +241,5 @@
       "url": "script\/interop.js"
     }
   ],
-  "version": "laPGpOiA"
+  "version": "B+xOMyXO"
 };
