@@ -65,7 +65,7 @@ public partial class Flashboard
     {
         get
         {
-            return String.Join(",", CalledNumbers);
+            return string.Join(",", CalledNumbers);
         }
     }
 

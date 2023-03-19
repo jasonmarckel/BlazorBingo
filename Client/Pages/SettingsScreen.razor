@@ -54,7 +54,7 @@
                         </InputSelect>
                     </div>
                     <div class="row mb-2">
-                        <label>Caller Voice</label>
+                        <label>Voice</label>
                         <InputSelect @bind-Value="settings.CallerVoice" id="voiceSelect">
                             @foreach (var voice in voices!.Where(x => x.lang == settings.SelectedLanguage))
                             {
