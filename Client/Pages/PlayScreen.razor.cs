@@ -14,7 +14,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected bool isHost;
     protected bool isCalling;
     protected bool showSettings;
-    protected bool isGameStarted;
+    protected int NumberOfCalls { get { return flashboard?.CalledNumbers.Count ?? 0; } }
+    protected bool isGameStarted { get { return NumberOfCalls > 0;  } }
 
     protected Flashboard? flashboard { get; set; }
 
@@ -35,7 +36,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             case "pick":
                 Console.WriteLine($"pick: {data}");
                 flashboard!.UpdateCalledNumbersCSV(data);
-                isGameStarted = true;
                 if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled, settings.CallerVoice, settings.SelectedLanguage); }
                 break;
             case "restart":
@@ -171,14 +171,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         return isValid;
     }
 
-    protected int NumberOfCalls
-    {
-        get
-        {
-            return flashboard?.CalledNumbers.Count ?? 0;
-        }
-    }
-
     protected override void OnInitialized()
     {        
         GenerateNewCard();
@@ -221,7 +213,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected async void Pick()
     {        
-        isGameStarted = true;
         isCalling = true;
         flashboard!.Pick();
         notificationMessage = string.Empty;
@@ -242,7 +233,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     {
         flashboard!.ClearBoard();
         ClearCard();
-        isGameStarted= false;
         notificationMessage = string.Empty;
         if (isHost)
         {
