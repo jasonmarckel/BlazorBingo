@@ -141,6 +141,9 @@ input.gameCode {
     --card-black: #000000;
 }
 
+.emoji {
+    font-family: var(--app-emoji);
+}
 .symbol {
      font-family: var(--app-symbols); 
 }
@@ -162,12 +165,13 @@ input.gameCode {
 }
 
 .gear:before {
-    content: "\2699";
     font-family: var(--app-emoji);
+    content: "\2699";
 }
 
 /* overlap == copy icon! == &#128471; */
 .copy:before {
+    font-family: var(--app-symbols);
     content: "\1F5D7";
     color: black;
 }

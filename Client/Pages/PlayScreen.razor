@@ -1,31 +1,24 @@
 ﻿@page "/play/{gamecode?}"
-@page "/host"
+@page "/host/{gamecode?}"
 @inject GameSettings settings
 @inject NavigationManager Navigation
 
-<div class="row">
+<div class="row justify-content-between">
     <div class="col-auto">
-        Bingo Hall
-        &nbsp;
-        <span style="font-family:monospace; font-weight:bold;">@GameCode</span>&nbsp;<button @onclick="CopyGameCode" title="copy" class="symbolbutton" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline; border:none; background-color:transparent;">&#128471;</button>
-    </div>
-@if (isHost)
-{
-    <div class="col-auto">
-        <label><span class="symbol silhouettebust" title="number of players"></span> @players.Count</label>
-    </div>
-    <div class="col-auto">
-        <button type="button" class="symbolbutton" @onclick="Restart" title="New Game" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline;">&#8634;</button>
-    </div>
-}
-    <div class="col-auto">
-        Call# @NumberOfCalls
+        <label class="col-form-label-sm">Bingo Hall</label>
+        <button type="button" class="btn btn-sm" @onclick="CopyGameCode" title="Copy Game Code"><span style="font-family:monospace; font-weight:bold;">@GameCode</span> <span class="symbol">&#128471;</span></button>
+        <button type="button" class="btn btn-sm" @onclick="ShowPlayers" title="Show Players"><span class="symbol silhouettebust"></span><span style="visibility: @(isHost ? "visible" : "hidden");">@players.Count</span></button>
+        <label class="col-form-label-sm">Calls @NumberOfCalls</label>
+        @if (isHost)
+        {
+            <button type="button" class="btn btn-sm" @onclick="Restart" title="New Game" style="min-width:3rem;"><span class="symbol" style="font-size:14 pt; line-height:1rem;">&#8634;</span></button>
+        }
     </div>
     <div class="col-auto">
-        <button type="button" class="symbol" title="Settings" @onclick="ToggleSettings" style="font-size:16pt; line-height:16pt; padding:0; vertical-align:baseline; border:none; background-color:transparent;"><span class="gear"></span></button>
+        <button type="button" class="btn btn-sm" @onclick="ToggleSettings" title="Settings" style="min-width:3rem;"><span class="gear" style="font-size:14pt; line-height:1rem;"></span></button>
     </div>
 </div>
-
+<!--  font-size:16pt; line-height:1rem; padding:0; vertical-align:baseline;" -->
 <Flashboard @ref="flashboard" BoardSize="75"></Flashboard>
 
 <div id="BingoCard" class="@settings.CardTheme prevent-select mb-1">

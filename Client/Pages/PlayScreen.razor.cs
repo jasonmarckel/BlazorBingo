@@ -24,7 +24,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected SortedSet<string> players = new();
     protected string notificationMessage = string.Empty;
-    protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
 
     public async Task HandleMessage(string messageType, string data)
     {
@@ -175,7 +174,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     }
 
     protected override void OnInitialized()
-    {        
+    {
+        isHost = Navigation.Uri.Contains("/host", StringComparison.OrdinalIgnoreCase);
         GenerateNewCard();
         settings.OnChange += StateHasChanged;
     }
@@ -187,24 +187,17 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        isHost = Navigation.Uri.Contains("/host", StringComparison.OrdinalIgnoreCase);
-
+        if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("./"); return; }
         if (isHost)
         {
-            GameCode = Utility.GenerateKey(4, BINGO_KEY_CHARS);
-#if DEBUG
-            GameCode = "0000";
-#endif
             await Interop.Host(this, GameCode);
         }
         else
         {
-            if (string.IsNullOrWhiteSpace(GameCode)) { Navigation.NavigateTo("./"); return; }
             // https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle?view=aspnetcore-7.0#handle-incomplete-async-actions-at-render
             // https://aryehsilver.co.uk/blazor-attempts-to-render-before-oninitializedasync-method-has-finished/
-            await Interop.Connect(this, GameCode!.ToUpper(), settings.PlayerName);
+            await Interop.Connect(this, GameCode.ToUpper(), settings.PlayerName);
         }
-
         await Interop.RequestWakeLock();
         await Interop.InitVoices();
     }
@@ -212,6 +205,11 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected void ToggleSettings()
     {
         showSettings = !showSettings;
+    }
+
+    protected void ShowPlayers()
+    {
+
     }
 
     protected async void Pick()

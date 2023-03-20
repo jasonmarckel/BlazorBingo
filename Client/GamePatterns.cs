@@ -111,9 +111,17 @@ public class GamePatterns
         return PatternsDict.Keys;
     }
 
+    public static int GetCount()
+    {
+        return PatternsDict.Count;
+    }
     public static uint GetPattern(string patternName)
     {
         return PatternsDict[patternName];
+    }
+    public static string GetPatternName(int patternIndex)
+    {
+        return PatternsDict.ElementAt(patternIndex).Key;
     }
 
     public static IEnumerable<uint> GetPatternSet(string patternName)

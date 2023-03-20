@@ -8,6 +8,7 @@ public partial class Index
     protected string gameCode = string.Empty;
     protected string playerName = string.Empty;
     protected bool canJoin;
+    protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,9 +38,13 @@ public partial class Index
 
     protected async Task Host()
     {
+        if (string.IsNullOrWhiteSpace(gameCode))
+        {
+            gameCode = Utility.GenerateKey(4, BINGO_KEY_CHARS);
+        }
         settings.PlayerName = playerName;
         await Interop.PrimeSpeechSynthesis(); // prime speechSynthesis for iOS
-        Navigation.NavigateTo("./host");
+        Navigation.NavigateTo($"./host/{gameCode}");
     }
 
     protected async Task Join()
