@@ -40,26 +40,18 @@
 
             <div class="row mb-2">
                 <label>Game Pattern</label>
-@*
-                <InputSelect @bind-Value="settings.SelectedPattern" disabled="@isGameStarted">
-                    @foreach (var pattern in GamePatterns.GetPatternNames())
-                    {
-                        <option value="@pattern">@pattern</option>
-                    }
-                </InputSelect>
-*@
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <button type="button" class="btn" @onclick="() => { gamePatternIndex--; }">&lt;</button>
+                <div class="row justify-content-center d-flex align-items-center">
+                    <div class="col-auto mb-3">
+                        <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex--; }">&lt;</button>
                     </div>
                     <div class="col-auto">
                         <GamePatternDisplay Pattern="@GamePatterns.GetPatternName(gamePatternIndex)"></GamePatternDisplay>
                     </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn" @onclick="() => { gamePatternIndex++; }">&gt;</button>
+                    <div class="col-auto mb-3">
+                        <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex++; }">&gt;</button>
                     </div>
                 </div>
-                <div style="max-width:75%;margin-left:auto;margin-right:auto;">
+                <div style="max-width:70%;margin-left:auto;margin-right:auto;">
                     <input type="range" class="form-range form-control-lg" min="0" max="@(GamePatterns.GetPatternNames().Count()-1)" step="1" @bind="@gamePatternIndex" @bind:event="oninput" />
                 </div>
 @* 
