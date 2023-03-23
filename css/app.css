@@ -1,6 +1,7 @@
 /* @import url('open-iconic/font/css/open-iconic-bootstrap.min.css'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
 /*html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -108,7 +109,7 @@ a, .btn-link {
     user-select: none; /* Standard syntax */
 }
 
-.container-md {
+.container-fluid {
     padding-left: calc(var(--bs-gutter-x) * 0.1);
     padding-right: calc(var(--bs-gutter-x) * 0.1);
     max-width: 13cm;
@@ -128,10 +129,10 @@ input.gameCode {
         https://www.vertex42.com/ExcelTips/unicode-symbols.html
         https://symbl.cc/en/
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    */
+   */
 
     --app-symbols: system-ui, -apple-system, Arial, "Apple Symbols", "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif;
-    --app-emoji: "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", emoji;
+    --app-emoji: 'Segoe UI Emoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Android Emoji', sans-serif;
     --card-red: #b32121;
     --card-green: #26b050;
     --card-blue: #1e90ff; /* dodgerblue */
@@ -140,6 +141,9 @@ input.gameCode {
     --card-black: #000000;
 }
 
+.emoji {
+    font-family: var(--app-emoji);
+}
 .symbol {
      font-family: var(--app-symbols); 
 }
@@ -161,12 +165,13 @@ input.gameCode {
 }
 
 .gear:before {
-    content: "\2699";
     font-family: var(--app-emoji);
+    content: "\2699";
 }
 
 /* overlap == copy icon! == &#128471; */
 .copy:before {
+    font-family: var(--app-symbols);
     content: "\1F5D7";
     color: black;
 }
