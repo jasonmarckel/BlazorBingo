@@ -17,13 +17,23 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected bool showSettings;
     protected int NumberOfCalls { get { return flashboard?.CalledNumbers.Count ?? 0; } }
     protected bool isGameStarted { get { return NumberOfCalls > 0;  } }
-
     protected Flashboard? flashboard { get; set; }
-
     protected const int boardSize = 75;
-
     protected SortedSet<string> players = new();
     protected string notificationMessage = string.Empty;
+
+    protected string _selectedPattern = GamePatterns.Default;
+    protected string selectedPattern
+    {
+        get
+        {
+            return isHost ? settings.SelectedPattern : _selectedPattern;
+        }
+        set
+        {
+            _selectedPattern = value;
+        }
+    }
 
     public async Task HandleMessage(string messageType, string data)
     {
@@ -31,7 +41,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         {
             case "pattern":
                 Console.WriteLine($"pattern: {data}");
-                settings.SelectedPattern = data;
+                selectedPattern = data;
                 break;
             case "pick":
                 Console.WriteLine($"pick: {data}");
@@ -165,7 +175,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             }
         }
         bool isValid = false;
-        var patterns = GamePatterns.GetPatternSet(settings.SelectedPattern);
+        var patterns = GamePatterns.GetPatternSet(selectedPattern);
         foreach (var pattern in patterns)
         {
             if ((pattern & card) == pattern) { isValid = true; break; }
@@ -219,7 +229,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         isCalling = true;
         flashboard!.Pick();
         notificationMessage = string.Empty;
-        await Interop.Broadcast("pattern", settings.SelectedPattern);
+        await Interop.Broadcast("pattern", selectedPattern);
         await Interop.Broadcast("pick", flashboard!.CalledNumbersCSV);
         if (!settings.IsMuted) { await Interop.Speak(flashboard!.LastCalled.Replace("-", ", "), settings.CallerVoice, settings.SelectedLanguage); }
         await Task.Delay(3000); // wait a few seconds before the next pick can be made
