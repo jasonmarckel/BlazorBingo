@@ -112,3 +112,7 @@
         text-align: center;
         font-weight: bold;
     }
+
+#settingsDialog {
+    max-width: 13cm;
+}

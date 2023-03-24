@@ -7,7 +7,10 @@
     <div class="col-auto">
         <label class="col-form-label-sm">Bingo Hall</label>
         <button type="button" class="btn btn-sm" @onclick="CopyGameCode" title="Copy Game Code"><span style="font-family:monospace; font-weight:bold;">@GameCode</span> <span class="symbol">&#128471;</span></button>
-        <button type="button" class="btn btn-sm" @onclick="ShowPlayers" title="Show Players"><span class="symbol silhouettebust"></span><span style="visibility: @(isHost ? "visible" : "hidden");">@players.Count</span></button>
+        @if (isHost)
+        {
+            <button type="button" class="btn btn-sm" @onclick="ShowPlayers" title="Show Players"><span class="symbol silhouettebust"></span><span style="visibility: @(isHost ? "visible" : "hidden");">@players.Count</span></button>            
+        }
         <label class="col-form-label-sm">Calls @NumberOfCalls</label>
         @if (isHost)
         {
@@ -15,7 +18,7 @@
         }
     </div>
     <div class="col-auto">
-        <button type="button" class="btn btn-sm" @onclick="ToggleSettings" title="Settings" style="min-width:3rem;"><span class="gear" style="font-size:14pt; line-height:1rem;"></span></button>
+        <button type="button" class="btn btn-sm" @onclick="ShowSettings" title="Settings" style="min-width:3rem;"><span class="gear" style="font-size:14pt; line-height:1rem;"></span></button>
     </div>
 </div>
 <!--  font-size:16pt; line-height:1rem; padding:0; vertical-align:baseline;" -->
@@ -75,7 +78,8 @@
     @notificationMessage
 </div>
 
-@if (showSettings)
-{
-    <SettingsScreen isGameStarted="@isGameStarted"></SettingsScreen>
-}
+<dialog id="settingsDialog">
+    <form method="dialog">
+        <SettingsScreen isGameStarted="@isGameStarted"></SettingsScreen>
+    </form>
+</dialog>

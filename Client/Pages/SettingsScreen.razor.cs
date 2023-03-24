@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 using System.Text.Json;
 
@@ -17,6 +18,19 @@ public partial class SettingsScreen
     protected string? platform;
     protected string? language;
 
+    private int _gamePatternIndex;
+    protected int gamePatternIndex
+    {
+        get { return _gamePatternIndex; }
+        set
+        {
+            if (value < 0) { _gamePatternIndex = GamePatterns.GetCount() - 1; }
+            else if (value >= GamePatterns.GetCount()) { _gamePatternIndex = 0; }
+            else _gamePatternIndex = value;
+            settings.SelectedPattern = GamePatterns.GetPatternName(_gamePatternIndex);
+        }
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await Interop.InitVoices();
@@ -27,10 +41,15 @@ public partial class SettingsScreen
         language = await Interop.GetLanguage();
         isLoaded = true;
         showVoiceSelection = !userAgent.Contains("Android", StringComparison.OrdinalIgnoreCase) || userAgent.Contains("Surface Duo", StringComparison.OrdinalIgnoreCase);
+        gamePatternIndex = GamePatterns.GetPatternNames().ToList().IndexOf(settings.SelectedPattern);
     }
     protected void ToggleMute()
     {
         settings.IsMuted = !settings.IsMuted;
+    }
+    protected void SelectDauber(MouseEventArgs e, string val)
+    {
+        settings.Dauber = val;
     }
 
     public static readonly string[] CardThemes = new string[]

@@ -5,7 +5,14 @@
 
 <div class="card mb-1">
     <div class="card-body">
-        <h5 class="card-title">Game Settings</h5>
+        <div class="row justify-content-between">
+            <div class="col-auto">
+                <h5 class="card-title">Game Settings</h5>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-secondary">X</button>
+            </div>
+        </div>
         @if (isLoaded)
         {
             <div class="row mb-2">
@@ -19,10 +26,10 @@
 
                 <div class="container text-center">
                     <div class="row row-cols-auto">
-                        @for (var i = 1; i < Daubers.Count(); i++)
+                        @for (var i = 0; i < Daubers.Count(); i++)
                         {
                             string cssName = @Daubers[i].CssName();
-                            <div class="col" @onclick="eventargs => SelectDauber(eventargs, cssName)"><button class="btn"><span class="stamp @cssName" style="font-size:2.5rem;"></span></button></div>
+                            <div class="col px-0" @onclick="eventargs => SelectDauber(eventargs, cssName)"><button type="button" class="btn btn-sm"><span class="stamp @cssName" style="font-size:2.5rem;"></span></button></div>
                         }
                     </div>
                 </div>
@@ -38,35 +45,38 @@
                 </InputSelect>
             </div>
 
-            <div class="row mb-2">
-                <label>Game Pattern</label>
-                <div class="row justify-content-center d-flex align-items-center">
-                    <div class="col-auto mb-3">
-                        <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex--; }">&lt;</button>
+            @if (!isGameStarted)
+            {
+                <div class="row mb-2">
+                    <label>Game Pattern</label>
+                    <div class="row justify-content-center d-flex align-items-center">
+                        <div class="col-auto mb-3">
+                            <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex--; }">&lt;</button>
+                        </div>
+                        <div class="col-auto">
+                            <GamePatternDisplay Pattern="@GamePatterns.GetPatternName(gamePatternIndex)"></GamePatternDisplay>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex++; }">&gt;</button>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <GamePatternDisplay Pattern="@GamePatterns.GetPatternName(gamePatternIndex)"></GamePatternDisplay>
+                    <div style="max-width:70%;margin-left:auto;margin-right:auto;">
+                        <input type="range" class="form-range form-control-lg" min="0" max="@(GamePatterns.GetPatternNames().Count()-1)" step="1" @bind="@gamePatternIndex" @bind:event="oninput" />
                     </div>
-                    <div class="col-auto mb-3">
-                        <button type="button" class="btn btn-outline-secondary btn-lg" @onclick="() => { gamePatternIndex++; }">&gt;</button>
-                    </div>
-                </div>
-                <div style="max-width:70%;margin-left:auto;margin-right:auto;">
-                    <input type="range" class="form-range form-control-lg" min="0" max="@(GamePatterns.GetPatternNames().Count()-1)" step="1" @bind="@gamePatternIndex" @bind:event="oninput" />
-                </div>
 @* 
-                <div class="grid" tabindex="-1" style="height: 12rem; overflow-y: auto;">
-                    <ul class="list-group list-group-flush">
-                        @foreach (var patternName in GamePatterns.GetPatternNames())
-                        {
-                        <li class="list-group-item">
-                            <GamePatternDisplay Pattern="@patternName"></GamePatternDisplay>
-                        </li>                        
-                        }
-                    </ul>
-                </div>
+                    <div class="grid" tabindex="-1" style="height: 12rem; overflow-y: auto;">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var patternName in GamePatterns.GetPatternNames())
+                            {
+                            <li class="list-group-item">
+                                <GamePatternDisplay Pattern="@patternName"></GamePatternDisplay>
+                            </li>                        
+                            }
+                        </ul>
+                    </div>
 *@
-            </div>
+                </div>
+            }
 
             <div class="row mb-2">
                 <label>Caller</label>
@@ -108,23 +118,3 @@
         </details>
     </div>
 </div>
-@code
-{
-    private int _gamePatternIndex;
-    protected int gamePatternIndex 
-    { 
-        get { return _gamePatternIndex; }
-        set
-        {
-            if (value < 0) { _gamePatternIndex = GamePatterns.GetCount() - 1; }
-            else if (value >= GamePatterns.GetCount()) { _gamePatternIndex = 0; }
-            else _gamePatternIndex = value;
-            settings.SelectedPattern = GamePatterns.GetPatternName(_gamePatternIndex);
-        }
-    }
-
-    protected void SelectDauber(MouseEventArgs e, string val)
-    {
-        settings.Dauber = val;
-    }
-}

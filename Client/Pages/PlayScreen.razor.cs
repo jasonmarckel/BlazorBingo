@@ -202,9 +202,9 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         await Interop.InitVoices();
     }
 
-    protected void ToggleSettings()
+    protected async Task ShowSettings()
     {
-        showSettings = !showSettings;
+        await Interop.ShowModal("settingsDialog");
     }
 
     protected void ShowPlayers()
