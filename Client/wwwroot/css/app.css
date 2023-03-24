@@ -7,6 +7,12 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 */
+
+body {
+    /* Disables pull-to-refresh and overscroll glow effects. */
+    overscroll-behavior-y: none;
+}
+
 h1:focus {
     outline: none;
 }
