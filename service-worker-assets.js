@@ -29,11 +29,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-n5GHbegvGOy156oTB+4a+jsdjlkOJDqTXii9zeO6ZBs=",
+      "hash": "sha256-MN\/5cv0JOET+i73cP796a3YE2E8vsin7+YNg2+WAR3M=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-cV3QaqCNZ4epdgXVlDCZ7julA9hoDIeLOmmbCKzzsv4=",
+      "hash": "sha256-Js\/m5auAzQFuh6d8XP+izoW+xPPbs1FOuW7TrC5EKco=",
       "url": "_framework\/BlazorBingo.Client.dll"
     },
     {
@@ -237,9 +237,9 @@
       "url": "manifest.json"
     },
     {
-      "hash": "sha256-gb5MPi4sX1n+nMGPspgpVSxTXsIKrwO9ejnlRvd9DXU=",
+      "hash": "sha256-M07F3ACTr5M6pKQ2ExkxTaYu3DUGol5WM9Hpli34448=",
       "url": "script\/interop.js"
     }
   ],
-  "version": "8cvsaFdV"
+  "version": "FBy4DKJR"
 };
