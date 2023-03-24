@@ -172,16 +172,16 @@ export async function host(component, id) {
     peer.on('connection', function (conn) {
         clientConnections.push(conn);
         var playerName = conn.metadata.playerName;
-        //console.log('received connection from ' + conn.peer + ' ' + playerName);
-        dotnetExports.BlazorBingo.Interop.OnDataReceived(component, "connected", playerName);
+        console.log('received connection from ' + conn.peer + ' ' + playerName);
+        dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, "connected", playerName);
 
         conn.on('data', function (data) {
-            //console.log(data);
-            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, data.messageType, data.message);
+            console.log(data);
+            dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, data.messageType, data.message);
         });
         conn.on('close', function () {
             //console.log('connection to ' + playerName + ' has been closed.');
-            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, "disconnected", playerName);
+            dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, "disconnected", playerName);
         });
     });
 
@@ -213,8 +213,8 @@ export async function connect(component, remoteId, playerName) {
             console.log('connected');
         });
         hostConnection.on("data", (data) => {
-            //console.log(data);
-            dotnetExports.BlazorBingo.Interop.OnDataReceived(component, data.messageType, data.message);
+            console.log(data);
+            dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, data.messageType, data.message);
         });
         hostConnection.on('close', function () {
             console.log('connection to host has been closed.');
