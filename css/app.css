@@ -235,9 +235,7 @@ input.gameCode {
     color: var(--card-black);
 }
 
-.random:before {
-    content: "?";
-}
+.random:before { content: "\2753"; } /* question mark emoji */
 
 .anchor:before { content: "\2693"; }
 .banana:before { content: "\1F34C"; }

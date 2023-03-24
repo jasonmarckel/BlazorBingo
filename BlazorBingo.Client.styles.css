@@ -43,19 +43,22 @@
         overflow: hidden;
     }
 
-        #BingoCard td div.square[b-wtrxhdz6k8] {
+        #BingoCard td button.square[b-wtrxhdz6k8] {
             display: grid;
             grid-template-columns: 1fr;
             padding: 0;
             aspect-ratio: 1/1;
+            background-color: transparent;
+            border: none;
+            width: 100%;
         }
 
-            #BingoCard td div.square div[b-wtrxhdz6k8] {
+            #BingoCard td button.square div[b-wtrxhdz6k8] {
                 grid-row-start: 1;
                 grid-column-start: 1;
             }
 
-                #BingoCard td div.square div:first-child[b-wtrxhdz6k8] {
+                #BingoCard td button.square div:first-child[b-wtrxhdz6k8] {
                     margin-top: 0.5vh;
                 }
 
@@ -113,6 +116,10 @@
         text-align: center;
         font-weight: bold;
     }
+
+#settingsDialog[b-wtrxhdz6k8] {
+    max-width: 13cm;
+}
 /* /Shared/Flashboard.razor.rz.scp.css */
 #flashboard[b-1j6imljcde] {
     border-style: solid;
