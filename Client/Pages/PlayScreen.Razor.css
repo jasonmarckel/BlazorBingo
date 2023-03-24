@@ -42,19 +42,22 @@
         overflow: hidden;
     }
 
-        #BingoCard td div.square {
+        #BingoCard td button.square {
             display: grid;
             grid-template-columns: 1fr;
             padding: 0;
             aspect-ratio: 1/1;
+            background-color: transparent;
+            border: none;
+            width: 100%;
         }
 
-            #BingoCard td div.square div {
+            #BingoCard td button.square div {
                 grid-row-start: 1;
                 grid-column-start: 1;
             }
 
-                #BingoCard td div.square div:first-child {
+                #BingoCard td button.square div:first-child {
                     margin-top: 0.5vh;
                 }
 

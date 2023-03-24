@@ -46,10 +46,10 @@
                     var row = r;
                     var col = c;
                     <td>
-                        <div class="square" @onclick="eventargs => StampSquare(eventargs, row, col)">
+                        <button type="button" class="square" @onclick="() => StampSquareAsync(row, col)">
                             <div>@((MarkupString)square.Value.ToString())</div>
                             <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>
-                        </div>
+                        </button>
                     </td>
                 }
             </tr>

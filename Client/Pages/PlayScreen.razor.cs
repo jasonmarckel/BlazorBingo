@@ -107,12 +107,13 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
     }
 
-    protected void StampSquare(MouseEventArgs e, int row, int col)
+    protected async Task StampSquareAsync(int row, int col)
     {
         if (row == 2 && col == 2) { return; }
         var square = squares[row, col];
         square.StampRotation = ThreadSafeRandom.ThisThreadsRandom.Next(-30, 30);
         square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
+        await Interop.PrimeSpeechSynthesis(); // keep iOS announcing active
     }
 
     protected void ClearCard()
