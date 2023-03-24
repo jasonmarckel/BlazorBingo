@@ -119,3 +119,8 @@
 #settingsDialog {
     max-width: 13cm;
 }
+/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
+dialog::backdrop {
+    background: rgba(105, 105, 105, 0.25);
+    color: dimgray;
+}
