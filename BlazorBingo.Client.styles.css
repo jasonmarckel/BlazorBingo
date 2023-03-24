@@ -120,6 +120,11 @@
 #settingsDialog[b-wtrxhdz6k8] {
     max-width: 13cm;
 }
+/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
+dialog[b-wtrxhdz6k8]::backdrop {
+    background: rgba(105, 105, 105, 0.25);
+    color: dimgray;
+}
 /* /Shared/Flashboard.razor.rz.scp.css */
 #flashboard[b-1j6imljcde] {
     border-style: solid;

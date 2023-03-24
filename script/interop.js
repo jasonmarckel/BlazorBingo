@@ -176,7 +176,7 @@ export async function host(component, id) {
         dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, "connected", playerName);
 
         conn.on('data', function (data) {
-            console.log(data);
+            //console.log(data);
             dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, data.messageType, data.message);
         });
         conn.on('close', function () {
@@ -213,7 +213,7 @@ export async function connect(component, remoteId, playerName) {
             console.log('connected');
         });
         hostConnection.on("data", (data) => {
-            console.log(data);
+            //console.log(data);
             dotnetExports.BlazorBingo.Client.Interop.OnDataReceived(component, data.messageType, data.message);
         });
         hostConnection.on('close', function () {
