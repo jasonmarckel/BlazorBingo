@@ -1,9 +1,8 @@
-/* @import url('open-iconic/font/css/open-iconic-bootstrap.min.css'); */
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
-/*html, body {
+/*
+html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 */
@@ -215,75 +214,3 @@ input.gameCode {
     content: "\1F508";
     font-family: var(--app-emoji);
 }
-
-/* stamps */
-
-.solidstar:before {
-    content: "\2605"; /* &#9733; a.k.a. Black Star */
-}
-
-.solidstar .green {
-    color: var(--card-green);
-}
-.solidstar .blue {
-    color: var(--card-blue);
-}
-.solidstar .red {
-    color: var(--card-red);
-}
-.solidstar .orange {
-    color: var(--card-orange);
-}
-.solidstar .yellow {
-    color: var(--card-yellow);
-}
-.solidstar .black {
-    color: var(--card-black);
-}
-
-.random:before { content: "\2753"; } /* question mark emoji */
-
-.anchor:before { content: "\2693"; }
-.banana:before { content: "\1F34C"; }
-.basketball:before { content: "\1F3C0"; }
-.beermug:before { content: "\1F37A"; }
-.cat:before { content: "\1F408"; }
-.catface:before { content: "\1F431"; }
-.catfacewithhearteyes:before { content: "\1F63B"; }
-.cherries:before { content: "\1F352"; }
-.christmastree:before { content: "\1F384"; }
-.cookie:before { content: "\1F36A"; }
-.curling:before { content: "\1F94C"; }
-.dogface:before { content: "\1F436"; }
-.dollar:before { content: "$"; color: #85bb65; }
-.doughnut:before { content: "\1F369"; }
-.dragon:before { content: "\1F409"; }
-.elephant:before { content: "\1F418"; }
-.fire:before { content: "\1F525"; }
-.football:before { content: "\1F3C8"; }
-.fox:before { content: "\1F98A"; }
-.golfer:before { content: "\1F3CC"; }
-.heart:before { content: "\2764"; color: red; }
-.hotdog:before { content: "\1F32D"; }
-.icecream:before { content: "\1F366"; }
-.kangaroo:before { content: "\1F998"; }
-.kiss:before { content: "\1F48B"; }
-.moneybag:before { content: "\1F4B0"; }
-.musicalnote:before { content: "\1F3B5"; }
-.pawprints:before { content: "\1F43E"; color: #000000 !important; }
-.penguin:before { content: "\1F427"; }
-.pingpong:before { content: "\1F3D3"; }
-.present:before { content: "\1F381"; }
-.scooter:before { content: "\1F6F5"; }
-.shark:before { content: "\1F988"; }
-.smiley:before { content: "\1F603"; }
-.snowman:before { content: "\26C4"; }
-.soccer:before { content: "\26BD"; }
-.statueofliberty:before { content: "\1F5FD"; }
-.strawberry:before { content: "\1F353"; }
-.t-rex:before { content: "\1F996"; }
-.tennis:before { content: "\1F3BE"; }
-.tractor:before { content: "\1F69C"; }
-.trident:before { content: "\1F531"; }
-.videogamecontroller:before { content: "\1F3AE"; }
-.waterwave:before { content: "\1F30A"; }

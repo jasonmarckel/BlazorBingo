@@ -28,7 +28,7 @@
                     <div class="row row-cols-auto">
                         @foreach (var dauber in Daubers.Keys)
                         {
-                            <div class="col px-0" @onclick="eventargs => SelectDauber(eventargs, dauber)"><button type="button" class="btn btn-sm"><span class="stamp" style="font-size:2.5rem;">@((MarkupString)SettingsScreen.Daubers[dauber])</span></button></div>
+                            <div class="col px-0"><button type="button" class="btn btn-sm" @onclick="() => SelectDauber(dauber)"><span class="stamp" style="font-size:2.5rem;">@((MarkupString)SettingsScreen.Daubers[dauber])</span></button></div>
                         }
                     </div>
                 </div>

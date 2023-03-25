@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 using System.Text.Json;
 
@@ -47,7 +46,7 @@ public partial class SettingsScreen
     {
         settings.IsMuted = !settings.IsMuted;
     }
-    protected void SelectDauber(MouseEventArgs e, string val)
+    protected void SelectDauber(string val)
     {
         settings.Dauber = val;
     }

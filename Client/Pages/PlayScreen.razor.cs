@@ -1,6 +1,5 @@
 ﻿using BlazorBingo.Client.Shared;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using System.Runtime.Versioning;
 
 namespace BlazorBingo.Client.Pages;
@@ -78,9 +77,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
 
     protected void GenerateNewCard()
     {
-        int numberOfValuesPerColumn = boardSize / 5;
-
         // generate a set of 5 unique integers for each column
+        int numberOfValuesPerColumn = boardSize / 5;
         for (int c = 0; c < 5; c++)
         {
             // determine the start number for the column

@@ -110,7 +110,6 @@ public class GamePatterns
     {
         return PatternsDict.Keys;
     }
-
     public static int GetCount()
     {
         return PatternsDict.Count;
@@ -123,7 +122,6 @@ public class GamePatterns
     {
         return PatternsDict.ElementAt(patternIndex).Key;
     }
-
     public static IEnumerable<uint> GetPatternSet(string patternName)
     {
         var returnValues = Enumerable.Empty<uint>();
