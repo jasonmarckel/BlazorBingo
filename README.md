@@ -16,7 +16,6 @@ BlazorBingo can be installed/pinned to the homescreen and launched as a full scr
 
 **TODO**:
 * Add special effects for winner (confetti, fireworks, etc.)
-* Why does text-to-speech stop working after a random period of time or random number of utterances on iOS devices?
 * Create an app icon!
 * Implement best practice for PWA app to notify that a new version is available and self-update.
   * Currently for an installed/pinned PWA, it must be launched, wait a few seconds, killed, and re-opened for it to detect, install, and use the latest version.

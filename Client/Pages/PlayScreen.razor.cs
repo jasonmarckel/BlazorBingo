@@ -107,7 +107,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         public bool IsStamped { get { return !string.IsNullOrWhiteSpace(Stamp); } }
     }
 
-    protected async Task StampSquareAsync(int row, int col)
+    protected void StampSquare(int row, int col)
     {
         if (row == 2 && col == 2) { return; }
         var square = squares[row, col];
@@ -115,8 +115,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         var dauberNames = SettingsScreen.Daubers.Keys.ToArray();
         string dauber = settings.Dauber == "Random" ? dauberNames[ThreadSafeRandom.ThisThreadsRandom.Next(1, dauberNames.Length)] : settings.Dauber;
         square.Stamp = square.IsStamped ? string.Empty : SettingsScreen.Daubers[dauber];
-
-        await Interop.PrimeSpeechSynthesis(); // keep iOS announcing active
     }
 
     protected void ClearCard()

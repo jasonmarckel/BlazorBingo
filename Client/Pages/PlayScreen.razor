@@ -45,8 +45,8 @@
                     if(square == null) { continue; }
                     var row = r;
                     var col = c;
-                    <td>
-                        <button type="button" class="square" @onclick="() => StampSquareAsync(row, col)">
+                        <td @onclick="Interop.PrimeSpeechSynthesis">
+                        <button type="button" class="square" @onclick="() => StampSquare(row, col)">
                             @if (!square.IsStamped)
                             {
                                 @(square.Value.ToString())
