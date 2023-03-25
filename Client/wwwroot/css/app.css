@@ -219,7 +219,7 @@ input.gameCode {
 /* stamps */
 
 .solidstar:before {
-    content: "\2605";
+    content: "\2605"; /* &#9733; a.k.a. Black Star */
 }
 
 .solidstar .green {

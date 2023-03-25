@@ -72,14 +72,6 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         this.StateHasChanged(); // force the UI to refresh
     }
 
-    protected string StamperCssClass
-    {
-        get
-        {
-            return settings.Dauber == "random" ? SettingsScreen.Daubers[ThreadSafeRandom.ThisThreadsRandom.Next(1, SettingsScreen.Daubers.Length)].CssName() : settings.Dauber;
-        }
-    }
-
     // https://stackoverflow.com/questions/60812587/c-sharp-non-nullable-field-lateinit
 
     protected readonly Square[,] squares = new Square[5, 5];
@@ -103,7 +95,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
                 if (c == 2 && r == 2)
                 {
                     squares[r, c].Value = 0; //FREE
-                    squares[r, c].StampClass = "stamp solidstar"; //TODO: theme the star
+                    squares[r, c].Stamp = "&#9733;"; //"Black Star";
                 }
             }
         }
@@ -112,9 +104,9 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected class Square
     {
         public int Value { get; set; }
-        public string StampClass { get; set; } = string.Empty;
+        public string Stamp { get; set; } = string.Empty;
         public int StampRotation { get; set; }
-        public bool IsStamped { get { return !string.IsNullOrWhiteSpace(StampClass); } }
+        public bool IsStamped { get { return !string.IsNullOrWhiteSpace(Stamp); } }
     }
 
     protected async Task StampSquareAsync(int row, int col)
@@ -122,7 +114,10 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         if (row == 2 && col == 2) { return; }
         var square = squares[row, col];
         square.StampRotation = ThreadSafeRandom.ThisThreadsRandom.Next(-30, 30);
-        square.StampClass = square.IsStamped ? string.Empty : "stamp " + StamperCssClass;
+        var dauberNames = SettingsScreen.Daubers.Keys.ToArray();
+        string dauber = settings.Dauber == "Random" ? dauberNames[ThreadSafeRandom.ThisThreadsRandom.Next(1, dauberNames.Length)] : settings.Dauber;
+        square.Stamp = square.IsStamped ? string.Empty : SettingsScreen.Daubers[dauber];
+
         await Interop.PrimeSpeechSynthesis(); // keep iOS announcing active
     }
 
@@ -133,7 +128,7 @@ public partial class PlayScreen : IMessageHandler, IDisposable
             for (int r = 0; r < 5; r++)
             {
                 if (c == 2 && r == 2) { continue; }
-                squares[r, c].StampClass = string.Empty;
+                squares[r, c].Stamp = string.Empty;
             }
         }
     }

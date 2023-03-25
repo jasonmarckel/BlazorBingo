@@ -21,7 +21,7 @@
         <button type="button" class="btn btn-sm" @onclick="ShowSettings" title="Settings" style="min-width:3rem;"><span class="gear" style="font-size:14pt; line-height:1rem;"></span></button>
     </div>
 </div>
-<!--  font-size:16pt; line-height:1rem; padding:0; vertical-align:baseline;" -->
+
 <Flashboard @ref="flashboard" BoardSize="75"></Flashboard>
 
 <div id="BingoCard" class="@settings.CardTheme prevent-select mb-1">
@@ -49,11 +49,11 @@
                         <button type="button" class="square" @onclick="() => StampSquareAsync(row, col)">
                             @if (!square.IsStamped)
                             {
-                                @((MarkupString)square.Value.ToString())
+                                @(square.Value.ToString())
                             }
                             else
                             {
-                                <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>                                    
+                                <div class="emoji" style="transform: rotate(@(square.StampRotation)deg);">@((MarkupString)square.Stamp)</div>
                             }
                         </button>
                     </td>

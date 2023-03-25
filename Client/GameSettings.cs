@@ -10,7 +10,7 @@ public class GameSettings
     private class Settings
     {
         public string playerName { get; set; } = string.Empty;
-        public string dauber { get; set; } = "random";
+        public string dauber { get; set; } = "Random";
         public string callerVoice { get; set; } = string.Empty;
         public string cardTheme { get; set; } = "blue";
         public string selectedLanguage { get; set; } = string.Empty;

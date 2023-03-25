@@ -18,18 +18,17 @@
             <div class="row mb-2">
                 <label>Dauber</label>
                 <InputSelect @bind-Value="settings.Dauber">
-                    @foreach (var dauber in Daubers)
+                    @foreach (var dauber in Daubers.Keys)
                     {
-                        <option value="@dauber.CssName()">@dauber</option>
+                        <option value="@dauber">@dauber</option>
                     }
                 </InputSelect>
 
                 <div class="container text-center">
                     <div class="row row-cols-auto">
-                        @for (var i = 0; i < Daubers.Count(); i++)
+                        @foreach (var dauber in Daubers.Keys)
                         {
-                            string cssName = @Daubers[i].CssName();
-                            <div class="col px-0" @onclick="eventargs => SelectDauber(eventargs, cssName)"><button type="button" class="btn btn-sm"><span class="stamp @cssName" style="font-size:2.5rem;"></span></button></div>
+                            <div class="col px-0" @onclick="eventargs => SelectDauber(eventargs, dauber)"><button type="button" class="btn btn-sm"><span class="stamp" style="font-size:2.5rem;">@((MarkupString)SettingsScreen.Daubers[dauber])</span></button></div>
                         }
                     </div>
                 </div>
