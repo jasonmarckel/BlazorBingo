@@ -348,5 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/BlazorBingo/Properties/launchSettings.json
+Properties/launchSettings.json
 /.vscode

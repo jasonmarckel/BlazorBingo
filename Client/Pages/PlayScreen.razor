@@ -47,8 +47,14 @@
                     var col = c;
                     <td>
                         <button type="button" class="square" @onclick="() => StampSquareAsync(row, col)">
-                            <div>@((MarkupString)square.Value.ToString())</div>
-                            <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>
+                            @if (!square.IsStamped)
+                            {
+                                @((MarkupString)square.Value.ToString())
+                            }
+                            else
+                            {
+                                <div class="@square.StampClass" style="transform: rotate(@(square.StampRotation)deg);"></div>                                    
+                            }
                         </button>
                     </td>
                 }
@@ -61,15 +67,15 @@
 <div id="PlayerControls" class="row mb-2">
     @if (isHost)
     {
-        <div class="col" style="text-align:center;">
+        <div class="col pt-4 text-center">
             <button type="button" class="btn btn-primary" @onclick="Pick" disabled="@isCalling">Pick</button>
         </div>
     }
-    <div class="col" style="text-align:center;">
+    <div class="col pt-4 text-center">
         <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)" disabled="@isBingoButtonClicked">Bingo!</button>
         <button type="button" class="btn btn-secondary text-nowrap" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted">New Card</button>        
     </div>
-    <div class="col" style="text-align:center;">
+    <div class="col text-center">
         <GamePatternDisplay Pattern="@selectedPattern"></GamePatternDisplay>        
     </div>
 </div>

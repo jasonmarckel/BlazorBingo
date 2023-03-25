@@ -43,24 +43,24 @@
     }
 
         #BingoCard td button.square {
+            /*
             display: grid;
             grid-template-columns: 1fr;
+            */
             padding: 0;
             aspect-ratio: 1/1;
             background-color: transparent;
             border: none;
             width: 100%;
+            vertical-align: bottom;
+            min-height: 2cm;
         }
-
+        /*
             #BingoCard td button.square div {
                 grid-row-start: 1;
                 grid-column-start: 1;
             }
-
-                #BingoCard td button.square div:first-child {
-                    margin-top: 0.5vh;
-                }
-
+        */
     #BingoCard thead td {
         font-size: clamp(1rem,11vw, 1.5cm);
         font-weight: 900;
@@ -91,7 +91,10 @@
     z-index: 1;
     font-size: 1.2em;
     background-color: white;
-    margin-top: -0.5vw;
+    height: 100%;
+}
+.stamp::before {
+    vertical-align: text-bottom;
 }
 
 #PlayerControls {
