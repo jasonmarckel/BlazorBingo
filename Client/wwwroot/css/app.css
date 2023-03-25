@@ -165,10 +165,12 @@ input.gameCode {
     vertical-align: middle;
 }
 
+/* circled information source == &#128712; */
 .info-circle:before {
     content: "\1f6c8";
 }
 
+/* gear symbol == &#9881; */
 .gear:before {
     font-family: var(--app-emoji);
     content: "\2699";
@@ -205,11 +207,13 @@ input.gameCode {
     content: "\2B6F";
 }
 
+/* &#128263; */
 .speakermuted:before {
     content: "\1F507";
     font-family: var(--app-emoji);
 }
 
+/* &#128264; */
 .speaker:before {
     content: "\1F508";
     font-family: var(--app-emoji);

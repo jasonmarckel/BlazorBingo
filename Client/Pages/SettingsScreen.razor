@@ -10,7 +10,7 @@
                 <h5 class="card-title">Game Settings</h5>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-outline-secondary">X</button>
+                <button type="submit" class="btn btn-outline-secondary" id="closeDialogButton" onclick="this.form.style.display='none';return typeof HTMLDialogElement === 'function'">X</button>
             </div>
         </div>
         @if (isLoaded)
