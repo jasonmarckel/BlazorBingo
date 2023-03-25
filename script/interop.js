@@ -11,6 +11,10 @@ export async function getPlatform() {
 }
 
 export async function showModal(id) {
+    // includes workaround for older versions of iOS which do not
+    // have support for the <dialog> element by manipulating the
+    // display attribute of the <form> element nested within the 
+    // <dialog> element.
     var hasDialogSupport = ((typeof HTMLDialogElement) === 'function');
     var dialogElement = document.getElementById(id);
     var formElement = dialogElement.firstElementChild;
@@ -106,6 +110,7 @@ export async function speak(inputText, voiceName, language) {
 }
 
 export async function primeSpeechSynthesis() {
+    //console.log("primeSpeechSynthesis");
     speak("ha", "", "");
 }
 
