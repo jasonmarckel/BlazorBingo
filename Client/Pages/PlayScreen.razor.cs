@@ -211,9 +211,9 @@ public partial class PlayScreen : IMessageHandler, IDisposable
         await Interop.ShowModal("settingsDialog");
     }
 
-    protected void ShowPlayers()
+    protected async void ShowPlayers()
     {
-
+        await Interop.ShowModal("playersDialog");
     }
 
     protected async void Pick()

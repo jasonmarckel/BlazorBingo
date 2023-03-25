@@ -89,3 +89,27 @@
         <SettingsScreen isGameStarted="@isGameStarted"></SettingsScreen>
     </form>
 </dialog>
+
+<dialog id="playersDialog">
+    <form method="dialog" style="display:none">
+        <div class="card mb-1">
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <h5 class="card-title">Players</h5>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-outline-secondary" id="closeDialogButton" onclick="this.form.style.display='none';return typeof HTMLDialogElement === 'function'">X</button>
+                    </div>
+                </div>
+            </div>
+            <ul>
+                <li>@settings.PlayerName (host)</li>
+                @foreach (var player in players)
+                {
+                    <li>@player</li>
+                }
+            </ul>
+        </div>
+    </form>
+</dialog>
