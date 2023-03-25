@@ -11,7 +11,13 @@ export async function getPlatform() {
 }
 
 export async function showModal(id) {
-    document.getElementById(id).showModal();
+    var hasDialogSupport = ((typeof HTMLDialogElement) === 'function');
+    var dialogElement = document.getElementById(id);
+    var formElement = dialogElement.firstElementChild;
+    formElement.style.display = 'block';
+    if (hasDialogSupport) {
+        dialogElement.showModal();
+    }
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
