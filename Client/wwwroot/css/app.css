@@ -199,11 +199,11 @@ input.gameCode {
 }
 
 /* &#8634; */
-.anticlockwiseciclearrow {
+.anticlockwiseciclearrow:before {
     content: "\21BA";
 }
 /* &#11119; */
-.anticlockwisecicletriangle {
+.anticlockwisecicletriangle:before {
     content: "\2B6F";
 }
 

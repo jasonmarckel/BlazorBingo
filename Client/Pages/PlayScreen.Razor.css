@@ -92,8 +92,6 @@
     font-size: 1.2em;
     background-color: white;
     height: 100%;
-}
-.stamp::before {
     vertical-align: text-bottom;
 }
 
