@@ -9,6 +9,7 @@ html, body {
 
 body {
     /* Disables pull-to-refresh and overscroll glow effects. */
+    /* https://developer.chrome.com/blog/overscroll-behavior/ */
     overscroll-behavior-y: none;
 }
 
@@ -133,6 +134,7 @@ input.gameCode {
         https://fonts.google.com/icons?icon.platform=web
         https://www.vertex42.com/ExcelTips/unicode-symbols.html
         https://symbl.cc/en/
+        https://www.w3schools.com/charsets/ref_emoji.asp
     --bs-fontstack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
    */
 
