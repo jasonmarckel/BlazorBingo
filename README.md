@@ -8,7 +8,7 @@
 * Dynamically updates an inline SVG representing the game pattern by binding values from an array of bits (UInt32).
 * GitHub Actions is used to build and [publish the Blazor WASM app to GitHub pages](https://swimburger.net/blog/dotnet/how-to-deploy-aspnet-blazor-webassembly-to-github-pages).
 
-Play a game at https://jasonmarckel.github.io/BlazorBingo.
+Play a game at https://jasonmarckel.github.io/BlazorBingo/.
 
 Select 'Host' to start a new *Bingo Hall* and generate the game code for the session.  Enter the game code in the other instances and select 'Join'.
 

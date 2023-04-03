@@ -2,11 +2,6 @@
 
 public static class Extensions
 {
-    public static string CssName(this string value)
-    {
-        return value.Replace(" ", string.Empty).ToLower();
-    }
-
     // Fisher-Yates shuffle
     // https://stackoverflow.com/questions/273313/randomize-a-listt
 

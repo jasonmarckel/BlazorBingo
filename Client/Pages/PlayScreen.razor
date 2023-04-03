@@ -3,7 +3,7 @@
 @inject GameSettings settings
 @inject NavigationManager Navigation
 
-<div class="row justify-content-between mx-0">
+<div class="row justify-content-between mx-0 prevent-select">
     <div class="col-auto">
         <label class="col-form-label-sm">Bingo Hall</label>
         <button type="button" class="btn btn-sm" @onclick="CopyGameCode" title="Copy Game Code"><span style="font-family:monospace; font-weight:bold;">@GameCode</span> <span class="symbol">&#128471;</span></button>
@@ -11,7 +11,7 @@
         {
             <button type="button" class="btn btn-sm" @onclick="ShowPlayers" title="Show Players"><span class="symbol silhouettebust"></span><span style="visibility: @(isHost ? "visible" : "hidden");">@players.Count</span></button>            
         }
-        <label class="col-form-label-sm">Calls @NumberOfCalls</label>
+        <label class="col-form-label-sm">Calls @numberOfCalls</label>
         @if (isHost)
         {
             <button type="button" class="btn btn-sm" @onclick="Restart" title="New Game" style="min-width:3rem;"><span class="symbol" style="font-size:14 pt; line-height:1rem;">&#8634;</span></button>
@@ -64,23 +64,23 @@
     </table>
 </div>
 
-<div id="PlayerControls" class="row mb-2">
+<div id="PlayerControls" class="row mb-2 prevent-select">
     @if (isHost)
     {
         <div class="col pt-4 text-center">
-            <button type="button" class="btn btn-primary" @onclick="Pick" disabled="@isCalling">Pick</button>
+            <button type="button" class="btn btn-primary btn-lg" @onclick="Pick" disabled="@isCalling">Pick</button>
         </div>
     }
     <div class="col pt-4 text-center">
-        <button type="button" class="btn btn-success" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)" disabled="@isBingoButtonClicked">Bingo!</button>
-        <button type="button" class="btn btn-secondary text-nowrap" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted">New Card</button>        
+        <button type="button" class="btn btn-success btn-lg" title="Bingo" @onclick="CallBingo" hidden="@(!isGameStarted)" disabled="@isBingoButtonClicked">Bingo!</button>
+        <button type="button" class="btn btn-secondary btn-lg text-nowrap" title="New card" @onclick="GenerateNewCard" hidden="@isGameStarted">New Card</button>        
     </div>
     <div class="col text-center">
         <GamePatternDisplay Pattern="@selectedPattern"></GamePatternDisplay>        
     </div>
 </div>
 
-<div>
+<div class="prevent-select">
     @notificationMessage
 </div>
 

@@ -36,7 +36,7 @@
                 <InputSelect @bind-Value="settings.CardTheme">
                     @foreach (var cardTheme in CardThemes)
                     {
-                        <option value="@cardTheme.CssName()">@cardTheme</option>
+                        <option value="@cardTheme.ToLowerInvariant()">@cardTheme</option>
                     }
                 </InputSelect>
             </div>

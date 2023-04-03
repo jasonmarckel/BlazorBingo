@@ -14,8 +14,8 @@ public partial class PlayScreen : IMessageHandler, IDisposable
     protected bool isCalling;
     protected bool isBingoButtonClicked;  // used to prevent multiple clicks
     protected bool showSettings;
-    protected int NumberOfCalls { get { return flashboard?.CalledNumbers.Count ?? 0; } }
-    protected bool isGameStarted { get { return NumberOfCalls > 0;  } }
+    protected int numberOfCalls { get { return flashboard?.CalledNumbers.Count ?? 0; } }
+    protected bool isGameStarted { get { return numberOfCalls > 0;  } }
     protected Flashboard? flashboard { get; set; }
     protected const int boardSize = 75;
     protected SortedSet<string> players = new();

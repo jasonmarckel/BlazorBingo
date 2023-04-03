@@ -53,4 +53,10 @@ public partial class Index
         await Interop.PrimeSpeechSynthesis(); // prime speechSynthesis for iOS
         Navigation.NavigateTo($"./play/{gameCode.ToUpper()}");
     }
+
+    protected async void ShareGameUrl()
+    {
+        await Interop.ShareUrl("BlazorBingo", "Play a game of bingo with your friends!", @"https://jasonmarckel.github.io/BlazorBingo/");
+    }
+
 }
