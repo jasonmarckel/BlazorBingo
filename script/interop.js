@@ -267,6 +267,7 @@ export async function shareUrl(title, text, url) {
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));
     } else {
-        console.log('Share not supported on this browser, do it the old way.');
+        console.log('Share not supported on this browser.');
+        window.navigator.clipboard.writeText(url);
     }
 }
