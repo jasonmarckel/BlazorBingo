@@ -9,6 +9,8 @@ public partial class Index
     protected string playerName = string.Empty;
     protected bool canJoin;
     protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
+    protected bool isIOS;
+    protected bool isInstallBannerVisible;
 
     protected override async Task OnInitializedAsync()
     {
@@ -22,6 +24,10 @@ public partial class Index
         gameCode = "0000";
         RefreshCanJoin();
 #endif
+        isIOS = await Interop.IsIOS();
+        var isInStandaloneMode = await Interop.IsInStandaloneMode();
+        var isInstalled = await Interop.IsInstalled();
+        isInstallBannerVisible = !isInstalled || (isIOS && !isInStandaloneMode);
         await Interop.ReleaseWakeLock();
     }
 
@@ -59,4 +65,9 @@ public partial class Index
         await Interop.ShareUrl("BlazorBingo", "Play a game of bingo with your friends!", @"https://jasonmarckel.github.io/BlazorBingo/");
     }
 
+    protected async void InstallPWA()
+    {
+        isInstallBannerVisible = false;
+        await Interop.InstallPWA();
+    }
 }

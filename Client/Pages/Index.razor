@@ -4,6 +4,23 @@
 
 <PageTitle>Blazor Bingo</PageTitle>
 
+<div class="row mb-4" >
+    @if (isInstallBannerVisible)
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @if(isIOS)
+            {
+                <span>Install this app on your device for the best experience: tap the Share icon and then Add to homescreen.</span>                
+            }
+            else
+            {                
+                <span>Install this app for the best experience.</span> <button type="button" class="btn btn-sm btn-secondary" @onclick="InstallPWA">Install</button>
+            }
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @onclick="() => { isInstallBannerVisible = false; }"></button>
+        </div>
+    }
+</div>
+
 <h1 class="text-center">Blazor Bingo</h1>
 
 <div class="row mb-2 justify-content-center">

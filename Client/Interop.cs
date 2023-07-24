@@ -68,8 +68,17 @@ public partial class Interop
     [JSImport("getUserAgent", "interopModule")]
     internal static partial Task<string> GetUserAgent();
 
-    [JSImport("getPlatform", "interopModule")]
-    internal static partial Task<string> GetPlatform();
+    [JSImport("isIOS", "interopModule")]
+    internal static partial Task<bool> IsIOS();
+
+    [JSImport("isInStandaloneMode", "interopModule")]
+    internal static partial Task<bool> IsInStandaloneMode();
+
+    [JSImport("isInstalled", "interopModule")]
+    internal static partial Task<bool> IsInstalled();
+
+    [JSImport("installPWA", "interopModule")]
+    internal static partial Task InstallPWA();
 
     [JSImport("initVoices", "interopModule")]
     internal static partial Task InitVoices();

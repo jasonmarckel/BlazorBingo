@@ -14,7 +14,6 @@ public partial class SettingsScreen
     protected bool showVoiceSelection;
     protected IEnumerable<Voice>? voices;
     protected string? userAgent;
-    protected string? platform;
     protected string? language;
 
     private int _gamePatternIndex;
@@ -36,7 +35,6 @@ public partial class SettingsScreen
         string voicesJson = await Interop.GetVoices();
         voices = JsonSerializer.Deserialize<IEnumerable<Voice>>(voicesJson)?.Where(x => !x.name.StartsWith("Android"));
         userAgent = await Interop.GetUserAgent();
-        platform = await Interop.GetPlatform();
         language = await Interop.GetLanguage();
         isLoaded = true;
         showVoiceSelection = !userAgent.Contains("Android", StringComparison.OrdinalIgnoreCase) || userAgent.Contains("Surface Duo", StringComparison.OrdinalIgnoreCase);

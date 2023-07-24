@@ -6,8 +6,30 @@ export async function getUserAgent() {
     return window.navigator.userAgent;
 }
 
-export async function getPlatform() {
-    return window.navigator.platform;
+// Detects if device is on iOS 
+const isIosAgent = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+
+export async function isIOS() {
+    return isIosAgent;
+}
+
+export async function isInStandaloneMode() {
+    return ('standalone' in window.navigator) && (window.navigator.standalone);
+}
+
+export async function isInstalled() {
+    return deferredPrompt == null;
+}
+
+export async function installPWA() {
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    // Optionally, send analytics event with outcome of user choice
+    console.log(`User response to the install prompt: ${outcome}`);
+    // We've used the prompt, and can't use it again, throw it away
+    deferredPrompt = null;
 }
 
 export async function showModal(id) {
@@ -36,7 +58,6 @@ export async function showModal(id) {
 const synth = window.speechSynthesis;
 const utterance = new SpeechSynthesisUtterance();
 let voices = [];
-const isIOS = window.navigator.platform === "iPhone" || window.navigator.platform === "iPad";
 
 function populateVoiceList() {
     voices = synth.getVoices().sort(function (a, b) {      
@@ -81,7 +102,7 @@ export async function speak(inputText, voiceName, language) {
     // "ha" is used to trigger a silent utterance to prime text-to-speech synthesis on iOS devices
     // which require an action to be taken by the user (i.e. a button click) to engage 
     // the voice synthesis.  Other devices can skip this voice synthesis 'priming'.
-    if (!isIOS && inputText === "ha") { return; }
+    if (!isIOS() && inputText === "ha") { return; }
 
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");

@@ -31,6 +31,19 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>
+        // Initialize deferredPrompt for use later to show browser install prompt.
+        let deferredPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Optionally, send analytics event that PWA install promo was shown.
+            console.log(`'beforeinstallprompt' event was fired.`);
+        });
+    </script>
 </body>
 
 </html>
