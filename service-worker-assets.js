@@ -29,11 +29,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-fDwAqqrYm85tduN9rGLpq7DC1ic5v2J1ON5k+pbdEQo=",
+      "hash": "sha256-PDv8usUPp0kQ6jhY0p6VukqlOt3oH5ItPfHtus71W5g=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-sUfFM0xAbxaJOVJ\/rl57kcVpKW6+qxP9bU8MbcDjKIg=",
+      "hash": "sha256-X28yY63UJHp+yrk8z+ic6wc+o+G64tAQxd1XMz2pW+4=",
       "url": "_framework\/BlazorBingo.Client.dll"
     },
     {
@@ -41,19 +41,19 @@
       "url": "_framework\/Blazored.LocalStorage.dll"
     },
     {
-      "hash": "sha256-KyHMXozxfJoqhAY9ESSZguPoMKXG0GM1w1c6Sl4gkDQ=",
+      "hash": "sha256-HE87clyfGdYiKo2HPieAo2FpZfjCKim\/hMQy1zKHF+g=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
-      "hash": "sha256-pdy25RoEemLFtE3AGpHvhM7skYWUEJVT7XK0UMJdbb4=",
+      "hash": "sha256-\/ZpEMrkZGwcsGLmM9dwQpUfjNzqY8TLHdNl\/T4TgOG0=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Forms.dll"
     },
     {
-      "hash": "sha256-YQlPt\/HF1cHztXp6ShPq7ozfeMxoDkcJHT4OycGz438=",
+      "hash": "sha256-3Y8IwlemcCcFZ0DxyREPocGgSP43lWQnIY9Gi9PJm\/o=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
-      "hash": "sha256-XCOctJUd08gOiPYVc+oS9bvDR1mMNjAxF7kQ69WHPL8=",
+      "hash": "sha256-GthKrHcSc8uOL6XXkGQP6uGfESlsj9kHhiGlLA+w5iM=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.dll"
     },
     {
@@ -93,11 +93,11 @@
       "url": "_framework\/Microsoft.Extensions.Primitives.dll"
     },
     {
-      "hash": "sha256-bH4kPtwztJ0GcMQgTZeRZ6ClbhrWt9hXT97QRGzz+bs=",
+      "hash": "sha256-iFbF23EmFeYVEl0lpJv2CZp2pMScqUp+OqGINYFQIJM=",
       "url": "_framework\/Microsoft.JSInterop.dll"
     },
     {
-      "hash": "sha256-Fibw4jtnMD0se9VIfLv5hPcrbAm7ipCW+RN8CfPIDkY=",
+      "hash": "sha256-rCEiCTvZ4q9Hh8faiYWMd8w8UxYteM1bNxGJ376zsmU=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
@@ -241,5 +241,5 @@
       "url": "script\/interop.js"
     }
   ],
-  "version": "\/1iOHJoF"
+  "version": "fh0j\/Jwy"
 };
