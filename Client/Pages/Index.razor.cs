@@ -36,9 +36,9 @@ public partial class Index
         canJoin = !string.IsNullOrWhiteSpace(playerName) && !string.IsNullOrWhiteSpace(gameCode) && gameCode.Length == 4;
     }
 
-    protected void OnGameCodeInput(string value)
+    protected void OnGameCodeInput(string? value)
     {
-        gameCode = value;
+        gameCode = value ?? string.Empty;
         RefreshCanJoin();
     }
 
