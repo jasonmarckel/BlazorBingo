@@ -11,7 +11,7 @@ public partial class Index
     protected const string BINGO_KEY_CHARS = "BCDFGHJKLMNPQRSTVWXYZ";
     protected bool isIOS;
     protected bool isInstallBannerVisible;
-    protected string appVersion = "BUILD_DATETIME"; // value will be replaced by step in main.yml
+    protected string appVersion = "BUILDDATE"; // value will be replaced by step in main.yml
 
     protected override async Task OnInitializedAsync()
     {
