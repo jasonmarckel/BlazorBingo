@@ -17,8 +17,9 @@ jobs:
     
     - name: Get current date
       id: today
-      run: |
-          echo "today::$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+      uses: Kaven-Universe/github-action-current-date-time@v1
+      with:
+        format: "YYYY.MM.DD"
 
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v4
@@ -30,7 +31,7 @@ jobs:
     
     # Changes the version in Index.razor
     - name: Change version in Index.razor
-      run: sed -i 's/BUILD_DATETIME/{{ env.today }}.{{ github.run_number }}/g' Pages/Index.razor
+      run: sed -i 's/BUILD_DATETIME/{{ steps.today.outputs.time }}.{{ github.run_number }}/g' Pages/Index.razor
 
     # Changes the base tag in index.html from root to match the GitHub Pages repository subdirectory
     - name: Change base-tag in index.html
