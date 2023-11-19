@@ -1,6 +1,7 @@
 {
   "name": "BlazorBingo",
   "short_name": "BlazorBingo",
+  "id": "./",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

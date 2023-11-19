@@ -57,6 +57,7 @@ export async function showModal(id) {
 
 const synth = window.speechSynthesis;
 const utterance = new SpeechSynthesisUtterance();
+const SilentUtteranceText = "ha";
 let voices = [];
 
 function populateVoiceList() {
@@ -99,10 +100,11 @@ export async function initVoices() {
 }
 
 export async function speak(inputText, voiceName, language) {
-    // "ha" is used to trigger a silent utterance to prime text-to-speech synthesis on iOS devices
+    // An inputText value of SilentUtteranceText is used to trigger a
+    // silent utterance to prime text-to-speech synthesis on iOS devices
     // which require an action to be taken by the user (i.e. a button click) to engage 
     // the voice synthesis.  Other devices can skip this voice synthesis 'priming'.
-    if (!isIOS() && inputText === "ha") { return; }
+    if (!isIOS() && inputText === SilentUtteranceText) { return; }
 
     if (synth.speaking) {
         console.error("speechSynthesis.speaking");
@@ -124,15 +126,15 @@ export async function speak(inputText, voiceName, language) {
         }
         utterance.text = inputText;
         utterance.pitch = 1.0;
-        utterance.rate = inputText === "ha" ? 2 : 1;
-        utterance.volume = inputText === "ha" ? 0 : 1;
+        utterance.rate = inputText === SilentUtteranceText ? 2 : 1;
+        utterance.volume = inputText === SilentUtteranceText ? 0 : 1;
         synth.speak(utterance);
     }
 }
 
 export async function primeSpeechSynthesis() {
     //console.log("primeSpeechSynthesis");
-    speak("ha", "", "");
+    speak(SilentUtteranceText, "", "");
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API
@@ -187,13 +189,14 @@ let dotnetExports;
 let hostConnection;
 let clientConnections = [];
 const hostDomain = "net-marckel-blazorbingo-";
+const peerJSscript = 'https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js';
 
 export async function host(component, id) {
 
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
     dotnetExports = await getAssemblyExports("BlazorBingo.Client.dll");
 
-    await insertGlobalScript('https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js');
+    await insertGlobalScript(peerJSscript);
 
     var peer = new Peer(hostDomain + id);
 
@@ -227,7 +230,7 @@ export async function connect(component, remoteId, playerName) {
     const { getAssemblyExports } = await globalThis.getDotnetRuntime(0);
     dotnetExports = await getAssemblyExports("BlazorBingo.Client.dll");
 
-    await insertGlobalScript('https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js');
+    await insertGlobalScript(peerJSscript);
 
     var peer = new Peer();
 

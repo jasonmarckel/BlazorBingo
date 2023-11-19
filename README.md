@@ -1,6 +1,6 @@
 # BlazorBingo
 
-* Blazor Web Assembly (WASM) / C# / .NET 7.0 / Progressive Web App (PWA)
+* Blazor Web Assembly (WASM) / C# / .NET 8.0 / Progressive Web App (PWA)
 * [PeerJS](https://peerjs.com/) is used via JSInterop to establish peer-to-peer communication between the game host and the players.  No server required!
 * The Web Speech API and SpeechSynthesisUtterance (text-to-speech) is used to announce the numbers called on the player instances.
 * Platform-native emoji characters are used for stamping the bingo cards.
