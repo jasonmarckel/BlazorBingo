@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "BlazorBingo.Client",
   "resources": {
-    "hash": "sha256-aXf3mMfqazNkq5MQ7rxHk7ryGsBTDVge9rTw6suQKFk=",
+    "hash": "sha256-sowgfWLdgJjrMz70NDAeIcWX6tIzJ7++m/7NRH25a/0=",
     "jsModuleNative": {
       "dotnet.native.8.0.0.45ykigla5r.js": "sha256-LjLDIz9+J7uuiwMlQ4HbNx2BnSpphOtO2MwkoI28vdI="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "BlazorBingo.Client.wasm": "sha256-IyPW2Xb/QqqqZblsorGpTEDdKXq7qDngdOQRVJmXLCc=",
+      "BlazorBingo.Client.wasm": "sha256-SkceeSrtqglwOKL19deidfc06BbhxcuGRBYTG1oznwg=",
       "Blazored.LocalStorage.wasm": "sha256-xHBGFCMjDjvvTwtMvgaMBNmQk9JdVhGmws2/GMZlxrI=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-L3z9gLy453ChDsq4RXjjKDg5IncprVXlOCxwTUv0LPc=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-mPRoPO4gA7rKSxnqpwiJFnHD6nYf0IirbW2IypLpZvI=",
