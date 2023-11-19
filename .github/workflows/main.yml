@@ -16,7 +16,9 @@ jobs:
     steps:
     
     - name: Get current date
-      run: echo "today::$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+      id: today
+      run: |
+          echo "today::$(date +'%Y.%m.%d')" >> $GITHUB_ENV
 
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v4
