@@ -31,7 +31,7 @@ jobs:
     
     # Changes the version in Index.razor
     - name: Change version in Index.razor
-      run: sed -i 's/BUILD_DATETIME/{{ steps.today.outputs.time }}.{{ github.run_number }}/g' Pages/Index.razor
+      run: sed -i 's/BUILD_DATETIME/{{ steps.today.outputs.time }}.{{ github.run_number }}/g' Pages/Index.razor.cs
 
     # Changes the base tag in index.html from root to match the GitHub Pages repository subdirectory
     - name: Change base-tag in index.html
