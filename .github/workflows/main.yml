@@ -41,6 +41,9 @@ jobs:
     - name: Change base-tag in service-worker.published.js
       run: sed -i 's/const base = "\/"/const base = "\/BlazorBingo\/"/g' wwwroot/service-worker.published.js
     
+    - name: Restore .NET workloads to pick up wasm-tools
+      run: dotnet workload restore
+
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
       run: dotnet publish BlazorBingo.Client.csproj -c Release -o release --nologo
