@@ -12,9 +12,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.2" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,8 +22,11 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<!-- needed for .NET 7 JS interop API -->
+		<!-- needed for .NET 7 / 8 JS interop API -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<!-- workaround for older versions of IOS devices which lack SIMD support -->
+		<RunAOTCompilation>false</RunAOTCompilation>
+		<WasmEnableSIMD>false</WasmEnableSIMD>
 		<!-- reduce output size -->
 		<BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
 		<BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
