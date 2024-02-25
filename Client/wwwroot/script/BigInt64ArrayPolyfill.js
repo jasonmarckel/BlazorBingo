@@ -1,5 +1,7 @@
 // https://github.com/ivanrhsosa/sample-onnx/blob/main/shim.js
 
+// Failed to start platform. Reaseon: Error: Assert failed: This browser/engine doesn't support BigInt64Array API. Please use a modern version. See also https://aka.ms/dotnet-wasm-features
+
 // Description: This file is used to shim the global BigInt64Array objects
 'use strict';
 

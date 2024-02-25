@@ -31,11 +31,14 @@
     </div>
     <!-- workaround for IOS -->
     <!--<script>var Module;</script>-->
-
     <!--<script type="module">
         import jsbi from 'https://cdn.jsdelivr.net/npm/jsbi@4.3.0/+esm'
     </script>-->
-
+    <!--
+        https://github.com/dotnet/runtime/blob/main/src/mono/wasm/features.md
+        https://www.jsdelivr.com/package/npm/jsbi
+        https://github.com/GoogleChromeLabs/jsbi/tree/main
+    -->
     <script type="module">
         import * as JSBI from 'https://cdn.jsdelivr.net/npm/jsbi@4.3.0/dist/jsbi-umd.min.js'
     </script>

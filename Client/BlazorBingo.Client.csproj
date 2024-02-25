@@ -25,7 +25,7 @@
 		<!-- needed for .NET 7 / 8 JS interop API -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<!-- workaround for older versions of IOS devices which lack SIMD support -->
-		<RunAOTCompilation>false</RunAOTCompilation>
+		<!--<RunAOTCompilation>false</RunAOTCompilation>-->
 		<WasmEnableSIMD>false</WasmEnableSIMD>
 		<!-- reduce output size -->
 		<BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
