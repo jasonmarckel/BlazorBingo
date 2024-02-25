@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
@@ -13,8 +13,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.16" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,9 +24,6 @@
 	<PropertyGroup>
 		<!-- needed for .NET 7 / 8 JS interop API -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<!-- workaround for older versions of IOS devices which lack SIMD support -->
-		<!--<RunAOTCompilation>false</RunAOTCompilation>-->
-		<WasmEnableSIMD>false</WasmEnableSIMD>
 		<!-- reduce output size -->
 		<BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
 		<BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
