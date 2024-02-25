@@ -32,7 +32,7 @@ export async function installPWA() {
         // We've used the prompt, and can't use it again, throw it away
         deferredPrompt = null;
     } catch (e) {
-        deferredPrompt = null;
+        console.log(`${e.name}, ${e.message}`);
     }
 }
 

@@ -30,9 +30,11 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script>
         // Initialize deferredPrompt for use later to show browser install prompt.
-        var deferredPrompt = null;
+        let deferredPrompt = null;
 
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent the mini-infobar from appearing on mobile
@@ -43,8 +45,6 @@
             //console.log(`'beforeinstallprompt' event was fired.`);
         });
     </script>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
 </html>
