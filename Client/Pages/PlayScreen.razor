@@ -42,10 +42,9 @@
                 @for (int c = 0; c < 5; c++)
                 {
                     var square = squares[r, c];                    
-                    if(square == null) { continue; }
                     var row = r;
                     var col = c;
-                        <td @onclick="Interop.PrimeSpeechSynthesis">
+                    <td @onclick="Interop.PrimeSpeechSynthesis">
                         <button type="button" class="square" @onclick="() => StampSquare(row, col)">
                             @if (!square.IsStamped)
                             {
