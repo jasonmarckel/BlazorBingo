@@ -193,7 +193,7 @@ let dotnetExports;
 let hostConnection;
 let clientConnections = [];
 const hostDomain = "net-marckel-blazorbingo-";
-const peerJSscript = 'https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js';
+const peerJSscript = 'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';
 
 export async function host(component, id) {
 
