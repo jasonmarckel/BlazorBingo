@@ -14,7 +14,7 @@ public class GamePatterns
 
     // 0U == placeholder for set of patterns
 
-    private static Dictionary<string, uint> PatternsDict = new()
+    private static readonly Dictionary<string, uint> PatternsDict = new()
     {
         { Default, 0U },
         { "Airplane", 0b00000000001010010111111001000010 },
@@ -124,7 +124,6 @@ public class GamePatterns
     }
     public static IEnumerable<uint> GetPatternSet(string patternName)
     {
-        var returnValues = Enumerable.Empty<uint>();
         switch (patternName)
         {
             case Default:

@@ -1,6 +1,6 @@
 # BlazorBingo
 
-* Blazor Web Assembly (WASM) / C# / .NET 8.0 / Progressive Web App (PWA)
+* Multiplayer bingo game built with Blazor WebAssembly (WASM) and C#.
 * [PeerJS](https://peerjs.com/) is used via JSInterop to establish peer-to-peer communication between the game host and the players.  No server required!
 * The Web Speech API and SpeechSynthesisUtterance (text-to-speech) is used to announce the numbers called on the player instances.
 * Platform-native emoji characters are used for stamping the bingo cards.
@@ -12,7 +12,7 @@ Play a game at https://jasonmarckel.github.io/BlazorBingo/.
 
 Select 'Host' to start a new *Bingo Hall* and generate the game code for the session.  Enter the game code in the other instances and select 'Join'.
 
-BlazorBingo can be installed/pinned to the homescreen and launched as a full screen PWA web app without the browser's chome around it.
+BlazorBingo can be installed/pinned to the homescreen and launched as a full screen Progressive Web App (PWA) without the browser's chome around it.
 
 **TODO**:
 * Add special effects for winner (confetti, fireworks, etc.)
