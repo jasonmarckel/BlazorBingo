@@ -22,12 +22,12 @@ jobs:
         format: "YYYY.MM.DD"
 
     # uses GitHub's checkout action to checkout code form the master branch
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with: 
-        dotnet-version: 9.x
+        dotnet-version: 10.x
     
     # Changes the version in Index.razor
     - name: Change version in Index.razor
